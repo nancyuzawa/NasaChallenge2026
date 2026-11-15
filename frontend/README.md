@@ -26,7 +26,10 @@ Declare every external frontend dependency in that file.
 Open the `NasaChallenge2026` root folder. Press F5 with the existing
 `Firewatch: iniciar Streamlit` configuration. Select
 `frontend/.venv/Scripts/python.exe` in **Python: Select Interpreter** if
-necessary. Running `frontend/app.py` directly also uses the project launcher.
+necessary. Running `frontend/app.py` or any script under `frontend/pages/`
+directly with Python also uses the project launcher and opens the complete
+application from Welcome. Navigate to Map, Activity, or Reports using the
+sidebar. The page files are `1_Dashboard.py`, `2_Activity.py`, and `3_Reports.py`.
 
 ## Navigation and filters
 
@@ -35,11 +38,13 @@ and press **Confirm**. Home is the entry page; the sidebar contains only
 Map, Activity, and Reports.
 
 The dashboard follows `midias/prototype/1. Dashboard.png`, initially
-showing January through December 2025. **Search** selects a reference city;
-**Filter** provides country, state/province, coordinates, and date controls.
+showing January through December 2025. **Filter** provides country,
+state/province, coordinates, and date controls. The pin badge on the right
+shows the country selected on the map.
 **Reset** restores Campinas and 2025. All selectors support text search and
-partial name matching. **Location**, next to Filter, stays synchronized
-with the globe. Drag to rotate; click a country or city to update the
+partial name matching. Opening a selector clears its search text; leaving
+without choosing another option restores the committed selection.
+Drag to rotate; click a country or city to update the
 location while preserving the date interval. The catalog is local and
 does not include every city. Activity and Reports share this location.
 
@@ -49,6 +54,18 @@ The second menu item follows `midias/prototype/2. Report.png`: daily
 heatmap, legend, searchable month/year controls, annual comparison, peak
 periods, and yearly summaries. Calendar month/year and annual comparison
 year/range controls are independent.
+
+The calendar has plain month labels, with its legend aligned beside the
+sensor and period controls, as in `midias/prototype/2. Report.png`.
+Select a specific month to display its centered heatmap and the
+**See more details** button at the bottom right, as in
+`midias/prototype/2.a. Calendar - Month.png`. The button opens **Month Details**
+for the selected month and year. The details screen shows daily bars, the monthly
+total, the share of the annual total, and change from the previous month
+(including December of the previous year when available). Month/year and
+sensor controls update these values. Confidence is unavailable in the demo
+dataset. **Back** restores the calendar and comparison controls, preserving
+the location and current sensor selection.
 
 The **MODIS** and **VIIRS** pills filter the entire Activity page:
 

@@ -20,6 +20,7 @@ st.set_page_config(
 )
 apply_styles()
 st.markdown(f"<style>{Path(__file__).with_name('welcome.css').read_text(encoding='utf-8')}</style>", unsafe_allow_html=True)
+st.html(Path(__file__).with_name("welcome_keyboard.html"), unsafe_allow_javascript=True)
 render_sidebar("Home", show_navigation=False)
 
 with st.container(key="welcome", width=520):

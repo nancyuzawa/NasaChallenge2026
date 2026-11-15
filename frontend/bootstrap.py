@@ -12,7 +12,9 @@ def launch_if_direct():
         "Scripts/python.exe" if os.name == "nt" else "bin/python"
     )
     same_environment = Path(sys.executable).resolve() == interpreter.resolve()
-    if same_environment:
+    # O Streamlit já estará carregado quando estiver executando uma página.
+    # Na execução direta, deixe a preparação das dependências para run.py.
+    if same_environment and "streamlit" in sys.modules:
         try:
             from streamlit.runtime.scriptrunner import get_script_run_ctx
         except ImportError:

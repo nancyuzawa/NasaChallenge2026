@@ -1,0 +1,40 @@
+/* Detalhamento mensal: midias/prototype/2.a. Calendar - Month.png. */
+.stMainBlockContainer:has(.st-key-month-page) { max-width: none; padding: var(--activity-pad) !important; }
+.stMainBlockContainer:has(.st-key-month-page) > [data-testid="stVerticalBlock"] { gap: 0; }
+.st-key-month-page { gap: clamp(14px, calc(20 * var(--u)), 20px) !important; }
+.st-key-month-back button { border: 0; background: transparent; color: white; padding: 0; font-size: 20px; }
+.st-key-month-back button p { font-size: 20px; font-weight: 600; }
+.month-breadcrumb { padding: 0 calc(22 * var(--u)); color: #ddd; font-family: 'Barlow Condensed', Arial, sans-serif; }
+.month-intro { margin-top: clamp(20px, calc(40 * var(--u)), 40px); }
+.st-key-month-page .month-intro h1 { margin: 0 0 14px; padding: 0; font-size: clamp(24px, calc(32 * var(--u)), 32px); }
+.st-key-month-page .month-intro p { margin: 0; font-size: clamp(14px, calc(20 * var(--u)), 20px); }
+.st-key-month-panel { padding: clamp(16px, calc(24 * var(--u)), 24px); border-radius: var(--panel-radius); background: var(--panel); gap: 24px !important; }
+.st-key-month-panel [data-testid="stSelectbox"] .react-aria-ComboBox > [role="group"] { min-height: 46px; border-radius: 28px; border: 1px solid white; background: #333; }
+.st-key-month-panel [data-testid="stSelectbox"] input { color: white; -webkit-text-fill-color: white; font-family: 'Barlow Condensed', Arial, sans-serif; font-size: 20px; font-weight: 700; }
+.st-key-month-panel [data-testid="stSelectbox"] button, .st-key-month-panel [data-testid="stIconMaterial"] { color: white; }
+.st-key-month-content [data-testid="stHorizontalBlock"] { align-items: center; }
+.st-key-month-page .month-chart-title { padding: 0; margin: 0; font-size: clamp(16px, calc(20 * var(--u)), 20px); }
+.month-metrics { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+.month-metric { display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: clamp(125px, calc(146 * var(--u)), 146px); padding: 18px 24px; box-sizing: border-box; border: 1px solid #fdfbfd; border-radius: 25px; background: linear-gradient(120deg, #3a4252, #373d4d); text-align: center; }
+.month-metric-icon { display: flex; flex: 0 0 48px; }
+.month-metric-icon.orange { color: #ffb648; }
+.month-metric-icon.red { color: #ff4148; }
+.month-metric-icon.green { color: #62b767; }
+.month-metric > div { flex: 1; }
+.month-metric strong, .month-metric > div > span { display: block; color: #fdfbfd; }
+.month-metric strong { font-size: clamp(26px, calc(38 * var(--u)), 38px); line-height: 1.2; }
+.month-metric > div > span { font-family: 'Barlow Condensed', Arial, sans-serif; font-size: clamp(16px, calc(22 * var(--u)), 22px); font-weight: 600; line-height: 1.2; }
+@media (max-width: 1050px) {
+  .st-key-month-content > [data-testid="stHorizontalBlock"] { flex-direction: column; }
+  .st-key-month-content [data-testid="stColumn"] { width: 100% !important; flex: 1 1 auto !important; }
+}
+@media (max-width: 700px) {
+  .st-key-month-panel { padding: 12px; }
+  .month-metric { padding: 12px; gap: 8px; border-radius: 16px; }
+  .month-metric-icon { flex-basis: 28px; }
+  .month-metric-icon svg { width: 28px; height: 28px; }
+  .st-key-month-panel .st-key-calendar-controls { flex-wrap: wrap !important; }
+  .st-key-month-panel .st-key-calendar-controls > [data-testid="stLayoutWrapper"]:last-child { margin-left: 0; }
+  .st-key-month-panel [data-testid="stSelectbox"] input { font-size: 16px; }
+}
+@media (max-width: 380px) { .month-metrics { grid-template-columns: minmax(0, 1fr); } }

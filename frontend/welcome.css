@@ -40,7 +40,16 @@
   top: -22px;
   right: -80px;
   fill: #ffffa0;
+  animation: welcome-bounce 2.4s ease-in-out infinite;
+  transform-origin: center bottom;
 }
+@keyframes welcome-bounce {
+  0%, 45%, 100% { transform: translateY(0) scale(1); }
+  15% { transform: translateY(-14px) scale(.98, 1.04); }
+  28% { transform: translateY(0) scale(1.06, .94); }
+  36% { transform: translateY(-5px) scale(1); }
+}
+@media (prefers-reduced-motion: reduce) { .welcome-sparkles { animation: none; } }
 .st-key-welcome .welcome-subtitle {
   margin: 18px 0 20px;
   color: white;
@@ -69,10 +78,10 @@
 .st-key-welcome [data-testid="stFormSubmitButton"] { width: 240px; max-width: 100%; margin: 32px auto 0; }
 .st-key-welcome [data-testid="stFormSubmitButton"] button {
   min-height: 50px;
-  border: 0;
+  border: 1px solid white;
   border-radius: 28px;
-  background: #064aad;
-  box-shadow: 5px 6px 0 #121212;
+  background: #000;
+  box-shadow: 5px 6px 0 #fff;
 }
 .st-key-welcome [data-testid="stFormSubmitButton"] button p {
   color: white;
@@ -80,7 +89,7 @@
   font-size: 22px;
   font-weight: 700;
 }
-.st-key-welcome [data-testid="stFormSubmitButton"] button:hover { background: #0b5cce; }
+.st-key-welcome [data-testid="stFormSubmitButton"] button:hover { background: #202020; border-color: white; }
 .st-key-welcome [data-testid="stAlert"] { text-align: left; margin-top: 12px; }
 @media (max-width: 640px) {
   .st-key-welcome { left: calc(50% + 12px); width: calc(100vw - 90px) !important; }

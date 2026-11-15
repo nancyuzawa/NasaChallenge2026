@@ -16,7 +16,7 @@ from activity_data import annual_summary, calendar_cells
 class ActivitySensorsTest(unittest.TestCase):
     def test_source_selection_and_month_keep_calendar_and_summary_consistent(self):
         app = AppTest.from_file(str(FRONTEND / "app.py"), default_timeout=30).run()
-        app.switch_page("pages/2_Atividade.py").run()
+        app.switch_page("pages/2_Activity.py").run()
         self.assertFalse(app.exception)
         self.assertEqual(app.get("button_group")[0].value, [])
         for sources in (["MODIS"], ["VIIRS"], ["MODIS", "VIIRS"], []):

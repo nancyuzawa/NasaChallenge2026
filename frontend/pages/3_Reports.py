@@ -1,3 +1,16 @@
+"""Resumo dos indicadores da região selecionada."""
+
+if __name__ == "__main__":
+    from pathlib import Path
+    import sys
+
+    frontend_path = str(Path(__file__).resolve().parents[1])
+    if frontend_path not in sys.path:
+        sys.path.insert(0, frontend_path)
+    from bootstrap import launch_if_direct
+
+    launch_if_direct()
+
 import streamlit as st
 from datetime import date
 
