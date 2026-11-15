@@ -19,6 +19,25 @@ CITIES = {
     for c in sorted(CITY_RECORDS, key=lambda c: (c["city"] != "Campinas", c["city"]))
 }
 
+LOCATION_LABELS = {
+    **{f"country:{code}": country["name"] for code, country in sorted(COUNTRIES.items(), key=lambda item: item[1]["name"])},
+    **{f"city:{city['id']}": f"{city['city']} - {STATE_CODES.get(city['state'], city['state'])}, {city['country']}"
+       for city in sorted(CITY_RECORDS, key=lambda city: city["city"])},
+}
+LOCATION_OPTIONS = list(LOCATION_LABELS)
+
+
+def location_key(filters):
+    """Identificador do seletor; coordenadas manuais mantêm um item próprio."""
+    for city in CITY_RECORDS:
+        if city["city"] == filters.get("city") and city["country"] == filters["country"]:
+            return f"city:{city['id']}"
+    if filters.get("state") == "All regions":
+        for code, country in COUNTRIES.items():
+            if country["name"] == filters["country"]:
+                return f"country:{code}"
+    return "current"
+
 
 def selection_filters(event, current):
     """Valida a seleção do componente e mantém o período e os demais filtros."""

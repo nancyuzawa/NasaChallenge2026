@@ -8,7 +8,7 @@ import unittest
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 from data import dashboard_metrics, dashboard_series
-from locations import CITY_RECORDS, selection_filters
+from locations import CITY_RECORDS, LOCATION_LABELS, location_key, selection_filters
 
 
 class LocationFiltersTest(unittest.TestCase):
@@ -33,6 +33,13 @@ class LocationFiltersTest(unittest.TestCase):
     def test_unknown_selections_are_rejected(self):
         for event in (None, {}, {"kind": "country", "id": "unknown"}, {"kind": "city", "id": "unknown"}):
             self.assertIsNone(selection_filters(event, self.filters))
+
+    def test_toolbar_selection_identifies_city_country_and_custom_coordinates(self):
+        self.assertEqual(location_key(self.filters), "city:BRA:Campinas")
+        country = selection_filters({"kind": "country", "id": "BRA"}, self.filters)
+        self.assertEqual(location_key(country), "country:BRA")
+        self.assertEqual(location_key({**self.filters, "city": None}), "current")
+        self.assertIn("Manaus", LOCATION_LABELS["city:BRA:Manaus"])
 
     def test_country_series_aggregates_available_city_samples(self):
         country = selection_filters({"kind": "country", "id": "BRA"}, self.filters)

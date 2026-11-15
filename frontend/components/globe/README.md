@@ -15,7 +15,8 @@ o componente não usa CDN, geocodificação externa ou chave de API em execuçã
 - Os catálogos contêm somente os campos usados pela aplicação.
 
 Arraste para girar. Clique no território de um país para filtrar o país inteiro;
-clique em um ponto ou use o seletor de cidades para filtrar uma cidade disponível.
+clique em um ponto para filtrar uma cidade disponível. O seletor com pesquisa
+ao lado dos filtros do dashboard também permite escolher países e cidades.
 As teclas de seta giram o globo, `+`/`-` controlam o zoom, e o primeiro botão
 retorna à localização selecionada. O botão de expansão usa a API de tela cheia
 ou ocupa a janela do aplicativo quando essa API não está disponível.

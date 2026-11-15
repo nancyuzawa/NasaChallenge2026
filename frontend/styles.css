@@ -140,6 +140,36 @@ h1, h2, h3 { font-family: Barlow, Arial, sans-serif; }
   min-width: 0;
   flex: 0 1 auto;
 }
+.st-key-map-toolbar > .st-key-toolbar_location {
+  flex: 1 1 0 !important;
+  max-width: 58%;
+  height: auto !important;
+}
+.st-key-toolbar_location .react-aria-ComboBox > [role="group"] {
+  min-height: var(--toolbar-height);
+  border: 0;
+  border-radius: calc(12 * var(--u));
+  background: #030a19;
+}
+.st-key-toolbar_location input {
+  min-width: 0;
+  font-family: 'Barlow Condensed', Arial, sans-serif;
+  font-size: clamp(11px, calc(20 * var(--u)), 20px);
+  font-weight: 700;
+  color: white;
+  -webkit-text-fill-color: white;
+  caret-color: white;
+}
+.st-key-toolbar_location .react-aria-ComboBox button,
+.st-key-toolbar_location [data-testid="stIconMaterial"] {
+  color: white;
+  background: transparent;
+}
+.st-key-toolbar_location .react-aria-ComboBox button {
+  padding: 0 4px;
+  height: auto;
+}
+.st-key-toolbar_location input::placeholder { color: #cbd3df; }
 .st-key-map-toolbar button {
   min-height: 0;
   height: clamp(28px, calc(46 * var(--u)), 46px);

@@ -24,14 +24,23 @@ def apply_styles(dashboard=False):
         st.markdown("<style>.stApp{--dashboard-page:1}.stMainBlockContainer:has(.st-key-dashboard-grid){max-width:none;padding:var(--page-gap)!important}.stMainBlockContainer:has(.st-key-dashboard-grid)>[data-testid='stVerticalBlock']{gap:0}</style>", unsafe_allow_html=True)
 
 
-def render_sidebar(active):
-    active_page = {"Mapa": 1, "Atividade": 2, "Relatórios": 3}[active]
-    st.markdown(f"<style>.st-key-navigation>[data-testid='stElementContainer']:nth-child({active_page}) [data-testid='stPageLink-NavLink']{{background:var(--blue)}}</style>", unsafe_allow_html=True)
+def searchable_selectbox(label, options, **kwargs):
+    """Campo editável com pesquisa textual diretamente no seletor."""
+    kwargs.setdefault("placeholder", "Type to search…")
+    kwargs.setdefault("help", "Type in this field to search the available options.")
+    return st.selectbox(label, options, icon=":material/search:", filter_mode="contains", **kwargs)
+
+
+def render_sidebar(active, show_navigation=True):
+    if show_navigation:
+        active_page = {"Mapa": 1, "Atividade": 2, "Relatórios": 3}[active]
+        st.markdown(f"<style>.st-key-navigation>[data-testid='stElementContainer']:nth-child({active_page}) [data-testid='stPageLink-NavLink']{{background:var(--blue)}}</style>", unsafe_allow_html=True)
     logo_path = Path(__file__).resolve().parent.parent / "midias" / "logo" / "Logo.svg"
     logo = b64encode(logo_path.read_bytes()).decode("ascii")
     with st.sidebar:
         st.markdown(f'<img class="space-apps-logo" src="data:image/svg+xml;base64,{logo}" alt="NASA Space Apps Challenge">', unsafe_allow_html=True)
-        with st.container(key="navigation"):
-            st.page_link("app.py", label="Map", icon=":material/map:", help="Mapa de focos de incêndio")
-            st.page_link("pages/2_Atividade.py", label="Activity", icon=":material/event:", help="Atividade mensal")
-            st.page_link("pages/3_Relatorios.py", label="Reports", icon=":material/description:", help="Relatórios")
+        if show_navigation:
+            with st.container(key="navigation"):
+                st.page_link("pages/1_Dashboard.py", label="Map", icon=":material/map:", help="Mapa de focos de incêndio")
+                st.page_link("pages/2_Atividade.py", label="Activity", icon=":material/event:", help="Atividade mensal")
+                st.page_link("pages/3_Relatorios.py", label="Reports", icon=":material/description:", help="Relatórios")

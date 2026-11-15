@@ -2,7 +2,6 @@
 (() => {
   const host = document.getElementById('globe');
   const loading = document.getElementById('loading');
-  const citySelect = document.getElementById('city');
   let globe, countries = [], cities = [], selection, signature, frameStyle = null;
   const post = (type, data = {}) => window.parent.postMessage({isStreamlitMessage: true, type, ...data}, '*');
   const safeLabel = text => { const label = document.createElement('span'); label.textContent = text; return label; };
@@ -18,13 +17,6 @@
     const key = JSON.stringify(next);
     if (signature === key || !globe) return;
     signature = key;
-    const country = countries.find(c => c.properties.iso === next.country_iso);
-    citySelect.replaceChildren();
-    const all = new Option(country ? `${country.properties.name} · All cities` : 'Select a country', '');
-    citySelect.add(all);
-    cities.filter(c => c.country_iso === next.country_iso).sort((a,b) => a.city.localeCompare(b.city)).forEach(c => {
-      citySelect.add(new Option(c.city, c.id, false, c.city === next.city));
-    });
     globe.polygonCapColor(c => c.properties.iso === next.country_iso ? '#57c9c0' : '#d4eede');
     globe.pointColor(c => c.city === next.city && c.country_iso === next.country_iso ? '#ff482c' : '#ffbb65');
     globe.pointRadius(c => c.city === next.city && c.country_iso === next.country_iso ? .6 : .28);
@@ -73,11 +65,6 @@
     }
   }
 
-  citySelect.addEventListener('change', () => {
-    const city = cities.find(c => c.id === citySelect.value);
-    if (city) chooseCity(city);
-    else if (selection?.country_iso) send('country', selection.country_iso);
-  });
   const zoom = direction => {
     if (!globe) return;
     const view = globe.pointOfView();

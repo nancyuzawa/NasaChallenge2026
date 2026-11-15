@@ -1,6 +1,6 @@
 # Frontend Firewatch
 
-Protótipo de dashboard feito com Python e Streamlit, com telas de mapa, atividade e relatórios.
+Protótipo feito com Python e Streamlit, com página inicial, dashboard, atividade e relatórios.
 
 ## Executar localmente
 
@@ -42,8 +42,14 @@ janeiro a dezembro de 2025. A barra lateral mantém os acessos a mapa, atividade
 e relatórios. A lupa permite selecionar cidades de referência e **Filter** abre
 os filtros de região, coordenadas e período. **Reset** restaura Campinas e 2025.
 
-O globo WebGL permite girar a Terra e clicar em países e cidades. O seletor
-sobre o mapa lista as cidades de referência do país selecionado. Essas ações
+A entrada do aplicativo segue `midias/prototype/0.Welcome.png`: escolha um país
+e pressione **Confirm** para abrir o dashboard com esse país selecionado.
+A Home é a página de entrada; o menu lateral contém apenas mapa, atividade e relatórios.
+Todos os seletores permitem digitar para pesquisar, com ícone de lupa e
+correspondência por trecho do nome. O campo **Location** ao lado dos filtros
+reúne países e cidades e acompanha a seleção feita no globo.
+
+O globo WebGL permite girar a Terra e clicar em países e cidades. Essas ações
 atualizam o mesmo filtro de localização usado por **Search** e **Filter**,
 preservando o intervalo de datas. O catálogo é local e não inclui todas as cidades.
 
