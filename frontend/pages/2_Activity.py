@@ -19,7 +19,6 @@ import streamlit as st
 from processed_activity import years, MONTH_NAMES, MONTH_LABELS, SERIES_COLORS, SENSORS, annual_summary, calendar_cells, heat_legend
 from processed_data import dataset_status
 from activity_ui import calendar_html, chart_heading, key_periods_html, legend_html, summary_html
-from locations import STATE_CODES
 from month_details import open_month, render_month_details
 from ui import apply_styles, render_sidebar, searchable_selectbox
 
@@ -38,15 +37,18 @@ for key in ("calendar_year", "comparison_year", "detail_year"):
     if key in st.session_state and st.session_state[key] not in AVAILABLE_YEARS:
         st.session_state[key] = AVAILABLE_YEARS[0]
 if filters:
-    state, country, city = filters["state"], filters["country"], filters.get("city")
-    location = f"{city} - {STATE_CODES.get(state, state)}, {country}" if city else (country if state == "All regions" else f"{state}, {country}")
+    state, country, city = filters.get("state"), filters["country"], filters.get("city")
+    area = [city] if city else []
+    if state and state not in ("All regions", city):
+        area.append(state)
+    location = ", ".join([*area, country])
 else:
-    location = "Campinas - SP, Brazil"
+    location = "Campinas, São Paulo, Brazil"
 
 
 def render_location():
     with st.container(key="activity-location", width="content"):
-        st.page_link("pages/1_Dashboard.py", label=location, icon=":material/location_on:")
+        st.page_link("pages/1_Dashboard.py", label=location, icon=":material/location_on:", help=location)
 
 
 if st.session_state.get("activity_view") == "month":
@@ -65,7 +67,7 @@ with st.container(key="activity-page"):
                 with st.container(key="calendar-main"):
                     with st.container(key="calendar-controls", horizontal=True, gap="small"):
                         with st.container(key="sensor-controls", horizontal=True, gap="small", vertical_alignment="center", width="content"):
-                            sensors = st.pills("Satellite sensors", SENSORS, selection_mode="multi", key="activity_sensors",
+                            sensors = st.pills("Satellite sensors", SENSORS, selection_mode="multi", default=SENSORS, key="activity_sensors",
                                                label_visibility="collapsed", wrap=False, persist_state="session")
                         with st.container(key="calendar-period-controls", horizontal=True, gap="small", width="content"):
                             month = searchable_selectbox("Month", list(range(13)), format_func=lambda value: "All months" if value == 0 else MONTH_NAMES[value - 1],

@@ -45,7 +45,10 @@ class ActivityDataTest(unittest.TestCase):
             modis = daily_activity(year, sensors=["MODIS"])
             viirs = daily_activity(year, sensors=["VIIRS"])
             self.assertEqual(combined, {day: modis[day] + viirs[day] for day in combined})
-            self.assertEqual(combined, daily_activity(year, sensors=[]))
+            self.assertEqual({day: 0 for day in combined}, daily_activity(year, sensors=[]))
+            self.assertEqual(annual_series(year, sensors=[]), [0] * 12)
+            self.assertEqual(annual_summary(year, sensors=[])["total"], 0)
+            self.assertTrue(all(cell["count"] == 0 for cell in calendar_cells(year, sensors=[])))
             self.assertEqual(combined, daily_activity(year, sensors=["VIIRS", "MODIS"]))
             self.assertNotEqual(modis, viirs)
             for sensor, counts in (("MODIS", modis), ("VIIRS", viirs)):

@@ -203,28 +203,39 @@
 .year-card-total span { color: #d1d6df; font-size: clamp(9px, calc(15 * var(--u)), 15px); }
 .year-growth { color: #a0e9bc; background: #214338; border-radius: 20px; padding: calc(7 * var(--u)) calc(14 * var(--u)); white-space: nowrap; font-size: clamp(9px, calc(14 * var(--u)), 14px); font-weight: 600; }
 
-/* O botão revela o nome à esquerda do pino, como Components/Button.png. */
+/* O pino fica à direita; o nome desliza para a esquerda ao passar o mouse ou focar. */
 .st-key-activity-location { position: fixed; right: 12px; top: 65%; transform: translateY(-50%); width: max-content !important; z-index: 100; }
 .st-key-activity-location [data-testid="stElementContainer"] { width: auto !important; }
 .st-key-activity-location {
-  --location-size: clamp(44px, calc(68 * var(--u)), 68px);
+  --location-size: clamp(52px, calc(70 * var(--u)), 70px);
   --location-icon: clamp(27px, calc(38 * var(--u)), 38px);
   --location-inset: calc((var(--location-size) - var(--location-icon)) / 2);
+  max-width: calc(100vw - var(--rail-width) - 24px);
 }
 .st-key-activity-location [data-testid="stPageLink-NavLink"] {
   display: flex; flex-direction: row-reverse; align-items: center; justify-content: flex-start;
-  width: var(--location-size); height: var(--location-size);
-  box-sizing: border-box; padding: 0 var(--location-inset); gap: 0; overflow: hidden;
-  border-radius: 11px; background: #000; color: white; transition: width .18s ease, gap .18s ease;
+  width: max-content; max-width: 100%; min-height: var(--location-size);
+  box-sizing: border-box;
+  padding: var(--location-inset);
+  gap: 0; overflow: hidden;
+  border: 0; border-radius: var(--location-radius); background: #000; color: white;
+  transition: gap .28s ease;
 }
 .st-key-activity-location [data-testid="stPageLink-NavLink"] > span:first-child { display: flex; align-items: center; justify-content: center; flex: 0 0 var(--location-icon); width: var(--location-icon); height: var(--location-icon); }
-.st-key-activity-location [data-testid="stIconMaterial"] { color: white !important; font-size: var(--location-icon); line-height: 1; }
-.st-key-activity-location [data-testid="stPageLink-NavLink"] > span:last-child { opacity: 0; max-width: 0; overflow: hidden; transition: opacity .18s ease, max-width .18s ease; }
-.st-key-activity-location [data-testid="stMarkdownContainer"] p { color: white; white-space: nowrap; font-size: clamp(12px, calc(20 * var(--u)), 20px); font-weight: 700; margin: 0; }
+.st-key-activity-location [data-testid="stIconMaterial"] { color: white !important; font-size: var(--location-icon); font-variation-settings: 'FILL' 0; line-height: 1; }
+.st-key-activity-location [data-testid="stPageLink-NavLink"] > span:last-child {
+  min-width: 0; max-width: 0; overflow: hidden; opacity: 0; transform: translateX(16px);
+  transition: max-width .28s ease, opacity .2s ease, transform .28s ease;
+}
+.st-key-activity-location [data-testid="stMarkdownContainer"] p { color: white; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; text-align: left; font-family: Barlow, Arial, sans-serif; font-size: clamp(14px, calc(20 * var(--u)), 20px); font-weight: 700; margin: 0; }
 .st-key-activity-location:hover [data-testid="stPageLink-NavLink"],
-.st-key-activity-location:focus-within [data-testid="stPageLink-NavLink"] { width: max-content; max-width: calc(100vw - var(--rail-width) - 32px); gap: 12px; }
+.st-key-activity-location:focus-within [data-testid="stPageLink-NavLink"] { gap: 12px; background: #000; color: white; }
 .st-key-activity-location:hover [data-testid="stPageLink-NavLink"] > span:last-child,
-.st-key-activity-location:focus-within [data-testid="stPageLink-NavLink"] > span:last-child { opacity: 1; max-width: 230px; }
+.st-key-activity-location:focus-within [data-testid="stPageLink-NavLink"] > span:last-child {
+  max-width: min(420px, calc(100vw - var(--rail-width) - var(--location-size) - 48px));
+  opacity: 1; transform: translateX(0);
+}
+.st-key-activity-location [data-testid="stPageLink-NavLink"]:focus-visible { outline: 2px solid #fff; outline-offset: 3px; }
 @media (prefers-reduced-motion: reduce) { .st-key-activity-location * { transition: none !important; } }
 
 @media (max-width: 700px) {

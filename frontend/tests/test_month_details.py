@@ -16,7 +16,7 @@ from activity_data import annual_series, month_summary
 
 class MonthDetailsTest(unittest.TestCase):
     def test_month_totals_shares_and_year_boundary(self):
-        for sensors in ([], ["MODIS"], ["VIIRS"]):
+        for sensors in (["MODIS", "VIIRS"], ["MODIS"], ["VIIRS"]):
             monthly = annual_series(2025, sensors=sensors)
             summary = month_summary(2025, 9, sensors=sensors)
             self.assertEqual(summary["total"], monthly[8])
@@ -27,6 +27,11 @@ class MonthDetailsTest(unittest.TestCase):
             december = annual_series(2024, sensors=sensors)[-1]
             self.assertEqual(january["growth"], round((monthly[0] / december - 1) * 100, 1))
         self.assertEqual(len(month_summary(2024, 2)["days"]), 29)
+        unselected = month_summary(2024, 2, sensors=[])
+        self.assertEqual(unselected["total"], 0)
+        self.assertTrue(all(count == 0 for _, count in unselected["days"]))
+        self.assertEqual(unselected["annual_share"], 0)
+        self.assertIsNone(unselected["growth"])
         self.assertIsNone(month_summary(2023, 1)["growth"])
         empty = month_summary(2025, 9, {"country": "Brazil", "city": "Missing city"})
         self.assertEqual(empty["total"], 0)
@@ -52,18 +57,36 @@ class MonthDetailsTest(unittest.TestCase):
         self.assertEqual(app.session_state.detail_month, 9)
         self.assertEqual(app.session_state.detail_year, 2024)
         self.assertEqual(app.get("button_group")[0].value, ["MODIS"])
+        chart = json.loads(app.get("plotly_chart")[0].proto.spec)
+        self.assertEqual(chart["data"][0]["name"], "MODIS")
+        self.assertEqual(chart["data"][0]["marker"]["color"], "#ff3b30")
         app.selectbox(key="detail_month").select(2).run()
         app.get("button_group")[0].set_value(["VIIRS"]).run()
         self.assertFalse(app.exception)
         chart = json.loads(app.get("plotly_chart")[0].proto.spec)
         self.assertEqual(len(chart["data"][0]["x"]), 29)
+        self.assertEqual(chart["data"][0]["name"], "VIIRS")
+        self.assertEqual(chart["data"][0]["marker"]["color"], "#ffd166")
         self.assertEqual(sum(chart["data"][0]["y"]), month_summary(2024, 2, filters, ["VIIRS"])["total"])
+        app.get("button_group")[0].set_value(["MODIS", "VIIRS"]).run()
+        self.assertFalse(app.exception)
+        chart = json.loads(app.get("plotly_chart")[0].proto.spec)
+        self.assertEqual([trace["name"] for trace in chart["data"]], ["MODIS", "VIIRS"])
+        self.assertEqual(chart["layout"]["barmode"], "stack")
+        self.assertEqual(
+            [sum(counts) for counts in zip(*(trace["y"] for trace in chart["data"]))],
+            [count for _, count in month_summary(2024, 2, filters)["days"]],
+        )
+        app.get("button_group")[0].set_value([]).run()
+        self.assertFalse(app.exception)
+        chart = json.loads(app.get("plotly_chart")[0].proto.spec)
+        self.assertEqual(chart["data"], [])
         app.button(key="month-back").click().run()
         self.assertFalse(app.exception)
         self.assertEqual(app.selectbox(key="calendar_year").value, 2024)
         self.assertEqual(app.selectbox(key="calendar_month").value, 9)
         self.assertEqual(app.selectbox(key="comparison_year").value, 2023)
-        self.assertEqual(app.get("button_group")[0].value, ["VIIRS"])
+        self.assertEqual(app.get("button_group")[0].value, [])
         self.assertEqual(app.session_state.filters, filters)
         app.selectbox(key="calendar_month").select(0).run()
         self.assertNotIn("see-month-details", [button.key for button in app.button])

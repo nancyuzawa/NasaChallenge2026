@@ -4,9 +4,12 @@ import plotly.graph_objects as go
 import streamlit as st
 from pathlib import Path
 
-from activity_data import AVAILABLE_YEARS, MONTH_NAMES, SENSORS, month_summary
+from activity_data import AVAILABLE_YEARS, MONTH_NAMES, SENSORS, daily_activity, month_summary
 from activity_ui import month_metrics_html
 from ui import searchable_selectbox
+
+
+SENSOR_COLORS = {"MODIS": "#ff3b30", "VIIRS": "#ffd166"}
 
 
 def open_month(month, year):
@@ -31,7 +34,7 @@ def render_month_details(filters, provider=None):
         with st.container(key="month-panel"):
             with st.container(key="calendar-controls", horizontal=True, gap="small"):
                 with st.container(key="sensor-controls", horizontal=True, gap="small", width="content"):
-                    sensors = st.pills("Satellite sensors", SENSORS, selection_mode="multi", key="activity_sensors",
+                    sensors = st.pills("Satellite sensors", SENSORS, selection_mode="multi", default=SENSORS, key="activity_sensors",
                                        label_visibility="collapsed", wrap=False, persist_state="session")
                 with st.container(key="calendar-period-controls", horizontal=True, gap="small", width="content"):
                     month = searchable_selectbox("Month", list(range(1, 13)), format_func=lambda value: MONTH_NAMES[value - 1],
@@ -50,7 +53,8 @@ def render_month_details(filters, provider=None):
                     ))
                     last_day = len(summary["days"])
                     figure.update_layout(
-                        paper_bgcolor="#303646", plot_bgcolor="#303646", showlegend=False,
+                        paper_bgcolor="#303646", plot_bgcolor="#303646", barmode="stack", showlegend=True,
+                        legend={"orientation": "h", "x": 0, "y": 1.15, "itemclick": False, "itemdoubleclick": False},
                         font={"family": "Barlow, Arial", "size": 13, "color": "#d5d8e2"},
                         margin={"l": 40, "r": 8, "t": 16, "b": 32}, bargap=.42,
                         xaxis={"tickmode": "array", "tickvals": [1, 5, 10, 15, 20, 25, last_day],
