@@ -51,7 +51,7 @@ period_label = (
     f"{ENGLISH_MONTHS[start.month - 1]} to {ENGLISH_MONTHS[end.month - 1]} {end.year}"
     if start.year == end.year else f"{start:%d/%m/%Y} to {end:%d/%m/%Y}"
 )
-hotspot_total = f"{metrics['hotspots']:,}".replace(",", ".")
+hotspot_total = f"{metrics['hotspots']:,}"
 
 
 def close_dialog():
@@ -134,7 +134,7 @@ def change_toolbar_location():
             st.session_state.filters = selected
 
 
-render_sidebar("Mapa")
+render_sidebar("Map")
 with st.container(key="dashboard-grid"):
     map_col, insight_col = st.columns([1, 1], gap="small", vertical_alignment="top")
 with map_col:

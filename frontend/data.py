@@ -9,7 +9,7 @@ import numpy as np
 
 from locations import CITY_RECORDS
 
-MONTHS = ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"]
+MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
 TREND_2025 = [48, 35, 82, 104, 104, 108, 143, 129, 386, 109, 184, 293]
 
 
@@ -68,5 +68,5 @@ def dashboard_metrics(period, filters=None):
         "peak_month": month_name[peak + 1] if total else "—", "peak_count": series[peak],
         "historical_growth": round((total / historical - 1) * 100, 1) if historical else 0,
         "current_period": total, "historical_average": historical,
-        "period_label": f"{start:%d/%m/%Y} a {end:%d/%m/%Y}",
+        "period_label": f"{start:%b %d, %Y} to {end:%b %d, %Y}",
     }
