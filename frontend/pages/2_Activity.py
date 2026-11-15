@@ -58,7 +58,7 @@ with st.container(key="activity-page"):
                 with st.container(key="calendar-main"):
                     with st.container(key="calendar-controls", horizontal=True, gap="small"):
                         with st.container(key="sensor-controls", horizontal=True, gap="small", vertical_alignment="center", width="content"):
-                            sensors = st.pills("Satellite sensors", SENSORS, selection_mode="multi", key="activity_sensors",
+                            sensors = st.pills("Satellite sensors", SENSORS, selection_mode="multi", default=SENSORS, key="activity_sensors",
                                                label_visibility="collapsed", wrap=False, persist_state="session")
                         with st.container(key="calendar-period-controls", horizontal=True, gap="small", width="content"):
                             month = searchable_selectbox("Month", list(range(13)), format_func=lambda value: "All months" if value == 0 else MONTH_NAMES[value - 1],
