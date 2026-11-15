@@ -1,4 +1,14 @@
-# Ingestão inicial de dados NASA FIRMS (MODIS + VIIRS)
+| Directory | Responsibility |
+| --- | --- |
+| `api/routes` | Receive requests from the frontend |
+| `services` | Run processing and business rules |
+| `models` | Represent system entities and, eventually, database tables |
+| `schemas` | Define API request and response formats |
+| `database` | Manage connections and persistence |
+| `core` | Configuration and environment variables |
+| `data/raw` | Original files |
+| `data/processed` | Standardized and harmonized data |
+| `data/aggregated` | Consolidated data for analysis |
 
 Este projeto é um primeiro passo do backend: lê arquivos CSV, CSV.GZ ou ZIP
 baixados do FIRMS, padroniza campos essenciais e gera uma base consolidada.

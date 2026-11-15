@@ -62,6 +62,7 @@ h1, h2, h3 { font-family: Barlow, Arial, sans-serif; }
 }
 .st-key-navigation [data-testid="stPageLink-NavLink"] {
   display: flex;
+  align-items: center;
   justify-content: center;
   height: clamp(34px, calc(60 * var(--u)), 60px);
   border-radius: clamp(9px, calc(17 * var(--u)), 17px);
@@ -69,11 +70,35 @@ h1, h2, h3 { font-family: Barlow, Arial, sans-serif; }
   color: #fff;
 }
 .st-key-navigation [data-testid="stPageLink-NavLink"] p { display: none; }
+.st-key-navigation [data-testid="stPageLink-NavLink"] > span:last-child { display: none; }
+.st-key-navigation [data-testid="stPageLink-NavLink"] > span:first-child { display: flex; align-items: center; justify-content: center; flex: none; }
 .st-key-navigation [data-testid="stIconMaterial"] {
   color: white !important;
   font-size: clamp(22px, calc(36 * var(--u)), 36px);
 }
 .st-key-navigation [data-testid="stPageLink-NavLink"]:hover { background: #3d4851; }
+
+/* Ícone e texto compartilham a mesma linha central, sem margens de parágrafo. */
+[data-testid="stButton"] button,
+[data-testid="stFormSubmitButton"] button {
+  display: inline-flex; align-items: center; justify-content: center;
+  padding-block: 0; line-height: 1.2;
+}
+[data-testid="stButton"] button [data-testid="stMarkdownContainer"],
+[data-testid="stFormSubmitButton"] button [data-testid="stMarkdownContainer"] {
+  display: flex; align-items: center; justify-content: center;
+  margin: 0 !important; padding: 0;
+}
+[data-testid="stButton"] button p,
+[data-testid="stFormSubmitButton"] button p { margin: 0 !important; padding: 0; line-height: 1.2 !important; }
+[data-testid="stIconMaterial"] {
+  display: inline-flex; align-items: center; justify-content: center;
+  line-height: 1 !important; vertical-align: middle; flex-shrink: 0;
+}
+[data-testid="stSelectbox"] .react-aria-ComboBox > [role="group"] { align-items: center; }
+[data-testid="stSelectbox"] .react-aria-ComboBox button { display: inline-flex; align-items: center; justify-content: center; line-height: 1; }
+[data-testid="stSelectbox"] .react-aria-ComboBox button svg { display: block; flex-shrink: 0; }
+[data-testid="stSelectbox"] input { padding-block: 0; line-height: 1.2; }
 
 /* Cada painel recebe uma parte da janela; o conteúdo não depende de alturas fixas. */
 .stMain:has(.st-key-dashboard-grid) { height: 100dvh; }
@@ -110,6 +135,10 @@ h1, h2, h3 { font-family: Barlow, Arial, sans-serif; }
   flex: 1 1 0 !important;
 }
 .st-key-dashboard-grid [data-testid="stMarkdownContainer"] { margin-bottom: 0 !important; }
+.st-key-dashboard-grid, .st-key-insights, .st-key-map-panel { min-width: 0; width: 100%; }
+.st-key-dashboard-grid [data-testid="stLayoutWrapper"],
+.st-key-insights > [data-testid="stElementContainer"],
+.st-key-insights > [data-testid="stLayoutWrapper"] { width: 100% !important; max-width: 100%; min-width: 0; }
 
 .st-key-map-panel {
   height: 100% !important;

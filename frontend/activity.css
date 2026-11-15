@@ -1,0 +1,245 @@
+/* Layout do segundo item do menu, conforme o protótipo 2. Report. */
+:root { --activity-pad: clamp(12px, calc(36 * var(--u)), 36px); }
+.stMain:has(.st-key-activity-page) { height: 100dvh; }
+.stMainBlockContainer:has(.st-key-activity-page) {
+  max-width: none;
+  height: 100%;
+  min-height: 0;
+  padding: var(--activity-pad) !important;
+}
+.stMainBlockContainer:has(.st-key-activity-page) > [data-testid="stVerticalBlock"] {
+  height: 100%; min-height: 0; gap: 0;
+}
+.stMainBlockContainer:has(.st-key-activity-page) > [data-testid="stVerticalBlock"] > [data-testid="stLayoutWrapper"]:has(.st-key-activity-page) {
+  height: 100%; min-height: 0; flex: 1 1 0;
+}
+.st-key-activity-page {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-rows: auto minmax(0, .42fr) auto minmax(0, .58fr);
+  height: 100%; min-height: 0;
+  gap: clamp(10px, calc(20 * var(--u)), 20px) !important;
+}
+.st-key-activity-page > [data-testid="stLayoutWrapper"] { height: 100%; min-height: 0; }
+.st-key-activity-page > [data-testid="stLayoutWrapper"],
+.st-key-activity-page [data-testid="stElementContainer"],
+.st-key-activity-calendar, .st-key-activity-annual,
+.st-key-calendar-body, .st-key-annual-comparison, .st-key-annual-chart {
+  width: 100% !important; max-width: 100%; min-width: 0;
+}
+.st-key-activity-page [data-testid="stMarkdownContainer"] { margin-bottom: 0 !important; color: #fdfbfd; }
+.activity-intro, .activity-section-heading { padding: 0 calc(22 * var(--u)); }
+.st-key-activity-page .activity-intro h1,
+.st-key-activity-page .activity-section-heading h2 {
+  margin: 0 0 calc(12 * var(--u)); padding: 0;
+  font-family: Barlow, Arial, sans-serif;
+  font-size: clamp(20px, calc(32 * var(--u)), 32px);
+  font-weight: 700; line-height: 1.15;
+}
+.st-key-activity-page .activity-intro p,
+.st-key-activity-page .activity-section-heading p {
+  margin: 0; color: #fdfbfd;
+  font-size: clamp(11px, calc(20 * var(--u)), 20px); line-height: 1.3;
+}
+.activity-demo {
+  display: inline-block; margin-left: 8px;
+  padding: 2px 5px; color: #bed3e0; border: 1px solid #526074; border-radius: 5px;
+  font-size: clamp(8px, calc(12 * var(--u)), 12px); vertical-align: middle; white-space: nowrap;
+}
+.st-key-activity-calendar, .st-key-activity-annual {
+  box-sizing: border-box; height: 100%; min-height: 0;
+  padding: calc(22 * var(--u));
+  background: var(--panel); border-radius: var(--panel-radius);
+  gap: calc(12 * var(--u)) !important;
+}
+.st-key-calendar-controls, .st-key-annual-controls {
+  min-height: 0;
+  gap: calc(10 * var(--u)) !important;
+  flex: 0 0 auto !important;
+  flex-wrap: nowrap !important;
+}
+.st-key-calendar-period-controls > [data-testid="stElementContainer"],
+.st-key-annual-controls > [data-testid="stElementContainer"] {
+  width: clamp(110px, calc(122 * var(--u)), 122px) !important;
+  flex: 0 0 auto !important;
+}
+.st-key-calendar-period-controls > .st-key-calendar_month,
+.st-key-annual-controls > .st-key-comparison_range { width: clamp(150px, calc(180 * var(--u)), 180px) !important; }
+.st-key-calendar-controls { align-items: center !important; }
+.st-key-calendar-controls > [data-testid="stLayoutWrapper"] { min-width: 0; flex: 0 0 auto; }
+.st-key-calendar-controls > [data-testid="stLayoutWrapper"]:last-child { margin-left: auto; }
+.st-key-calendar-period-controls { gap: calc(10 * var(--u)) !important; flex-wrap: nowrap !important; }
+.st-key-sensor-controls { align-items: center !important; gap: calc(10 * var(--u)) !important; }
+.st-key-sensor-controls > [data-testid="stElementContainer"] { width: auto !important; flex: 0 0 auto; }
+.sensor-filter-icon {
+  display: flex; align-items: center; justify-content: center;
+  box-sizing: border-box; width: clamp(30px, calc(46 * var(--u)), 46px);
+  height: clamp(30px, calc(46 * var(--u)), 46px);
+  border: 1px solid #f5f5f5; border-radius: 50%; background: #333;
+}
+.sensor-filter-icon svg { width: 60%; height: 60%; display: block; }
+.st-key-activity_sensors [data-testid="stButtonGroup"] { gap: calc(10 * var(--u)); }
+.st-key-activity_sensors button {
+  display: inline-flex; align-items: center; justify-content: center;
+  box-sizing: border-box; min-height: 0; height: clamp(30px, calc(46 * var(--u)), 46px);
+  padding: 0 clamp(10px, calc(20 * var(--u)), 20px); border: 1px solid #bfc0c6;
+  border-radius: 28px; background: #333; color: #c4c4c9; line-height: 1;
+}
+.st-key-activity_sensors button[aria-pressed="true"] { background: #000 !important; border-color: #000 !important; color: #fff !important; }
+.st-key-activity_sensors button[aria-pressed="true"]::before { content: '✓'; margin-right: .5em; font-size: 1em; line-height: 1; }
+.st-key-activity_sensors button p { margin: 0 !important; color: inherit; font-size: clamp(12px, calc(20 * var(--u)), 20px); font-weight: 700; line-height: 1.2; }
+.st-key-activity_sensors button svg { display: block; flex-shrink: 0; }
+.st-key-activity_sensors button:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
+.st-key-activity-page [data-testid="stSelectbox"] .react-aria-ComboBox > [role="group"] {
+  min-height: clamp(30px, calc(46 * var(--u)), 46px);
+  background: #333; border: 1px solid #f5f5f5; border-radius: 28px;
+}
+.st-key-activity-page [data-testid="stSelectbox"] input {
+  min-width: 0; color: white; -webkit-text-fill-color: white; caret-color: white;
+  font-family: 'Barlow Condensed', Arial, sans-serif;
+  font-size: clamp(12px, calc(20 * var(--u)), 20px); font-weight: 700;
+}
+.st-key-activity-page [data-testid="stSelectbox"] button,
+.st-key-activity-page [data-testid="stSelectbox"] [data-testid="stIconMaterial"] { color: white; }
+.st-key-activity-calendar > [data-testid="stLayoutWrapper"]:has(.st-key-calendar-body),
+.st-key-activity-annual > [data-testid="stLayoutWrapper"]:has(.st-key-annual-comparison) {
+  height: 0 !important; min-height: 0; flex: 1 1 0 !important;
+}
+.st-key-calendar-body, .st-key-annual-comparison { height: 100%; min-height: 0; }
+.st-key-calendar-body > [data-testid="stHorizontalBlock"],
+.st-key-annual-comparison > [data-testid="stHorizontalBlock"],
+.st-key-calendar-body > [data-testid="stLayoutWrapper"],
+.st-key-annual-comparison > [data-testid="stLayoutWrapper"],
+.st-key-calendar-body [data-testid="stHorizontalBlock"],
+.st-key-annual-comparison [data-testid="stHorizontalBlock"] {
+  height: 100%; min-height: 0; flex-wrap: nowrap !important;
+  gap: clamp(10px, calc(28 * var(--u)), 28px) !important;
+}
+.st-key-calendar-body [data-testid="stColumn"],
+.st-key-annual-comparison [data-testid="stColumn"] { height: 100%; min-height: 0; min-width: 0; }
+.st-key-calendar-body [data-testid="stColumn"] > [data-testid="stVerticalBlock"],
+.st-key-annual-comparison [data-testid="stColumn"] > [data-testid="stVerticalBlock"],
+.st-key-annual-comparison [data-testid="stColumn"] > [data-testid="stVerticalBlock"] > [data-testid="stLayoutWrapper"] { height: 100%; min-height: 0; }
+.st-key-calendar-body [data-testid="stElementContainer"],
+.st-key-calendar-body [data-testid="stMarkdown"],
+.st-key-calendar-body [data-testid="stMarkdown"] > div,
+.st-key-calendar-body [data-testid="stMarkdownContainer"] { height: 100%; min-height: 0; }
+.calendar-canvas { position: relative; display: flex; align-items: center; justify-content: center; width: 100%; height: 100%; min-width: 0; min-height: 0; container-type: size; }
+.activity-heatmap {
+  display: grid; width: 100%; height: 100%; min-width: 0; min-height: 0;
+  grid-template-columns: clamp(10px, calc(20 * var(--u)), 20px) repeat(var(--calendar-weeks), minmax(0, 1fr));
+  grid-template-rows: minmax(10px, .8fr) repeat(7, minmax(0, 1fr));
+  column-gap: clamp(1px, calc(4 * var(--u)), 4px);
+  row-gap: clamp(1px, calc(4 * var(--u)), 4px);
+}
+.calendar-canvas--month .activity-heatmap { width: min(100%, calc(100cqh * var(--calendar-ratio))); }
+.calendar-row { display: contents; }
+.calendar-month, .calendar-weekday { color: #c4c7d1; min-width: 0; display: flex; align-items: center; justify-content: center; line-height: 1; }
+.calendar-month { font-size: clamp(8px, calc(14 * var(--u)), 14px); font-family: 'Barlow Condensed', Arial, sans-serif; }
+.calendar-weekday { font-size: clamp(8px, calc(11 * var(--u)), 11px); }
+.calendar-day { display: block; position: relative; min-width: 0; min-height: 0; container-type: size; }
+.calendar-day::after {
+  content: ''; position: absolute; left: 50%; top: 50%;
+  width: min(100cqw, 100cqh); height: min(100cqw, 100cqh);
+  transform: translate(-50%, -50%); border-radius: 2px; background: var(--day-color);
+}
+.calendar-legend { display: flex; flex-direction: column; gap: calc(7 * var(--u)); height: 100%; min-height: 0; }
+.st-key-activity-page .calendar-legend h3,
+.st-key-activity-page .key-periods h3,
+.st-key-activity-page .annual-summary h3 {
+  margin: 0; padding: 0; font-size: clamp(12px, calc(20 * var(--u)), 20px); line-height: 1.2; font-weight: 700;
+}
+.calendar-legend h3 { border-bottom: 1px solid #697182; padding-bottom: calc(12 * var(--u)) !important; margin-bottom: calc(6 * var(--u)) !important; }
+.calendar-legend-item { display: flex; align-items: center; gap: calc(10 * var(--u)); min-height: 0; flex: 1; font-size: clamp(9px, calc(14 * var(--u)), 14px); line-height: 1.15; }
+.heat-swatch { display: block; width: calc(34 * var(--u)); height: 100%; max-height: calc(34 * var(--u)); min-width: 12px; border-radius: 4px; flex-shrink: 0; }
+.st-key-annual-chart { height: 100%; min-height: 0; gap: calc(8 * var(--u)) !important; }
+.annual-chart-heading { display: flex; justify-content: space-between; align-items: center; gap: 10px; font-size: clamp(11px, calc(20 * var(--u)), 20px); line-height: 1.2; }
+.series-legend { display: flex; gap: calc(32 * var(--u)); font-size: clamp(9px, calc(14 * var(--u)), 14px); font-weight: 600; }
+.series-legend span { display: inline-flex; align-items: center; gap: calc(9 * var(--u)); }
+.series-legend i, .key-period i, .year-card-label i { display: inline-block; width: clamp(6px, calc(10 * var(--u)), 10px); height: clamp(6px, calc(10 * var(--u)), 10px); border-radius: 50%; flex-shrink: 0; }
+.st-key-annual-chart > [data-testid="stElementContainer"]:has([data-testid="stPlotlyChart"]) { height: 0 !important; min-height: 0; flex: 1 1 0 !important; }
+.st-key-annual-chart [data-testid="stFullScreenFrame"], .st-key-annual-chart [data-testid="stPlotlyChart"] { height: 100% !important; min-height: 0; }
+.st-key-annual-comparison [data-testid="stColumn"]:last-child [data-testid="stElementContainer"],
+.st-key-annual-comparison [data-testid="stColumn"]:last-child [data-testid="stMarkdown"],
+.st-key-annual-comparison [data-testid="stColumn"]:last-child [data-testid="stMarkdown"] > div,
+.st-key-annual-comparison [data-testid="stColumn"]:last-child [data-testid="stMarkdownContainer"] { height: 100%; min-height: 0; }
+.key-periods { height: 100%; border-left: 1px solid #4a5263; padding-left: calc(24 * var(--u)); display: flex; flex-direction: column; gap: calc(10 * var(--u)); }
+.key-period { display: flex; align-items: flex-start; gap: calc(14 * var(--u)); font-size: clamp(11px, calc(19 * var(--u)), 19px); line-height: 1.2; }
+.key-period i { margin-top: .35em; }
+.key-period strong, .key-period span { display: block; }
+.key-period span { color: #d7dbe5; margin-top: calc(5 * var(--u)); font-size: clamp(10px, calc(17 * var(--u)), 17px); }
+.annual-summary h3 { margin: calc(2 * var(--u)) 0 calc(12 * var(--u)) !important; }
+.year-cards { display: grid; grid-template-columns: repeat(var(--summary-count), minmax(0, 1fr)); gap: calc(20 * var(--u)); }
+.year-card { padding: calc(12 * var(--u)) calc(20 * var(--u)); border: 1px solid #4b5465; border-radius: 12px; background: #293140; }
+.year-card-label { display: flex; align-items: center; gap: calc(10 * var(--u)); font-size: clamp(12px, calc(20 * var(--u)), 20px); font-weight: 700; line-height: 1.15; }
+.year-card-footer { display: flex; justify-content: space-between; align-items: center; gap: 7px; margin-top: calc(10 * var(--u)); }
+.year-card-total { display: flex; align-items: baseline; gap: calc(8 * var(--u)); }
+.year-card-total strong { font-size: clamp(18px, calc(26 * var(--u)), 26px); line-height: 1.1; }
+.year-card-total span { color: #d1d6df; font-size: clamp(9px, calc(15 * var(--u)), 15px); }
+.year-growth { color: #a0e9bc; background: #214338; border-radius: 20px; padding: calc(7 * var(--u)) calc(14 * var(--u)); white-space: nowrap; font-size: clamp(9px, calc(14 * var(--u)), 14px); font-weight: 600; }
+
+/* O botão revela o nome à esquerda do pino, como Components/Button.png. */
+.st-key-activity-location { position: fixed; right: 12px; top: 65%; transform: translateY(-50%); width: max-content !important; z-index: 100; }
+.st-key-activity-location [data-testid="stElementContainer"] { width: auto !important; }
+.st-key-activity-location {
+  --location-size: clamp(44px, calc(68 * var(--u)), 68px);
+  --location-icon: clamp(27px, calc(38 * var(--u)), 38px);
+  --location-inset: calc((var(--location-size) - var(--location-icon)) / 2);
+}
+.st-key-activity-location [data-testid="stPageLink-NavLink"] {
+  display: flex; flex-direction: row-reverse; align-items: center; justify-content: flex-start;
+  width: var(--location-size); height: var(--location-size);
+  box-sizing: border-box; padding: 0 var(--location-inset); gap: 0; overflow: hidden;
+  border-radius: 11px; background: #000; color: white; transition: width .18s ease, gap .18s ease;
+}
+.st-key-activity-location [data-testid="stPageLink-NavLink"] > span:first-child { display: flex; align-items: center; justify-content: center; flex: 0 0 var(--location-icon); width: var(--location-icon); height: var(--location-icon); }
+.st-key-activity-location [data-testid="stIconMaterial"] { color: white !important; font-size: var(--location-icon); line-height: 1; }
+.st-key-activity-location [data-testid="stPageLink-NavLink"] > span:last-child { opacity: 0; max-width: 0; overflow: hidden; transition: opacity .18s ease, max-width .18s ease; }
+.st-key-activity-location [data-testid="stMarkdownContainer"] p { color: white; white-space: nowrap; font-size: clamp(12px, calc(20 * var(--u)), 20px); font-weight: 700; margin: 0; }
+.st-key-activity-location:hover [data-testid="stPageLink-NavLink"],
+.st-key-activity-location:focus-within [data-testid="stPageLink-NavLink"] { width: max-content; max-width: calc(100vw - var(--rail-width) - 32px); gap: 12px; }
+.st-key-activity-location:hover [data-testid="stPageLink-NavLink"] > span:last-child,
+.st-key-activity-location:focus-within [data-testid="stPageLink-NavLink"] > span:last-child { opacity: 1; max-width: 230px; }
+@media (prefers-reduced-motion: reduce) { .st-key-activity-location * { transition: none !important; } }
+
+@media (max-width: 700px) {
+  .activity-intro, .activity-section-heading { padding: 0; }
+  .st-key-activity-calendar, .st-key-activity-annual { padding: 8px; gap: 7px !important; }
+  .st-key-activity-page { grid-template-rows: auto minmax(0, .4fr) auto minmax(0, .6fr); }
+  .st-key-calendar-controls { flex-wrap: wrap !important; gap: 6px !important; }
+  .st-key-calendar-controls > [data-testid="stLayoutWrapper"]:last-child { margin-left: 0; }
+  .st-key-calendar-body [data-testid="stHorizontalBlock"] { display: grid; grid-template-columns: minmax(0, 1fr); grid-template-rows: minmax(0, 1fr) auto; gap: 4px !important; }
+  .st-key-calendar-body [data-testid="stColumn"] { width: 100% !important; }
+  .calendar-legend { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 3px; height: auto; }
+  .calendar-legend h3 { grid-column: 1 / -1; margin: 0 !important; padding: 0 0 3px !important; font-size: 10px !important; }
+  .calendar-legend-item { height: 18px; font-size: 8px; gap: 4px; }
+  .heat-swatch { width: 12px; height: 12px; max-height: 12px; border-radius: 2px; }
+  .activity-demo { font-size: 8px; }
+  .st-key-annual-comparison [data-testid="stHorizontalBlock"] { gap: 6px !important; }
+  .key-periods { padding-left: 6px; gap: 8px; }
+  .key-periods h3 { font-size: 10px !important; }
+  .key-period { gap: 4px; font-size: 10px; }
+  .key-period span { font-size: 9px; }
+  .annual-chart-heading { align-items: flex-start; flex-direction: column; gap: 4px; font-size: 10px; }
+  .series-legend { gap: 10px; font-size: 8px; }
+  .annual-summary h3 { font-size: 11px !important; margin-bottom: 5px !important; }
+  .year-cards { gap: 4px; }
+  .year-card { padding: 6px; border-radius: 6px; }
+  .year-card-label { font-size: 10px; gap: 4px; }
+  .year-card-footer, .year-card-total { flex-wrap: wrap; gap: 3px; }
+  .year-card-footer { margin-top: 5px; }
+  .year-card-total strong { font-size: 17px; }
+  .year-card-total span, .year-growth { font-size: 8px; }
+  .year-growth { padding: 3px 5px; }
+  .st-key-activity-location { right: 6px; }
+}
+@media (max-width: 700px) and (max-height: 700px) {
+  .st-key-activity-page { grid-template-rows: auto minmax(0, .42fr) auto minmax(0, .58fr); }
+}
+@media (min-width: 701px) and (max-height: 700px) {
+  .key-periods { gap: 5px; }
+  .key-period { align-items: center; font-size: 11px; line-height: 1.15; }
+  .key-period i { margin-top: 0; }
+  .key-period strong, .key-period span { display: inline; }
+  .key-period span { margin: 0 0 0 4px; font-size: 10px; }
+}

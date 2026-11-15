@@ -1,4 +1,4 @@
-"""Prepara o ambiente do frontend e inicia o Streamlit com o Python correto."""
+"""Prepare the frontend environment and start Streamlit with its Python interpreter."""
 
 import argparse
 import hashlib
@@ -41,13 +41,13 @@ def install_dependencies():
                 bundle = Path(directory) / "windows-ca.pem"
                 bundle.write_text("\n".join(certificates), encoding="ascii")
                 environment["PIP_CERT"] = str(bundle)
-        print("Instalando as dependências em frontend/.venv...", flush=True)
+        print("Installing dependencies in frontend/.venv...", flush=True)
         run([str(PYTHON), "-m", "pip", "install", "-r", str(REQUIREMENTS)], env=environment)
 
 
 def prepare_environment(force_install=False):
     if not PYTHON.exists():
-        print("Criando o ambiente virtual em frontend/.venv...", flush=True)
+        print("Creating the virtual environment in frontend/.venv...", flush=True)
         venv.EnvBuilder(with_pip=True).create(ENVIRONMENT)
     fingerprint = hashlib.sha256(REQUIREMENTS.read_bytes()).hexdigest()
     recorded = STAMP.read_text(encoding="ascii").strip() if STAMP.exists() else ""
@@ -61,26 +61,26 @@ def prepare_environment(force_install=False):
     run([str(PYTHON), "-c", IMPORT_CHECK])
     run([str(PYTHON), "-m", "pip", "check"])
     STAMP.write_text(fingerprint, encoding="ascii")
-    print(f"Python do aplicativo: {PYTHON}", flush=True)
+    print(f"Application Python: {PYTHON}", flush=True)
 
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--check", action="store_true", help="Prepara e confere as dependências sem abrir o app.")
-    parser.add_argument("--install", action="store_true", help="Instala as dependências declaradas novamente.")
+    parser.add_argument("--check", action="store_true", help="Prepare and verify dependencies without starting the app.")
+    parser.add_argument("--install", action="store_true", help="Reinstall the declared dependencies.")
     options, streamlit_options = parser.parse_known_args()
     try:
         prepare_environment(force_install=options.install)
         if options.check:
-            print("Streamlit, Plotly, NumPy e dependências prontos.", flush=True)
+            print("Streamlit, Plotly, NumPy, and dependencies are ready.", flush=True)
             return 0
         return subprocess.call(
             [str(PYTHON), "-m", "streamlit", "run", str(FRONTEND / "app.py"), *streamlit_options],
             cwd=FRONTEND,
         )
     except (OSError, subprocess.CalledProcessError) as error:
-        print(f"Não foi possível preparar ou iniciar o aplicativo: {error}", file=sys.stderr)
-        print("Confira os detalhes acima. Para tentar a instalação novamente: python run.py --install", file=sys.stderr)
+        print(f"Could not prepare or start the application: {error}", file=sys.stderr)
+        print("Check the details above. To retry installation: python run.py --install", file=sys.stderr)
         return 1
     except KeyboardInterrupt:
         return 0

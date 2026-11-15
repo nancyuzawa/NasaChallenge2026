@@ -14,6 +14,7 @@ def icon(name, size=32):
         "chart": '<path d="m2 13 6-5 5 3L22 2M17 2h5v5M4 17v5m5-9v9m5-7v7m5-11v11"/>',
         "pin": '<path d="M20 10c0 6-8 13-8 13S4 16 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="3"/>',
         "trend": '<path d="m2 18 7-7 5 3 8-10M16 4h6v6"/>',
+        "filter": '<path d="M4 3h16a1 1 0 0 1 .8 1.6L14 13v7l-4 2v-9L3.2 4.6A1 1 0 0 1 4 3Z"/>',
     }
     return f'<svg width="{size}" height="{size}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">{paths[name]}</svg>'
 
@@ -33,7 +34,7 @@ def searchable_selectbox(label, options, **kwargs):
 
 def render_sidebar(active, show_navigation=True):
     if show_navigation:
-        active_page = {"Mapa": 1, "Atividade": 2, "Relatórios": 3}[active]
+        active_page = {"Map": 1, "Activity": 2, "Reports": 3}[active]
         st.markdown(f"<style>.st-key-navigation>[data-testid='stElementContainer']:nth-child({active_page}) [data-testid='stPageLink-NavLink']{{background:var(--blue)}}</style>", unsafe_allow_html=True)
     logo_path = Path(__file__).resolve().parent.parent / "midias" / "logo" / "Logo.svg"
     logo = b64encode(logo_path.read_bytes()).decode("ascii")
@@ -41,6 +42,6 @@ def render_sidebar(active, show_navigation=True):
         st.markdown(f'<img class="space-apps-logo" src="data:image/svg+xml;base64,{logo}" alt="NASA Space Apps Challenge">', unsafe_allow_html=True)
         if show_navigation:
             with st.container(key="navigation"):
-                st.page_link("pages/1_Dashboard.py", label="Map", icon=":material/map:", help="Mapa de focos de incêndio")
-                st.page_link("pages/2_Atividade.py", label="Activity", icon=":material/event:", help="Atividade mensal")
-                st.page_link("pages/3_Relatorios.py", label="Reports", icon=":material/description:", help="Relatórios")
+                st.page_link("pages/1_Dashboard.py", label="Map", icon=":material/map:", help="Fire hotspots map")
+                st.page_link("pages/2_Atividade.py", label="Activity", icon=":material/event:", help="Monthly activity")
+                st.page_link("pages/3_Relatorios.py", label="Reports", icon=":material/description:", help="Reports")

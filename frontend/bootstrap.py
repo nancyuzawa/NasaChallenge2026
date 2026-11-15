@@ -20,7 +20,7 @@ def launch_if_direct():
         else:
             if get_script_run_ctx(suppress_warning=True) is not None:
                 return
-    print("Iniciando pelo ambiente virtual do projeto...", flush=True)
+    print("Starting with the project's virtual environment...", flush=True)
     try:
         result = subprocess.call([sys.executable, str(root / "run.py"), *sys.argv[1:]], cwd=root)
     except KeyboardInterrupt:

@@ -1,13 +1,13 @@
 # NasaChallenge2026
 
-Para iniciar o frontend, abra `iniciar.cmd` no Windows ou execute na raiz:
+To start the frontend, open `iniciar.cmd` on Windows or run from the project root:
 
 ```powershell
 python run.py
 ```
 
-O iniciador prepara `frontend/.venv`, instala as dependências declaradas e abre
-o Streamlit com o Python desse ambiente. Use `python run.py --check` para
-conferir o ambiente sem abrir o aplicativo.
+The launcher prepares `frontend/.venv`, installs the declared dependencies,
+and starts Streamlit with that environment's Python. Use `python run.py --check`
+to verify the environment without opening the application. The interface is in English.
 
-Mais detalhes em [frontend/README.md](frontend/README.md).
+See [frontend/README.md](frontend/README.md) for details.
