@@ -1,3 +1,5 @@
 python backend/scripts/import_firms.py --export-only --start-year 2020 --end-year 2025
 
+python backend/scripts/import_firms.py --start-year 2006 --end-year 2006
+
 determina o ano de quando até quando ele baixa
