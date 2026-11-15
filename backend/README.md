@@ -1,12 +1,12 @@
-| Diretório | Responsabilidade |
+| Directory | Responsibility |
 | --- | --- |
-| `api/routes` | Receber requisições do frontend |
-| `services` | Executar o processamento e as regras de negócio |
-| `models` | Representar as entidades do sistema e, futuramente, tabelas |
-| `schemas` | Definir o formato das entradas e respostas da API |
-| `database` | Gerenciar a conexão e persistência |
-| `core` | Configurações e variáveis de ambiente |
-| `data/raw` | Arquivos originais |
-| `data/processed` | Dados padronizados e harmonizados |
-| `data/aggregated` | Dados consolidados para análises |
+| `api/routes` | Receive requests from the frontend |
+| `services` | Run processing and business rules |
+| `models` | Represent system entities and, eventually, database tables |
+| `schemas` | Define API request and response formats |
+| `database` | Manage connections and persistence |
+| `core` | Configuration and environment variables |
+| `data/raw` | Original files |
+| `data/processed` | Standardized and harmonized data |
+| `data/aggregated` | Consolidated data for analysis |
 

@@ -21,7 +21,7 @@
     globe.pointColor(c => c.city === next.city && c.country_iso === next.country_iso ? '#ff482c' : '#ffbb65');
     globe.pointRadius(c => c.city === next.city && c.country_iso === next.country_iso ? .6 : .28);
     globe.pointOfView({lat: next.latitude, lng: next.longitude, altitude: next.city ? 1.8 : 1.65}, 600);
-    document.getElementById('coordinates').textContent = `Lat.: ${next.latitude.toFixed(4)} / Long.: ${next.longitude.toFixed(4)}`;
+    document.getElementById('coordinates').textContent = `Lat: ${next.latitude.toFixed(4)} / Lon: ${next.longitude.toFixed(4)}`;
   }
 
   function resize() {

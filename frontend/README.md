@@ -1,69 +1,91 @@
-# Frontend Firewatch
+# Firewatch frontend
 
-Protótipo feito com Python e Streamlit, com página inicial, dashboard, atividade e relatórios.
+Python and Streamlit prototype with Welcome, Map, Activity, and Reports pages. The interface is in English.
 
-## Executar localmente
+## Run locally
 
-Na raiz do projeto, execute:
+From the project root:
 
 ```powershell
 python run.py
 ```
 
-No Windows também é possível abrir `iniciar.cmd` com dois cliques.
-O iniciador cria `frontend/.venv` se necessário, instala os pacotes de
-`requirements.txt` e executa o Streamlit com o mesmo Python. Não é preciso
-ativar o ambiente nem alterar a política de execução do PowerShell.
-A instalação usa os certificados confiáveis do Windows para validar HTTPS.
+On Windows, you can also double-click `iniciar.cmd`. The launcher creates
+`frontend/.venv` if needed, installs `requirements.txt`, and starts Streamlit
+with that environment's Python. No environment activation or PowerShell
+execution policy changes are needed. Installation uses trusted Windows
+certificates to validate HTTPS.
 
-Para conferir as importações e a compatibilidade das dependências:
-
-```powershell
-python run.py --check
-```
-
-Para instalar alterações em `requirements.txt`, basta executar o iniciador
-novamente. Para solicitar a instalação explicitamente, use `python run.py --install`.
-Declare nesse arquivo cada nova biblioteca externa usada pelo frontend.
+Use `python run.py --check` to verify imports and dependency compatibility
+without starting the application. Run the launcher again after changing
+`requirements.txt`, or use `python run.py --install` to explicitly reinstall.
+Declare every external frontend dependency in that file.
 
 ## VS Code
 
-Abra a pasta raiz `NasaChallenge2026`. Use F5 com a configuração
-`Firewatch: iniciar Streamlit`. O projeto já aponta para o Python de
-`frontend/.venv/Scripts/python.exe`.
-Se o VS Code já tinha outro interpretador selecionado, escolha esse caminho
-em **Python: Select Interpreter**. A execução direta de `frontend/app.py`
-também redireciona para o iniciador e usa o ambiente do projeto.
+Open the `NasaChallenge2026` root folder. Press F5 with the existing
+`Firewatch: iniciar Streamlit` configuration. Select
+`frontend/.venv/Scripts/python.exe` in **Python: Select Interpreter** if
+necessary. Running `frontend/app.py` directly also uses the project launcher.
 
-O painel inclui filtros de país, estado/província, latitude, longitude e intervalo de datas. Os indicadores, a série histórica e os pontos do mapa são demonstrativos e estão em `data.py`; podem ser substituídos pela integração com a API quando o backend estiver pronto.
+## Navigation and filters
 
-O dashboard segue `midias/prototype/1. Dashboard.png`, com período inicial de
-janeiro a dezembro de 2025. A barra lateral mantém os acessos a mapa, atividade
-e relatórios. A lupa permite selecionar cidades de referência e **Filter** abre
-os filtros de região, coordenadas e período. **Reset** restaura Campinas e 2025.
+The entry page follows `midias/prototype/0.Welcome.png`: choose a country
+and press **Confirm**. Home is the entry page; the sidebar contains only
+Map, Activity, and Reports.
 
-A entrada do aplicativo segue `midias/prototype/0.Welcome.png`: escolha um país
-e pressione **Confirm** para abrir o dashboard com esse país selecionado.
-A Home é a página de entrada; o menu lateral contém apenas mapa, atividade e relatórios.
-Todos os seletores permitem digitar para pesquisar, com ícone de lupa e
-correspondência por trecho do nome. O campo **Location** ao lado dos filtros
-reúne países e cidades e acompanha a seleção feita no globo.
+The dashboard follows `midias/prototype/1. Dashboard.png`, initially
+showing January through December 2025. **Search** selects a reference city;
+**Filter** provides country, state/province, coordinates, and date controls.
+**Reset** restores Campinas and 2025. All selectors support text search and
+partial name matching. **Location**, next to Filter, stays synchronized
+with the globe. Drag to rotate; click a country or city to update the
+location while preserving the date interval. The catalog is local and
+does not include every city. Activity and Reports share this location.
 
-O globo WebGL permite girar a Terra e clicar em países e cidades. Essas ações
-atualizam o mesmo filtro de localização usado por **Search** e **Filter**,
-preservando o intervalo de datas. O catálogo é local e não inclui todas as cidades.
+## Activity calendar and satellite sources
 
-Os indicadores e o gráfico usam amostras sintéticas por cidade, exclusivamente
-para 2025. A soma das cidades disponíveis forma a amostra de cada país; não é
-uma estimativa nacional. Intervalos fora de 2025 e áreas sem amostras exibem zero.
-Os dados não são medições de satélite. As páginas de atividade e relatórios
-compartilham a seleção. A conexão com o backend ainda não está implementada.
+The second menu item follows `midias/prototype/2. Report.png`: daily
+heatmap, legend, searchable month/year controls, annual comparison, peak
+periods, and yearly summaries. Calendar month/year and annual comparison
+year/range controls are independent.
 
-A implementação do mapa, os dados geográficos e as dependências JavaScript
-estão em `components/globe`; consulte seu README para fontes e licença.
-Os estilos compartilhados ficam em `styles.css`. O dashboard distribui mapa,
-indicadores e gráfico pela altura disponível da janela, sem rolagem da página.
-Fontes, ícones e espaçamentos acompanham o tamanho da tela. Em janelas estreitas,
-o mapa fica acima dos indicadores, mantendo todos os painéis visíveis.
-O logo da barra lateral é carregado de `midias/logo/Logo.svg`.
-O frontend utiliza os recursos de layout do Streamlit 1.67+.
+The **MODIS** and **VIIRS** pills filter the entire Activity page:
+
+- No selection: both sources combined.
+- One selected source: only that source.
+- Both selected: both sources combined.
+
+The calendar, legend, annual chart, peak periods, growth, and yearly totals
+all reflect the selected sources. Clearing the selection restores combined
+data without changing location or date controls.
+
+All data is synthetic. The 2023-2025 scenarios derive from 2025 city
+samples. MODIS/VIIRS assignments are simulated, not satellite measurements.
+Source counts add up exactly to each day's combined total; daily counts
+match monthly and yearly sums. Earlier years are not historical
+observations. Rules are in `activity_data.py`, markup in `activity_ui.py`,
+and styles in `activity.css`.
+
+The floating location button follows
+`midias/prototype/Components/Button.png`: it expands on hover or keyboard
+focus, and returns to the map with the location preserved.
+
+## Data and layout
+
+Dashboard samples in `data.py` are synthetic and limited to 2025. Country
+totals aggregate available cities; they are not national estimates.
+Dates outside 2025 and areas without samples show zero. The backend API
+is not connected yet.
+
+See `components/globe/README.md` for map assets, geographic sources, and
+licensing. Shared styles are in `styles.css`. Panels adapt to the window;
+narrow screens place the map above the indicators. All calendar days stay
+inside their panel when resizing. The sidebar uses `midias/logo/Logo.svg`.
+Requires Streamlit 1.67+ layout features.
+
+Run tests from the project root:
+
+```powershell
+frontend\.venv\Scripts\python.exe -m unittest discover -s frontend/tests -v
+```
