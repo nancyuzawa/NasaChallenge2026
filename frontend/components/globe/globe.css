@@ -8,7 +8,8 @@ body { background: #09163b; color: #fff; font-family: Arial, sans-serif; }
 #loading { position: absolute; inset: 40% 12% auto; text-align: center; font-size: 13px; }
 .hint { position: absolute; top: 7px; left: 7px; margin: 0; font-size: clamp(8px, 1.3vh, 11px); color: #c9dbe6; pointer-events: none; }
 .controls { position: absolute; right: 6px; bottom: 22px; display: grid; gap: clamp(3px, .6vh, 7px); }
-button { display: grid; place-items: center; width: clamp(23px, 4vh, 40px); height: clamp(23px, 4vh, 40px); border: 0; border-radius: 5px; color: #080808; background: #d9d9dc; font-size: clamp(19px, 3vh, 27px); cursor: pointer; }
+button { display: flex; align-items: center; justify-content: center; box-sizing: border-box; padding: 0; line-height: 1; width: clamp(23px, 4vh, 40px); height: clamp(23px, 4vh, 40px); border: 0; border-radius: 5px; color: #080808; background: #d9d9dc; cursor: pointer; }
+button svg { display: block; width: 62%; height: 62%; flex: none; fill: none; stroke: currentColor; stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
 button:hover { background: white; }
 button:focus-visible { outline: 2px solid #50c1d9; outline-offset: 2px; }
 .coordinates { position: absolute; bottom: 0; left: 0; margin: 0; padding: 6px 8px; background: #030a19; font-size: clamp(9px, 1.4vh, 12px); pointer-events: none; }

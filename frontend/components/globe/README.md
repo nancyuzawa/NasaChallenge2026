@@ -1,25 +1,23 @@
-# Globo de seleção de localização
+# Location selection globe
 
-Componente Streamlit v1 com comunicação bidirecional. O globo envia somente
-identificadores de países/cidades e um identificador de evento. O Python valida
-os identificadores no catálogo local antes de atualizar os filtros da sessão.
-Os arquivos de renderização e os dados geográficos são servidos localmente;
-o componente não usa CDN, geocodificação externa ou chave de API em execução.
+Streamlit v1 component with bidirectional communication. The globe sends only
+country/city identifiers and an event identifier. Python validates these against
+the local catalog before updating session filters. Rendering assets and geographic
+data are served locally; no CDN, external geocoding, or runtime API key is required.
 
-- Renderizador: [Globe.gl](https://globe.gl/) **2.46.2**, pacote npm verificado
-  pelo SHA-512 publicado no registro. Bundle em `vendor/globe.gl.min.js` e
-  licença MIT em `vendor/globe.gl.LICENSE`.
-- Limites de países: [Natural Earth, admin 0, 110m](https://github.com/nvkelso/natural-earth-vector/blob/master/geojson/ne_110m_admin_0_countries.geojson).
-- Cidades de referência: [Natural Earth, populated places, 110m](https://github.com/nvkelso/natural-earth-vector/blob/master/geojson/ne_110m_populated_places.geojson),
-  complementadas pelas cidades brasileiras já disponíveis no protótipo.
-- Os catálogos contêm somente os campos usados pela aplicação.
+- Renderer: [Globe.gl](https://globe.gl/) **2.46.2**, npm package verified
+  against the registry's published SHA-512. Bundle: `vendor/globe.gl.min.js`;
+  MIT license: `vendor/globe.gl.LICENSE`.
+- Country boundaries: [Natural Earth, admin 0, 110m](https://github.com/nvkelso/natural-earth-vector/blob/master/geojson/ne_110m_admin_0_countries.geojson).
+- Reference cities: [Natural Earth, populated places, 110m](https://github.com/nvkelso/natural-earth-vector/blob/master/geojson/ne_110m_populated_places.geojson),
+  supplemented with the Brazilian cities already available in the prototype.
+- Catalogs contain only the fields used by the application.
 
-Arraste para girar. Clique no território de um país para filtrar o país inteiro;
-clique em um ponto para filtrar uma cidade disponível. O seletor com pesquisa
-ao lado dos filtros do dashboard também permite escolher países e cidades.
-As teclas de seta giram o globo, `+`/`-` controlam o zoom, e o primeiro botão
-retorna à localização selecionada. O botão de expansão usa a API de tela cheia
-ou ocupa a janela do aplicativo quando essa API não está disponível.
+Drag to rotate. Click a country's territory to select that country; click a
+point to select an available city. The searchable Location field also selects
+countries and cities. Arrow keys rotate, `+`/`-` control zoom, and the first
+control returns to the selected location. Expand uses the Fullscreen API or
+fills the application window when that API is unavailable.
 
-Requer WebGL. Se o navegador não conseguir inicializá-lo, o componente mostra
-uma mensagem e os filtros Search/Filter continuam disponíveis.
+Requires WebGL. If initialization fails, the component displays a message;
+Search and Filter remain available for selecting a location.
