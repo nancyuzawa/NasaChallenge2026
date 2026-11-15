@@ -4,6 +4,7 @@ from datetime import date
 from pathlib import Path
 import sys
 import unittest
+from unittest.mock import patch
 
 from streamlit.testing.v1 import AppTest
 
@@ -12,7 +13,7 @@ sys.path.insert(0, str(FRONTEND))
 
 
 class WelcomeNavigationTest(unittest.TestCase):
-    def test_welcome_country_toolbar_and_return_home(self):
+    def test_welcome_country_indicator_and_return_home(self):
         app = AppTest.from_file(str(FRONTEND / "app.py"), default_timeout=30).run()
         self.assertFalse(app.exception)
         self.assertIsNone(app.selectbox(key="welcome_country").value)
@@ -28,15 +29,15 @@ class WelcomeNavigationTest(unittest.TestCase):
         self.assertEqual(app.session_state.filters["period"], (date(2025, 1, 1), date(2025, 12, 31)))
         self.assertEqual(len(app.get("plotly_chart")), 1)
 
-        app.selectbox(key="toolbar_location").select("city:BRA:Manaus").run()
-        self.assertFalse(app.exception)
-        self.assertEqual(app.session_state.filters["city"], "Manaus")
-        self.assertEqual(app.selectbox(key="toolbar_location").value, "city:BRA:Manaus")
+        self.assertNotIn("toolbar_location", [select.key for select in app.selectbox])
+        self.assertNotIn("search", [button.key for button in app.button])
+        self.assertTrue(any('aria-label="Selected country"' in m.value and 'Brazil' in m.value for m in app.markdown))
 
-        app.selectbox(key="toolbar_location").set_value(None).run()
+        with patch("globe.render_globe", return_value={"kind": "city", "id": "BRA:Manaus", "event_id": "test-city"}):
+            app.run()
         self.assertFalse(app.exception)
-        self.assertIsNone(app.selectbox(key="toolbar_location").value)
         self.assertEqual(app.session_state.filters["city"], "Manaus")
+        self.assertTrue(any('aria-label="Selected country"' in m.value and 'Brazil' in m.value for m in app.markdown))
 
         app.button(key="filter").click().run()
         next(s for s in app.selectbox if s.label == "Country").set_value(None).run()
@@ -47,21 +48,21 @@ class WelcomeNavigationTest(unittest.TestCase):
         next(b for b in app.button if b.label == "Apply").click().run()
         self.assertFalse(app.exception)
         self.assertEqual(app.session_state.filters["country"], "Argentina")
-        self.assertEqual(app.selectbox(key="toolbar_location").value, "country:ARG")
+        self.assertTrue(any('aria-label="Selected country"' in m.value and 'Argentina' in m.value for m in app.markdown))
 
-        app.switch_page("pages/2_Atividade.py").run()
+        app.switch_page("pages/2_Activity.py").run()
         self.assertFalse(app.exception)
-        app.switch_page("pages/3_Relatorios.py").run()
+        app.switch_page("pages/3_Reports.py").run()
         self.assertFalse(app.exception)
         app.switch_page("app.py").run()
         self.assertFalse(app.exception)
         self.assertIsNone(app.selectbox(key="welcome_country").value)
 
-        # Retornar ao mesmo país deve restaurar o texto do seletor no dashboard.
+        # Retornar ao mesmo país deve restaurar o indicador no dashboard.
         app.selectbox(key="welcome_country").select("ARG")
         next(b for b in app.button if b.label == "Confirm").click().run()
         self.assertFalse(app.exception)
-        self.assertEqual(app.selectbox(key="toolbar_location").value, "country:ARG")
+        self.assertTrue(any('aria-label="Selected country"' in m.value and 'Argentina' in m.value for m in app.markdown))
 
 
 if __name__ == "__main__":

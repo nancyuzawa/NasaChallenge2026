@@ -3,20 +3,25 @@
 from html import escape
 
 from activity_data import HEAT_COLORS, MONTH_LABELS
+from ui import icon
 
 
 def calendar_html(cells, legend):
     weeks = max(cell["week"] for cell in cells) + 1
+    first_day = cells[0]["date"].replace(month=1, day=1)
+    last_day = first_day.replace(month=12, day=31)
+    year_weeks = ((last_day - first_day).days + (first_day.weekday() + 1) % 7) // 7 + 1
     focused = len({cell["date"].month for cell in cells}) == 1
     frame_class = "calendar-canvas calendar-canvas--month" if focused else "calendar-canvas"
-    parts = [f'<div class="{frame_class}" style="--calendar-ratio:{(weeks + 1) / 8:.4f}">',
+    parts = [f'<div class="{frame_class}" style="--calendar-ratio:{(year_weeks + 1) / 8:.4f};--calendar-year-weeks:{year_weeks}">',
              f'<div class="activity-heatmap" role="grid" aria-label="Daily fire hotspots calendar" aria-rowcount="8" aria-colcount="{weeks + 1}" style="--calendar-weeks:{weeks}">',
              '<div class="calendar-row" role="row">']
     seen_months = set()
     for cell in cells:
         day = cell["date"]
         if day.month not in seen_months:
-            parts.append(f'<span class="calendar-month" role="columnheader" style="grid-column:{cell["week"] + 2};grid-row:1">{MONTH_LABELS[day.month - 1]}</span>')
+            last_week = max(item["week"] for item in cells if item["date"].month == day.month)
+            parts.append(f'<span class="calendar-month" role="columnheader" style="grid-column:{cell["week"] + 2} / {last_week + 3};grid-row:1">{MONTH_LABELS[day.month - 1]}</span>')
             seen_months.add(day.month)
     parts.append('</div>')
     step = legend[0]["step"]
@@ -33,6 +38,24 @@ def calendar_html(cells, legend):
         parts.append('</div>')
     parts.append('</div></div>')
     return ''.join(parts)
+
+
+def month_metrics_html(summary):
+    growth = summary["growth"]
+    growth_label = "Change from the previous month"
+    if growth is not None:
+        growth_label = "Increase from the previous month" if growth >= 0 else "Decrease from the previous month"
+    growth_value = f"{abs(growth):g}%" if growth is not None else "N/A"
+    cards = [
+        ("fire", "orange", f'{summary["total"]:,}', "Fire hotspots"),
+        ("pie", "orange", f'{summary["annual_share"]:g}%', "of the year's total"),
+        ("trend", "red" if growth is None or growth >= 0 else "green", growth_value, growth_label),
+        ("pie", "green", "N/A", "Confidence unavailable in demo data"),
+    ]
+    items = ''.join(f'<article class="month-metric"><span class="month-metric-icon {color}">{icon(name, 48)}</span>'
+                    f'<div><strong>{value}</strong><span>{label}</span></div></article>'
+                    for name, color, value, label in cards)
+    return f'<section class="month-metrics" aria-label="Month summary">{items}</section>'
 
 
 def legend_html(legend):
