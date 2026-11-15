@@ -85,10 +85,48 @@ observations. Rules are in `activity_data.py`, markup in `activity_ui.py`,
 and styles in `activity.css`.
 
 The floating location button follows
-`midias/prototype/Components/Button.png`: it expands on hover or keyboard
-focus, and returns to the map with the location preserved.
+`midias/prototype/Components/Button.png`: black background, bold white location
+text on the left, and an outlined pin on the right. Activity and Month Details
+initially show only the pin; hovering or keyboard focus slides the name into view
+to the left. The label includes the city and full region name when available,
+followed by the country. The button returns to the map with the location preserved.
+The map's country badge uses the same colors, icon placement and 12px corner
+radius, with the country always visible. Long labels are truncated to fit the
+viewport; the tooltip contains the full name. Reduced motion preferences disable
+the slide animation.
 
 ## Data and layout
+
+### Historical Analysis (Reports)
+
+Reports implements `midias/prototype/4. Historical comparison and identification of anomalies.png`
+and its `4.a` and `4.b` variants. Use the side arrows or the three dots to switch
+between historical indicators, anomaly identification with a monthly chart, and
+the detection record. The record shows ten rows per page, newest first.
+**Export all data** downloads every detection in the current selection as CSV,
+including rows beyond the visible page. The CSV identifies its data as synthetic.
+
+Country and state initially follow the map. Reports then retains its own filters;
+changing the map's administrative area initializes them again. Reports aggregates
+all catalog cities in the selected state or country, without restricting the
+sample to the map's current city or coordinates. Available years are 2023–2025.
+Changing country, state or year resets record pagination and updates every slide
+and the export together.
+
+The historical baseline is the monthly mean of available years strictly before
+the selected year. Anomalies are monthly deviations of at least 20% in either
+direction; activity against a zero baseline is identified as new activity without
+a percentage. The largest deviation is the largest absolute monthly percentage.
+2023 has no earlier baseline and shows N/A. Empty areas show no records.
+The synthetic historical series currently differ only by annual scale, so their
+anomalies mostly have the same direction and similar percentages.
+
+Records preserve the Activity dataset's daily, monthly, yearly and MODIS/VIIRS
+counts per city. Times are simulated within each day (UTC), and coordinates are
+city centers. Satellite, confidence, radiative power and day/night are unavailable
+and shown as N/A, with empty CSV fields. These are demonstration records, not
+satellite observations. Logic is in `reports_data.py`, rendering in `reports_ui.py`
+and `pages/3_Reports.py`, and styling in `reports.css`.
 
 Dashboard samples in `data.py` are synthetic and limited to 2025. Country
 totals aggregate available cities; they are not national estimates.
