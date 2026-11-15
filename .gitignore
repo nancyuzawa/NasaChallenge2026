@@ -1,0 +1,34 @@
+# Dados brutos de satélite
+backend/data/raw/
+
+# Dados processados
+backend/data/processed/
+
+# Ambiente virtual
+backend/.venv/
+backend/venv/
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+
+# Variáveis de ambiente
+.env
+.env.*
+
+# Cache e testes
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Logs
+*.log
+
+# IDE
+.vscode/
+.idea/
+
+# Sistema operacional
+.DS_Store
+Thumbs.db

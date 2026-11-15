@@ -1,0 +1,18 @@
+firms_ingestion.py — processamento
+
+Responsável por:
+- Ler arquivos CSV, CSV.GZ e ZIP contendo CSVs.
+- Identificar os dados MODIS e VIIRS pela pasta de origem.
+- Padronizar os nomes das colunas.
+- Converter coordenadas e FRP para valores numéricos.
+- Padronizar datas e horários.
+- Verificar registros inválidos.
+- Evitar reimportações duplicadas dentro do conjunto processado.
+- Gerar arquivos CSV e Parquet.
+
+
+import_firms.py — execução
+
+É o script que você executará no terminal. Ele chama o módulo de processamento e permite definir as pastas de entrada e saída.
+
+Uma decisão importante: não descartei automaticamente focos com baixa confiança. Vamos preservar os dados originais nessa etapa e definir os critérios de qualidade posteriormente, considerando as diferenças entre os produtos.
