@@ -1,0 +1,90 @@
+/* Página de entrada: composição central e fundo preto do protótipo Welcome. */
+.stApp:has(.st-key-welcome),
+.stApp:has(.st-key-welcome) [data-testid="stSidebar"] {
+  background: #000;
+  border: none !important;
+  box-shadow: none !important;
+}
+.stApp:has(.st-key-welcome) [data-testid="stSidebarResizeHandle"] { display: none; }
+.stMain:has(.st-key-welcome) { height: 100dvh; }
+.stMainBlockContainer:has(.st-key-welcome) {
+  height: 100%;
+  max-width: none;
+  padding: 0 !important;
+}
+.st-key-welcome {
+  position: fixed;
+  left: 50%;
+  top: 46%;
+  transform: translate(-50%, -50%);
+  width: min(520px, calc(100vw - 50px)) !important;
+  gap: 0 !important;
+  color: #fff;
+  text-align: center;
+}
+.st-key-welcome [data-testid="stMarkdownContainer"] { margin-bottom: 0 !important; text-align: center; }
+.welcome-heading { position: relative; display: inline-block; }
+.welcome-heading h1 {
+  margin: 0;
+  padding: 0;
+  color: white;
+  font-family: Barlow, Arial, sans-serif;
+  font-size: clamp(32px, 2.5vw, 48px);
+  font-weight: 700;
+  line-height: 1.2;
+}
+.welcome-sparkles {
+  position: absolute;
+  width: clamp(40px, 4vw, 70px);
+  height: clamp(40px, 4vw, 70px);
+  top: -22px;
+  right: -80px;
+  fill: #ffffa0;
+}
+.st-key-welcome .welcome-subtitle {
+  margin: 18px 0 20px;
+  color: white;
+  font-family: 'Barlow Condensed', Arial, sans-serif;
+  font-size: clamp(16px, 1.25vw, 22px);
+  font-weight: 600;
+  line-height: 1.3;
+}
+.st-key-welcome [data-testid="stForm"] { width: 320px; max-width: 100%; margin: auto; padding: 0; border: 0; }
+.st-key-welcome .react-aria-ComboBox > [role="group"] {
+  min-height: 50px;
+  border: 1px solid white;
+  border-radius: 28px;
+  background: #333;
+}
+.st-key-welcome .react-aria-ComboBox input {
+  color: #fff;
+  -webkit-text-fill-color: #fff;
+  caret-color: white;
+  font-family: Barlow, Arial, sans-serif;
+  font-size: 20px;
+}
+.st-key-welcome .react-aria-ComboBox input::placeholder { color: #fff; opacity: 1; }
+.st-key-welcome .react-aria-ComboBox button,
+.st-key-welcome .react-aria-ComboBox [data-testid="stIconMaterial"] { color: white; }
+.st-key-welcome [data-testid="stFormSubmitButton"] { width: 240px; max-width: 100%; margin: 32px auto 0; }
+.st-key-welcome [data-testid="stFormSubmitButton"] button {
+  min-height: 50px;
+  border: 0;
+  border-radius: 28px;
+  background: #064aad;
+  box-shadow: 5px 6px 0 #121212;
+}
+.st-key-welcome [data-testid="stFormSubmitButton"] button p {
+  color: white;
+  font-family: 'Barlow Condensed', Arial, sans-serif;
+  font-size: 22px;
+  font-weight: 700;
+}
+.st-key-welcome [data-testid="stFormSubmitButton"] button:hover { background: #0b5cce; }
+.st-key-welcome [data-testid="stAlert"] { text-align: left; margin-top: 12px; }
+@media (max-width: 640px) {
+  .st-key-welcome { left: calc(50% + 12px); width: calc(100vw - 90px) !important; }
+  .welcome-sparkles { right: -38px; top: -20px; width: 38px; height: 38px; }
+  .welcome-subtitle { margin: 14px 0 20px; }
+  .st-key-welcome .react-aria-ComboBox input { font-size: 16px; }
+}

@@ -1,0 +1,24 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="stylesheet" href="globe.css">
+<script src="vendor/globe.gl.min.js"></script>
+</head>
+<body>
+<main id="map" aria-label="Interactive 3D location filter">
+  <div id="globe" tabindex="0" aria-label="Drag to rotate the globe. Click a country or a city to filter."></div>
+  <div id="loading" role="status">Loading globe…</div>
+  <p class="hint">Demo 2025 · Drag to rotate · Click a country or city</p>
+  <div class="controls" aria-label="Globe controls">
+    <button id="reset" title="Return to selected location" aria-label="Return to selected location">⌖</button>
+    <button id="fullscreen" title="Full screen" aria-label="Full screen">⛶</button>
+    <button id="zoom-in" title="Zoom in" aria-label="Zoom in">+</button>
+    <button id="zoom-out" title="Zoom out" aria-label="Zoom out">−</button>
+  </div>
+  <p id="coordinates" class="coordinates"></p>
+</main>
+<script src="globe.js"></script>
+</body>
+</html>
