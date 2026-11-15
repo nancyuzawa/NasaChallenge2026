@@ -33,3 +33,6 @@ htmlcov/
 # Sistema operacional
 .DS_Store
 Thumbs.db
+# Banco de dados local
+/backend/data/processed/firewatch.sqlite
+/backend/data/processed/firewatch.sqlite-wal
