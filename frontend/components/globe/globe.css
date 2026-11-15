@@ -14,3 +14,12 @@ button:hover { background: white; }
 button:focus-visible { outline: 2px solid #50c1d9; outline-offset: 2px; }
 .coordinates { position: absolute; bottom: 0; left: 0; margin: 0; padding: 6px 8px; background: #030a19; font-size: clamp(9px, 1.4vh, 12px); pointer-events: none; }
 .scene-tooltip { border-radius: 5px; background: #030a19e8; padding: 6px 9px; color: white; font-size: 12px; }
+
+.hotspot-legend { position:absolute; top:24px; left:7px; right:12px; margin:0; padding:4px 6px; width:fit-content; max-width:90%; background:#030a19d9; color:#eef3fa; font-size:clamp(9px,1.3vh,11px); pointer-events:none; border-radius:4px; }
+
+.sensor-legend-items { display:flex; gap:16px; align-items:center; font-weight:700; }
+.sensor-legend-items span { display:inline-flex; align-items:center; gap:6px; }
+.sensor-swatch { display:inline-block; width:10px; height:10px; border-radius:50%; border:1px solid #ffffff66; }
+.sensor-swatch--modis { background:#ff3b30; }
+.sensor-swatch--viirs { background:#ffd166; }
+#hotspot-status { margin:5px 0 0; color:#d0dbea; line-height:1.4; }

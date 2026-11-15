@@ -1,0 +1,2 @@
+sensor,satellite,acq_date,acq_time,latitude,longitude,confidence,frp,cell_x,cell_y,source_file
+MODIS,Terra,2020-03-19,1544,21.8382,-71.8946,71,31.9,-6924,2736,modis/2020/modis_2020_Turks_and_Caicos_Islands.csv

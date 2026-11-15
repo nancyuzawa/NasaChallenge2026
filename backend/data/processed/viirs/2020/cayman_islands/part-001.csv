@@ -1,0 +1,7 @@
+sensor,satellite,acq_date,acq_time,latitude,longitude,confidence,frp,cell_x,cell_y,source_file
+VIIRS,N20,2020-01-24,1904,19.30878,-81.37701,n,18.18,-7837,2432,viirs/2020/viirs-jpss1_2020_Cayman_Islands.csv
+VIIRS,N20,2020-02-01,0703,19.29486,-81.24563,n,1.02,-7824,2430,viirs/2020/viirs-jpss1_2020_Cayman_Islands.csv
+VIIRS,N20,2020-03-10,0651,19.31021,-81.37672,n,1.62,-7837,2432,viirs/2020/viirs-jpss1_2020_Cayman_Islands.csv
+VIIRS,N20,2020-04-27,1802,19.31598,-81.1181,h,6.11,-7812,2433,viirs/2020/viirs-jpss1_2020_Cayman_Islands.csv
+VIIRS,N20,2020-05-28,1821,19.31109,-81.1027,n,3.62,-7811,2432,viirs/2020/viirs-jpss1_2020_Cayman_Islands.csv
+VIIRS,N20,2020-08-14,1858,19.67749,-80.06561,n,5.61,-7711,2477,viirs/2020/viirs-jpss1_2020_Cayman_Islands.csv

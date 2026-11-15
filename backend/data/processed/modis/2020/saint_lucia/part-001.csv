@@ -1,0 +1,2 @@
+sensor,satellite,acq_date,acq_time,latitude,longitude,confidence,frp,cell_x,cell_y,source_file
+MODIS,Terra,2020-05-21,1502,13.7457,-60.9493,0,23.0,-5870,1748,modis/2020/modis_2020_Saint_Lucia.csv

@@ -1,0 +1,4 @@
+sensor,satellite,acq_date,acq_time,latitude,longitude,confidence,frp,cell_x,cell_y,source_file
+MODIS,Terra,2020-02-13,1354,-51.8276,-58.449,47,7.5,-5629,-5784,modis/2020/modis_2020_Falkland_Islands.csv
+MODIS,Terra,2020-11-29,1341,-51.7102,-59.9001,40,5.5,-5769,-5775,modis/2020/modis_2020_Falkland_Islands.csv
+MODIS,Terra,2020-11-29,1341,-51.7079,-59.9147,62,7.8,-5770,-5774,modis/2020/modis_2020_Falkland_Islands.csv

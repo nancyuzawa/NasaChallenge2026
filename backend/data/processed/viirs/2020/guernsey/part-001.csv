@@ -1,0 +1,5 @@
+sensor,satellite,acq_date,acq_time,latitude,longitude,confidence,frp,cell_x,cell_y,source_file
+VIIRS,N20,2020-09-13,1258,49.46646,-2.57009,n,2.27,-248,5591,viirs/2020/viirs-jpss1_2020_Guernsey.csv
+VIIRS,N20,2020-09-13,1258,49.46878,-2.57278,n,8.48,-248,5591,viirs/2020/viirs-jpss1_2020_Guernsey.csv
+VIIRS,N20,2020-09-18,0137,49.71493,-2.18549,n,2.28,-211,5611,viirs/2020/viirs-jpss1_2020_Guernsey.csv
+VIIRS,N20,2020-09-18,0137,49.71583,-2.18623,n,1.15,-211,5611,viirs/2020/viirs-jpss1_2020_Guernsey.csv

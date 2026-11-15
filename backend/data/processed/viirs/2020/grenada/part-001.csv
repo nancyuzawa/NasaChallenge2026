@@ -1,0 +1,17 @@
+sensor,satellite,acq_date,acq_time,latitude,longitude,confidence,frp,cell_x,cell_y,source_file
+VIIRS,N20,2020-01-31,0543,12.10582,-61.74781,n,2.15,-5947,1542,viirs/2020/viirs-jpss1_2020_Grenada.csv
+VIIRS,N20,2020-03-10,0512,12.05016,-61.70444,n,1.26,-5942,1535,viirs/2020/viirs-jpss1_2020_Grenada.csv
+VIIRS,N20,2020-03-10,0512,12.10793,-61.74881,n,10.98,-5947,1543,viirs/2020/viirs-jpss1_2020_Grenada.csv
+VIIRS,N20,2020-03-11,1740,12.10497,-61.74763,n,2.73,-5947,1542,viirs/2020/viirs-jpss1_2020_Grenada.csv
+VIIRS,N20,2020-03-12,0614,12.10589,-61.74916,n,1.07,-5947,1542,viirs/2020/viirs-jpss1_2020_Grenada.csv
+VIIRS,N20,2020-03-13,0556,12.1081,-61.74625,n,1.21,-5947,1543,viirs/2020/viirs-jpss1_2020_Grenada.csv
+VIIRS,N20,2020-03-14,0537,12.10626,-61.74667,n,1.07,-5947,1542,viirs/2020/viirs-jpss1_2020_Grenada.csv
+VIIRS,N20,2020-03-19,0543,12.10649,-61.74739,n,0.84,-5947,1542,viirs/2020/viirs-jpss1_2020_Grenada.csv
+VIIRS,N20,2020-04-18,1728,12.14483,-61.73136,n,2.85,-5945,1547,viirs/2020/viirs-jpss1_2020_Grenada.csv
+VIIRS,N20,2020-05-20,1728,12.08122,-61.73562,n,1.87,-5946,1539,viirs/2020/viirs-jpss1_2020_Grenada.csv
+VIIRS,N20,2020-08-13,1733,12.20692,-61.62013,n,5.85,-5934,1555,viirs/2020/viirs-jpss1_2020_Grenada.csv
+VIIRS,N20,2020-08-13,1734,12.20789,-61.61971,n,7.16,-5934,1555,viirs/2020/viirs-jpss1_2020_Grenada.csv
+VIIRS,N20,2020-12-08,1740,12.18681,-61.60744,n,6.03,-5933,1552,viirs/2020/viirs-jpss1_2020_Grenada.csv
+VIIRS,N20,2020-12-08,1740,12.18976,-61.60634,n,4.65,-5933,1553,viirs/2020/viirs-jpss1_2020_Grenada.csv
+VIIRS,N20,2020-12-09,1721,12.18768,-61.60489,l,4.29,-5933,1553,viirs/2020/viirs-jpss1_2020_Grenada.csv
+VIIRS,N20,2020-12-10,1702,12.19052,-61.60689,n,4.59,-5933,1553,viirs/2020/viirs-jpss1_2020_Grenada.csv

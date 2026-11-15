@@ -1,0 +1,2 @@
+sensor,satellite,acq_date,acq_time,latitude,longitude,confidence,frp,cell_x,cell_y,source_file
+MODIS,Terra,2020-08-10,1540,32.3661,-64.6783,50,21.3,-6229,3938,modis/2020/modis_2020_Bermuda.csv

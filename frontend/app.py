@@ -11,6 +11,7 @@ from pathlib import Path
 import streamlit as st
 
 from locations import COUNTRIES, selection_filters
+from navigation_loading import show_dashboard_loading
 from ui import apply_styles, render_sidebar, searchable_selectbox
 
 
@@ -47,4 +48,6 @@ with st.container(key="welcome", width=520):
                 })
                 st.session_state.filters = selection_filters({"kind": "country", "id": country}, current)
                 st.session_state.active_dialog = None
+                st.session_state._dashboard_navigation_loading = True
+                show_dashboard_loading()
                 st.switch_page("pages/1_Dashboard.py")

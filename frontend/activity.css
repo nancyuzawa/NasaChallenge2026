@@ -283,3 +283,43 @@
   .key-period strong, .key-period span { display: inline; }
   .key-period span { margin: 0 0 0 4px; font-size: 10px; }
 }
+
+
+/* Keep long year lists inside the comparison panel, above Yearly summary. */
+.key-periods {
+  box-sizing: border-box;
+  min-height: 0;
+  max-height: 100%;
+  overflow: hidden;
+}
+.st-key-activity-page .key-periods h3 {
+  flex: 0 0 auto;
+  margin-bottom: 0 !important;
+}
+.key-period-list {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(6px, calc(10 * var(--u)), 10px);
+  flex: 1 1 auto;
+  height: clamp(120px, 22dvh, 260px);
+  min-height: 0;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  padding: 0 8px 8px 0;
+  scrollbar-gutter: stable;
+  scrollbar-width: auto;
+  scrollbar-color: #a5b1c5 #303646;
+  overscroll-behavior: contain;
+}
+.key-period-list .key-period { flex: 0 0 auto; }
+.key-period-list .key-period > div { min-width: 0; overflow-wrap: anywhere; }
+.key-period-list:focus-visible { outline: 2px solid #93c5fd; outline-offset: -2px; }
+
+.key-period-list::-webkit-scrollbar { display: block; width: 9px; }
+.key-period-list::-webkit-scrollbar-track { background: #252c3a; border-radius: 8px; }
+.key-period-list::-webkit-scrollbar-thumb {
+  background: #a5b1c5;
+  border: 2px solid #252c3a;
+  border-radius: 8px;
+}
+.key-period-list::-webkit-scrollbar-thumb:hover { background: #d1d9e6; }

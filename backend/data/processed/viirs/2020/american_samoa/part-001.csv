@@ -1,0 +1,3 @@
+sensor,satellite,acq_date,acq_time,latitude,longitude,confidence,frp,cell_x,cell_y,source_file
+VIIRS,N20,2020-03-31,1212,-14.325,-170.74533,n,1.73,-16443,-1821,viirs/2020/viirs-jpss1_2020_American_Samoa.csv
+VIIRS,N20,2020-03-31,1212,-14.32057,-170.74414,n,1.73,-16443,-1820,viirs/2020/viirs-jpss1_2020_American_Samoa.csv

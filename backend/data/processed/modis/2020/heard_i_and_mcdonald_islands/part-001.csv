@@ -1,0 +1,4 @@
+sensor,satellite,acq_date,acq_time,latitude,longitude,confidence,frp,cell_x,cell_y,source_file
+MODIS,Aqua,2020-04-26,0940,-53.1113,73.5059,100,0.0,7078,-5884,modis/2020/modis_2020_Heard_I_and_McDonald_Islands.csv
+MODIS,Terra,2020-10-12,1858,-53.1087,73.4991,100,62.5,7077,-5884,modis/2020/modis_2020_Heard_I_and_McDonald_Islands.csv
+MODIS,Terra,2020-10-12,1858,-53.1039,73.5191,100,224.5,7079,-5884,modis/2020/modis_2020_Heard_I_and_McDonald_Islands.csv

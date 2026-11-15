@@ -1,0 +1,7 @@
+sensor,satellite,acq_date,acq_time,latitude,longitude,confidence,frp,cell_x,cell_y,source_file
+MODIS,Aqua,2015-05-27,2234,26.0418,50.5635,80,7.4,4869,3229,modis/2015/modis_2015_Bahrain.csv
+MODIS,Aqua,2015-08-27,2258,26.0413,50.5978,100,49.7,4872,3229,modis/2015/modis_2015_Bahrain.csv
+MODIS,Terra,2015-12-26,0734,26.0313,50.5687,73,16.2,4869,3228,modis/2015/modis_2015_Bahrain.csv
+MODIS,Terra,2015-12-26,0734,26.0332,50.5572,47,6.1,4868,3228,modis/2015/modis_2015_Bahrain.csv
+MODIS,Aqua,2015-12-27,0949,25.9817,50.5225,72,13.5,4865,3222,modis/2015/modis_2015_Bahrain.csv
+MODIS,Terra,2015-12-28,0722,26.0996,50.5984,59,6.4,4872,3236,modis/2015/modis_2015_Bahrain.csv

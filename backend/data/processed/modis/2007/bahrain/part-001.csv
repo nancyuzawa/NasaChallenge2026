@@ -1,0 +1,2 @@
+sensor,satellite,acq_date,acq_time,latitude,longitude,confidence,frp,cell_x,cell_y,source_file
+MODIS,Terra,2007-05-29,1902,26.1088,50.6133,81,8.0,4873,3237,modis/2007/modis_2007_Bahrain.csv
