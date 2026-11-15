@@ -538,7 +538,7 @@ h1, h2, h3 { font-family: Barlow, Arial, sans-serif; }
 }
 
 [data-testid="stDialog"] button[kind="primaryFormSubmit"] {
-  background:linear-gradient(120deg,#075bdc 35%,#09163b 75%);
+  background:#000;
   border:0;
   color:white;
   border-radius:28px;

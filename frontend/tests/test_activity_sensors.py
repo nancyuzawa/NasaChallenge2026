@@ -18,7 +18,7 @@ class ActivitySensorsTest(unittest.TestCase):
         app = AppTest.from_file(str(FRONTEND / "app.py"), default_timeout=30).run()
         app.switch_page("pages/2_Activity.py").run()
         self.assertFalse(app.exception)
-        self.assertEqual(app.get("button_group")[0].value, [])
+        self.assertEqual(app.get("button_group")[0].value, ["MODIS", "VIIRS"])
         for sources in (["MODIS"], ["VIIRS"], ["MODIS", "VIIRS"], []):
             app.get("button_group")[0].set_value(sources).run()
             self.assertFalse(app.exception)

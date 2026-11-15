@@ -27,7 +27,7 @@ def _annual_totals(year, filters=None):
 
 
 def _selected_sensors(sensors):
-    selected = set(sensors or SENSORS)
+    selected = set(SENSORS if sensors is None else sensors)
     if not selected.issubset(SENSORS):
         raise ValueError("Unknown sensor. Choose MODIS or VIIRS.")
     return selected
@@ -48,6 +48,8 @@ def daily_activity(year, filters=None, sensors=None):
         result.update({date(year, month, day): int(count) for day, count in enumerate(counts, 1)})
     if selected == set(SENSORS):
         return result
+    if not selected:
+        return {day: 0 for day in result}
     # Synthetic source assignments partition the existing demo totals exactly.
     source_rng = np.random.default_rng(seed ^ 0x4D4F444953)
     modis = {day: int(source_rng.binomial(count, .42)) for day, count in result.items()}
