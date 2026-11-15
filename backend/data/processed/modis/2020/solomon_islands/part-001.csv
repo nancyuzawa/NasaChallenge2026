@@ -1,0 +1,17 @@
+sensor,satellite,acq_date,acq_time,latitude,longitude,confidence,frp,cell_x,cell_y,source_file
+MODIS,Aqua,2020-02-24,0304,-9.5226,160.2282,68,8.7,15429,-1218,modis/2020/modis_2020_Solomon_Islands.csv
+MODIS,Aqua,2020-02-24,0304,-9.4537,160.1925,66,7.2,15426,-1209,modis/2020/modis_2020_Solomon_Islands.csv
+MODIS,Aqua,2020-02-26,0252,-9.701,160.6339,75,16.0,15468,-1240,modis/2020/modis_2020_Solomon_Islands.csv
+MODIS,Aqua,2020-04-28,0304,-9.3433,159.7905,68,9.6,15387,-1195,modis/2020/modis_2020_Solomon_Islands.csv
+MODIS,Terra,2020-04-30,0000,-9.4407,160.2395,52,9.1,15430,-1207,modis/2020/modis_2020_Solomon_Islands.csv
+MODIS,Aqua,2020-05-09,0246,-9.4297,160.3196,46,9.9,15438,-1206,modis/2020/modis_2020_Solomon_Islands.csv
+MODIS,Terra,2020-05-10,2342,-9.511,160.4114,64,5.9,15447,-1216,modis/2020/modis_2020_Solomon_Islands.csv
+MODIS,Terra,2020-05-10,2342,-9.5097,160.4024,63,5.6,15446,-1216,modis/2020/modis_2020_Solomon_Islands.csv
+MODIS,Aqua,2020-08-04,0252,-9.5067,160.2298,71,9.5,15429,-1216,modis/2020/modis_2020_Solomon_Islands.csv
+MODIS,Aqua,2020-08-04,0252,-9.5052,160.2399,54,6.8,15430,-1215,modis/2020/modis_2020_Solomon_Islands.csv
+MODIS,Aqua,2020-09-12,0258,-9.4692,160.3092,65,5.7,15437,-1211,modis/2020/modis_2020_Solomon_Islands.csv
+MODIS,Aqua,2020-09-12,0258,-9.4435,160.2313,70,8.0,15429,-1208,modis/2020/modis_2020_Solomon_Islands.csv
+MODIS,Aqua,2020-09-14,0246,-9.4893,160.2874,62,11.9,15435,-1213,modis/2020/modis_2020_Solomon_Islands.csv
+MODIS,Aqua,2020-10-16,0245,-9.4739,160.172,65,10.5,15424,-1211,modis/2020/modis_2020_Solomon_Islands.csv
+MODIS,Terra,2020-10-17,2342,-9.473,160.1744,34,5.6,15424,-1211,modis/2020/modis_2020_Solomon_Islands.csv
+MODIS,Aqua,2020-10-23,0251,-9.4756,160.1898,54,8.8,15425,-1212,modis/2020/modis_2020_Solomon_Islands.csv

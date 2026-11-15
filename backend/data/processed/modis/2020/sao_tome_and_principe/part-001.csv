@@ -1,0 +1,9 @@
+sensor,satellite,acq_date,acq_time,latitude,longitude,confidence,frp,cell_x,cell_y,source_file
+MODIS,Terra,2020-07-15,1015,0.4004,6.6271,13,5.8,638,51,modis/2020/modis_2020_Sao_Tome_and_Principe.csv
+MODIS,Terra,2020-07-20,1034,0.3971,6.6286,0,33.2,638,50,modis/2020/modis_2020_Sao_Tome_and_Principe.csv
+MODIS,Aqua,2020-07-24,1306,0.3836,6.6798,66,10.6,643,49,modis/2020/modis_2020_Sao_Tome_and_Principe.csv
+MODIS,Aqua,2020-08-04,1248,0.3829,6.6439,38,17.8,639,49,modis/2020/modis_2020_Sao_Tome_and_Principe.csv
+MODIS,Aqua,2020-08-04,1248,0.3852,6.6341,17,16.8,638,49,modis/2020/modis_2020_Sao_Tome_and_Principe.csv
+MODIS,Aqua,2020-08-04,1248,0.3874,6.6499,36,16.5,640,49,modis/2020/modis_2020_Sao_Tome_and_Principe.csv
+MODIS,Terra,2020-09-28,0957,0.3429,6.5457,57,7.4,630,44,modis/2020/modis_2020_Sao_Tome_and_Principe.csv
+MODIS,Terra,2020-09-28,0957,0.3443,6.536,0,10.0,629,44,modis/2020/modis_2020_Sao_Tome_and_Principe.csv

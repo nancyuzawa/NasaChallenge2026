@@ -1,0 +1,5 @@
+sensor,satellite,acq_date,acq_time,latitude,longitude,confidence,frp,cell_x,cell_y,source_file
+MODIS,Aqua,2015-03-04,1725,17.1056,-61.8676,67,25.0,-5958,2163,modis/2015/modis_2015_Antigua_and_Barbuda.csv
+MODIS,Aqua,2015-07-08,1737,17.0841,-61.7907,52,10.2,-5951,2161,modis/2015/modis_2015_Antigua_and_Barbuda.csv
+MODIS,Aqua,2015-08-23,1749,17.1119,-61.8697,0,25.2,-5958,2164,modis/2015/modis_2015_Antigua_and_Barbuda.csv
+MODIS,Aqua,2015-08-31,1700,17.0563,-61.747,21,27.2,-5947,2157,modis/2015/modis_2015_Antigua_and_Barbuda.csv

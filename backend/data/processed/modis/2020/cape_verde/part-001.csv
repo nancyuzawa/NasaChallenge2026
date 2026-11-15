@@ -1,0 +1,5 @@
+sensor,satellite,acq_date,acq_time,latitude,longitude,confidence,frp,cell_x,cell_y,source_file
+MODIS,Terra,2020-08-05,1209,14.8143,-24.7109,41,10.5,-2380,1880,modis/2020/modis_2020_Cape_Verde.csv
+MODIS,Terra,2020-08-07,1157,14.9251,-23.5546,23,11.5,-2269,1894,modis/2020/modis_2020_Cape_Verde.csv
+MODIS,Terra,2020-10-06,1221,16.5943,-24.187,34,11.8,-2330,2100,modis/2020/modis_2020_Cape_Verde.csv
+MODIS,Terra,2020-10-06,1221,16.5958,-24.1966,12,16.2,-2331,2101,modis/2020/modis_2020_Cape_Verde.csv

@@ -28,6 +28,9 @@ class WelcomeNavigationTest(unittest.TestCase):
         self.assertIsNone(app.session_state.filters["city"])
         self.assertEqual(app.session_state.filters["period"], (date(2025, 1, 1), date(2025, 12, 31)))
         self.assertEqual(len(app.get("plotly_chart")), 1)
+        with self.assertRaises(KeyError):
+            app.session_state["_dashboard_navigation_loading"]
+        self.assertFalse(any('class="dashboard-loading-overlay"' in m.value for m in app.markdown))
 
         self.assertNotIn("toolbar_location", [select.key for select in app.selectbox])
         self.assertNotIn("search", [button.key for button in app.button])

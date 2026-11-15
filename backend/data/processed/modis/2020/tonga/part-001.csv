@@ -1,0 +1,6 @@
+sensor,satellite,acq_date,acq_time,latitude,longitude,confidence,frp,cell_x,cell_y,source_file
+MODIS,Terra,2020-01-05,2153,-18.5754,-173.9823,45,5.1,-16755,-2344,modis/2020/modis_2020_Tonga.csv
+MODIS,Terra,2020-01-28,2200,-19.7313,-175.07,46,8.4,-16859,-2484,modis/2020/modis_2020_Tonga.csv
+MODIS,Aqua,2020-09-28,0116,-21.239,-175.1602,59,9.1,-16868,-2665,modis/2020/modis_2020_Tonga.csv
+MODIS,Terra,2020-11-11,2159,-19.732,-175.0702,34,11.4,-16859,-2484,modis/2020/modis_2020_Tonga.csv
+MODIS,Terra,2020-11-29,2147,-19.7299,-175.0648,43,8.5,-16859,-2484,modis/2020/modis_2020_Tonga.csv

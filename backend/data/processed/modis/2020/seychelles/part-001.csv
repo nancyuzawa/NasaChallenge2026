@@ -1,0 +1,3 @@
+sensor,satellite,acq_date,acq_time,latitude,longitude,confidence,frp,cell_x,cell_y,source_file
+MODIS,Terra,2020-09-19,1906,-4.6613,55.489,91,24.4,5343,-598,modis/2020/modis_2020_Seychelles.csv
+MODIS,Terra,2020-09-19,1906,-4.6593,55.5023,70,15.7,5344,-598,modis/2020/modis_2020_Seychelles.csv

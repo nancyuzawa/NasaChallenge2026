@@ -1,0 +1,16 @@
+sensor,satellite,acq_date,acq_time,latitude,longitude,confidence,frp,cell_x,cell_y,source_file
+MODIS,Aqua,2020-02-27,0020,-0.3801,-160.0121,48,7.7,-15409,-49,modis/2020/modis_2020_United_States_Minor_Outlying_Islands.csv
+MODIS,Aqua,2020-04-11,0049,16.7296,-169.5299,51,9.6,-16326,2117,modis/2020/modis_2020_United_States_Minor_Outlying_Islands.csv
+MODIS,Terra,2020-06-04,2149,16.7304,-169.526,49,7.7,-16325,2117,modis/2020/modis_2020_United_States_Minor_Outlying_Islands.csv
+MODIS,Terra,2020-06-07,2358,19.2807,166.6423,43,15.9,16047,2429,modis/2020/modis_2020_United_States_Minor_Outlying_Islands.csv
+MODIS,Terra,2020-06-16,2211,28.2073,-177.373,41,19.6,-17081,3477,modis/2020/modis_2020_United_States_Minor_Outlying_Islands.csv
+MODIS,Terra,2020-06-17,2254,28.2083,-177.3284,48,11.8,-17077,3477,modis/2020/modis_2020_United_States_Minor_Outlying_Islands.csv
+MODIS,Terra,2020-06-29,2143,16.7261,-169.5344,38,9.7,-16326,2117,modis/2020/modis_2020_United_States_Minor_Outlying_Islands.csv
+MODIS,Terra,2020-07-06,2149,16.7298,-169.5283,46,7.5,-16326,2117,modis/2020/modis_2020_United_States_Minor_Outlying_Islands.csv
+MODIS,Aqua,2020-08-06,0111,28.2066,-177.3317,49,7.4,-17077,3477,modis/2020/modis_2020_United_States_Minor_Outlying_Islands.csv
+MODIS,Terra,2020-08-07,2150,16.727,-169.5355,52,8.1,-16326,2117,modis/2020/modis_2020_United_States_Minor_Outlying_Islands.csv
+MODIS,Aqua,2020-08-15,0101,16.7302,-169.5315,48,12.7,-16326,2117,modis/2020/modis_2020_United_States_Minor_Outlying_Islands.csv
+MODIS,Terra,2020-09-01,2143,16.7311,-169.5263,53,11.4,-16325,2117,modis/2020/modis_2020_United_States_Minor_Outlying_Islands.csv
+MODIS,Aqua,2020-09-27,0043,16.7302,-169.5274,41,5.4,-16326,2117,modis/2020/modis_2020_United_States_Minor_Outlying_Islands.csv
+MODIS,Aqua,2020-10-21,0127,0.1931,-176.4806,64,11.9,-16995,24,modis/2020/modis_2020_United_States_Minor_Outlying_Islands.csv
+MODIS,Terra,2020-12-07,2231,0.1926,-176.4774,48,10.9,-16995,24,modis/2020/modis_2020_United_States_Minor_Outlying_Islands.csv

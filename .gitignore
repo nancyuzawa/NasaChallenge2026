@@ -1,5 +1,35 @@
+
+# Ambiente virtual
 **/.venv/
+**/venv/
+
+# Python
 **/__pycache__/
 *.py[cod]
+*.egg-info/
+
+# Variáveis de ambiente
 .env
+.env.*
+
+# Logs
 *.log
+
+# Dados brutos de satélite
+backend/data/raw/
+
+# Dados processados
+backend/data/processed/.dashboard_cache/
+
+# Cache e testes
+.pytest_cache/
+.coverage
+htmlcov/
+
+# IDEs
+.vscode/
+.idea/
+
+# Sistema operacional
+.DS_Store
+Thumbs.db

@@ -1,0 +1,14 @@
+sensor,satellite,acq_date,acq_time,latitude,longitude,confidence,frp,cell_x,cell_y,source_file
+MODIS,Terra,2020-01-04,0113,16.3549,145.6848,37,11.8,14029,2071,modis/2020/modis_2020_Northern_Mariana_Islands.csv
+MODIS,Terra,2020-03-19,0056,15.2464,145.7737,0,10.6,14037,1934,modis/2020/modis_2020_Northern_Mariana_Islands.csv
+MODIS,Terra,2020-04-21,1230,15.0593,145.6123,35,5.2,14022,1911,modis/2020/modis_2020_Northern_Mariana_Islands.csv
+MODIS,Terra,2020-04-29,0048,18.1053,145.7973,21,5.8,14039,2286,modis/2020/modis_2020_Northern_Mariana_Islands.csv
+MODIS,Aqua,2020-05-08,0348,15.0537,145.6382,50,8.4,14024,1910,modis/2020/modis_2020_Northern_Mariana_Islands.csv
+MODIS,Aqua,2020-05-17,0342,15.0411,145.6069,19,8.0,14021,1909,modis/2020/modis_2020_Northern_Mariana_Islands.csv
+MODIS,Terra,2020-05-22,0054,18.1543,145.7908,43,10.2,14039,2292,modis/2020/modis_2020_Northern_Mariana_Islands.csv
+MODIS,Aqua,2020-05-22,0400,14.9982,145.6475,65,24.9,14025,1903,modis/2020/modis_2020_Northern_Mariana_Islands.csv
+MODIS,Terra,2020-05-31,0048,20.5432,144.904,49,9.9,13953,2581,modis/2020/modis_2020_Northern_Mariana_Islands.csv
+MODIS,Aqua,2020-06-14,0406,14.9893,145.6454,75,57.1,14025,1902,modis/2020/modis_2020_Northern_Mariana_Islands.csv
+MODIS,Terra,2020-06-21,0107,15.1716,145.7365,71,39.7,14034,1925,modis/2020/modis_2020_Northern_Mariana_Islands.csv
+MODIS,Aqua,2020-07-06,0330,16.3507,145.6802,65,19.4,14028,2071,modis/2020/modis_2020_Northern_Mariana_Islands.csv
+MODIS,Aqua,2020-08-16,0324,18.1485,145.7771,25,12.4,14038,2291,modis/2020/modis_2020_Northern_Mariana_Islands.csv

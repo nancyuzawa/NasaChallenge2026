@@ -32,9 +32,10 @@ def calendar_html(cells, legend):
             if cell["weekday"] != row:
                 continue
             day, count = cell["date"], cell["count"]
-            level = min(5, max(0, (count - 1) // step))
-            title = f"{day:%d/%m/%Y}: {count:,} hotspots"
-            parts.append(f'<span class="calendar-day" role="gridcell" title="{title}" aria-label="{title}" data-date="{day.isoformat()}" style="grid-column:{cell["week"] + 2};grid-row:{row + 2};--day-color:{HEAT_COLORS[level]}"></span>')
+            level = int(min(5, max(0, (count or 0) / step if legend[0].get("continuous") else ((count or 0) - 1) // step)))
+            title = f"{day:%d/%m/%Y}: {count:,} {cell.get('unit', 'hotspots')}" if count is not None else f"{day:%d/%m/%Y}: No observations"
+            color = HEAT_COLORS[level] if count is not None else "#687080"
+            parts.append(f'<span class="calendar-day" role="gridcell" title="{title}" aria-label="{title}" data-date="{day.isoformat()}" style="grid-column:{cell["week"] + 2};grid-row:{row + 2};--day-color:{color}"></span>')
         parts.append('</div>')
     parts.append('</div></div>')
     return ''.join(parts)
@@ -47,10 +48,10 @@ def month_metrics_html(summary):
         growth_label = "Increase from the previous month" if growth >= 0 else "Decrease from the previous month"
     growth_value = f"{abs(growth):g}%" if growth is not None else "N/A"
     cards = [
-        ("fire", "orange", f'{summary["total"]:,}', "Fire hotspots"),
+        ("fire", "orange", f'{summary["total"]:,}', summary.get("unit", "Fire hotspots")),
         ("pie", "orange", f'{summary["annual_share"]:g}%', "of the year's total"),
         ("trend", "red" if growth is None or growth >= 0 else "green", growth_value, growth_label),
-        ("pie", "green", "N/A", "Confidence unavailable in demo data"),
+        ("pie", "green", "N/A", "Confidence not aggregated" if summary.get("unit") else "Confidence unavailable in demo data"),
     ]
     items = ''.join(f'<article class="month-metric"><span class="month-metric-icon {color}">{icon(name, 48)}</span>'
                     f'<div><strong>{value}</strong><span>{label}</span></div></article>'
@@ -58,9 +59,9 @@ def month_metrics_html(summary):
     return f'<section class="month-metrics" aria-label="Month summary">{items}</section>'
 
 
-def legend_html(legend):
+def legend_html(legend, unit="hotspots"):
     rows = ''.join(f'<div class="calendar-legend-item"><span class="heat-swatch" style="background:{item["color"]}"></span>'
-                   f'<span>{item["low"]:,} – {item["high"]:,} hotspots</span></div>' for item in legend)
+                   f'<span>{item["low"]:,} – {item["high"]:,} {unit}</span></div>' for item in legend)
     return f'<aside class="calendar-legend"><h3>Legend</h3>{rows}</aside>'
 
 
@@ -72,7 +73,7 @@ def chart_heading(summaries, colors):
 def key_periods_html(summaries, colors):
     items = ''.join(f'<div class="key-period"><i style="background:{color}"></i><div><strong>{summary["year"]}</strong>'
                     f'<span>{escape(summary["peak_period"])}</span></div></div>' for summary, color in zip(summaries, colors))
-    return f'<aside class="key-periods"><h3>Key Periods</h3>{items}</aside>'
+    return f'<aside class="key-periods"><h3>Key Periods</h3><div class="key-period-list" tabindex="0" role="region" aria-label="Key periods by year">{items}</div></aside>'
 
 
 def summary_html(summaries, colors):
@@ -82,6 +83,6 @@ def summary_html(summaries, colors):
         growth = summary["growth"]
         note = f'↗ {growth:g}%' if growth is not None else ('Base year' if summary["total"] else 'No data')
         cards.append(f'<article class="year-card"><div class="year-card-label"><i style="background:{color}"></i>{summary["year"]}</div>'
-                     f'<div class="year-card-footer"><div class="year-card-total"><strong>{total}</strong><span>Hotspots</span></div>'
+                     f'<div class="year-card-footer"><div class="year-card-total"><strong>{total}</strong><span>{summary.get("unit", "Hotspots")}</span></div>'
                      f'<span class="year-growth">{note}</span></div></article>')
     return f'<section class="annual-summary"><h3>Yearly summary</h3><div class="year-cards" style="--summary-count:{len(cards)}">{"".join(cards)}</div></section>'

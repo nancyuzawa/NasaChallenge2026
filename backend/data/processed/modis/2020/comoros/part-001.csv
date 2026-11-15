@@ -1,0 +1,15 @@
+sensor,satellite,acq_date,acq_time,latitude,longitude,confidence,frp,cell_x,cell_y,source_file
+MODIS,Aqua,2020-01-04,1047,-11.607,43.3324,74,11.8,4172,-1481,modis/2020/modis_2020_Comoros.csv
+MODIS,Aqua,2020-01-04,1047,-11.6057,43.3416,57,7.5,4173,-1480,modis/2020/modis_2020_Comoros.csv
+MODIS,Terra,2020-03-12,0733,-11.5523,43.2746,15,7.0,4167,-1474,modis/2020/modis_2020_Comoros.csv
+MODIS,Terra,2020-03-30,0720,-11.7732,43.3675,35,11.6,4176,-1502,modis/2020/modis_2020_Comoros.csv
+MODIS,Terra,2020-06-02,0720,-11.5683,43.3357,63,13.4,4173,-1476,modis/2020/modis_2020_Comoros.csv
+MODIS,Terra,2020-06-02,0720,-11.5665,43.3248,53,11.4,4172,-1476,modis/2020/modis_2020_Comoros.csv
+MODIS,Terra,2020-08-14,0714,-11.6058,43.3315,62,12.8,4172,-1480,modis/2020/modis_2020_Comoros.csv
+MODIS,Terra,2020-08-30,0714,-11.6617,43.3684,89,60.2,4176,-1488,modis/2020/modis_2020_Comoros.csv
+MODIS,Terra,2020-08-30,0714,-11.6577,43.3738,77,40.6,4176,-1487,modis/2020/modis_2020_Comoros.csv
+MODIS,Aqua,2020-09-22,2238,-11.4073,43.3636,61,7.7,4175,-1456,modis/2020/modis_2020_Comoros.csv
+MODIS,Aqua,2020-09-23,1053,-11.7589,43.4378,37,17.6,4182,-1500,modis/2020/modis_2020_Comoros.csv
+MODIS,Terra,2020-09-29,0726,-11.5419,43.31,35,7.5,4170,-1472,modis/2020/modis_2020_Comoros.csv
+MODIS,Aqua,2020-11-23,1022,-11.7238,43.3515,42,30.3,4174,-1495,modis/2020/modis_2020_Comoros.csv
+MODIS,Aqua,2020-11-23,1022,-11.721,43.3561,49,22.9,4175,-1495,modis/2020/modis_2020_Comoros.csv

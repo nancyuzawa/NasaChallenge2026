@@ -1,0 +1,9 @@
+sensor,satellite,acq_date,acq_time,latitude,longitude,confidence,frp,cell_x,cell_y,source_file
+MODIS,Terra,2020-05-25,2116,1.7774,-157.2729,81,82.1,-15146,228,modis/2020/modis_2020_Kiribati.csv
+MODIS,Terra,2020-05-25,2116,1.78,-157.2661,89,58.4,-15145,228,modis/2020/modis_2020_Kiribati.csv
+MODIS,Terra,2020-05-25,2116,1.7821,-157.2794,85,43.4,-15146,228,modis/2020/modis_2020_Kiribati.csv
+MODIS,Aqua,2020-05-26,0014,1.7715,-157.2838,89,64.2,-15147,227,modis/2020/modis_2020_Kiribati.csv
+MODIS,Aqua,2020-05-26,0014,1.773,-157.2731,82,62.7,-15146,227,modis/2020/modis_2020_Kiribati.csv
+MODIS,Aqua,2020-05-26,0014,1.7797,-157.2959,63,8.3,-15148,228,modis/2020/modis_2020_Kiribati.csv
+MODIS,Aqua,2020-05-26,0014,1.7812,-157.2852,94,60.4,-15147,228,modis/2020/modis_2020_Kiribati.csv
+MODIS,Aqua,2020-05-26,0014,1.7827,-157.2745,85,27.6,-15146,228,modis/2020/modis_2020_Kiribati.csv
