@@ -1,0 +1,19 @@
+﻿* { box-sizing: border-box; }
+html, body, #map, #globe { width: 100%; height: 100%; margin: 0; overflow: hidden; }
+body { background: #09163b; color: #fff; font-family: Arial, sans-serif; }
+#map { position: relative; }
+#globe { cursor: grab; touch-action: none; }
+#globe:active { cursor: grabbing; }
+#globe:focus-visible { outline: 2px solid #50c1d9; outline-offset: -3px; }
+#loading { position: absolute; inset: 40% 12% auto; text-align: center; font-size: 13px; }
+.city-picker { position: absolute; top: 7px; left: 7px; display: flex; align-items: center; gap: 6px; max-width: calc(100% - 14px); }
+.city-picker label { font-size: 11px; }
+select { max-width: min(250px, 65vw); padding: 6px 25px 6px 8px; border: 1px solid #6e91aa; border-radius: 6px; background: #07132d; color: #fff; font-size: clamp(10px, 1.5vh, 13px); }
+select option { color: #fff; background: #07132d; }
+.hint { position: absolute; top: 35px; left: 7px; margin: 0; font-size: clamp(8px, 1.3vh, 11px); color: #c9dbe6; pointer-events: none; }
+.controls { position: absolute; right: 6px; bottom: 22px; display: grid; gap: clamp(3px, .6vh, 7px); }
+button { display: grid; place-items: center; width: clamp(23px, 4vh, 40px); height: clamp(23px, 4vh, 40px); border: 0; border-radius: 5px; color: #080808; background: #d9d9dc; font-size: clamp(19px, 3vh, 27px); cursor: pointer; }
+button:hover { background: white; }
+button:focus-visible, select:focus-visible { outline: 2px solid #50c1d9; outline-offset: 2px; }
+.coordinates { position: absolute; bottom: 0; left: 0; margin: 0; padding: 6px 8px; background: #030a19; font-size: clamp(9px, 1.4vh, 12px); pointer-events: none; }
+.scene-tooltip { border-radius: 5px; background: #030a19e8; padding: 6px 9px; color: white; font-size: 12px; }

@@ -42,9 +42,22 @@ janeiro a dezembro de 2025. A barra lateral mantém os acessos a mapa, atividade
 e relatórios. A lupa permite selecionar cidades de referência e **Filter** abre
 os filtros de região, coordenadas e período. **Reset** restaura Campinas e 2025.
 
-O globo é uma ilustração vetorial local (`globe.html`), sem serviço externo de
-mapas, e oferece zoom, arraste e tela cheia. As coordenadas selecionadas movem
-o marcador sobre a ilustração. Duplo clique ou a tecla `0` restauram a vista;
-as teclas `+` e `-` ajustam o zoom. Não representa focos reais de satélite.
-Os estilos compartilhados ficam em `styles.css`. O layout empilha mapa e
-indicadores em telas menores e utiliza os recursos de layout do Streamlit 1.67+.
+O globo WebGL permite girar a Terra e clicar em países e cidades. O seletor
+sobre o mapa lista as cidades de referência do país selecionado. Essas ações
+atualizam o mesmo filtro de localização usado por **Search** e **Filter**,
+preservando o intervalo de datas. O catálogo é local e não inclui todas as cidades.
+
+Os indicadores e o gráfico usam amostras sintéticas por cidade, exclusivamente
+para 2025. A soma das cidades disponíveis forma a amostra de cada país; não é
+uma estimativa nacional. Intervalos fora de 2025 e áreas sem amostras exibem zero.
+Os dados não são medições de satélite. As páginas de atividade e relatórios
+compartilham a seleção. A conexão com o backend ainda não está implementada.
+
+A implementação do mapa, os dados geográficos e as dependências JavaScript
+estão em `components/globe`; consulte seu README para fontes e licença.
+Os estilos compartilhados ficam em `styles.css`. O dashboard distribui mapa,
+indicadores e gráfico pela altura disponível da janela, sem rolagem da página.
+Fontes, ícones e espaçamentos acompanham o tamanho da tela. Em janelas estreitas,
+o mapa fica acima dos indicadores, mantendo todos os painéis visíveis.
+O logo da barra lateral é carregado de `midias/logo/Logo.svg`.
+O frontend utiliza os recursos de layout do Streamlit 1.67+.
