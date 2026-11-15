@@ -1,0 +1,22 @@
+<script>
+(() => {
+  if (window.firewatchWelcomeKeyboard) return;
+  window.firewatchWelcomeKeyboard = true;
+  document.addEventListener('keydown', event => {
+    if (event.key !== 'Enter' || event.defaultPrevented || event.repeat ||
+        event.isComposing || event.ctrlKey || event.altKey || event.metaKey || event.shiftKey) return;
+    const welcome = document.querySelector('.st-key-welcome');
+    if (!welcome) return;
+    const input = welcome.querySelector('input[role="combobox"]');
+    // An open list uses Enter to commit the highlighted country first.
+    if (input?.getAttribute('aria-expanded') === 'true') return;
+    // Let focused buttons and links retain their native keyboard behavior.
+    if (event.target.closest('button, a, textarea, [contenteditable="true"]')) return;
+    const confirm = welcome.querySelector('[data-testid="stFormSubmitButton"] button');
+    if (!confirm || confirm.disabled) return;
+    event.preventDefault();
+    event.stopPropagation();
+    confirm.click();
+  }, true);
+})();
+</script>

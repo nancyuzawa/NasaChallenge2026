@@ -1,5 +1,16 @@
 """Dashboard Streamlit baseado no protótipo de monitoramento de incêndios."""
 
+if __name__ == "__main__":
+    from pathlib import Path
+    import sys
+
+    frontend_path = str(Path(__file__).resolve().parents[1])
+    if frontend_path not in sys.path:
+        sys.path.insert(0, frontend_path)
+    from bootstrap import launch_if_direct
+
+    launch_if_direct()
+
 from datetime import date
 from html import escape
 
@@ -12,7 +23,7 @@ except ModuleNotFoundError:
 
 from data import dashboard_metrics, dashboard_series
 from globe import render_globe
-from locations import CITIES, REGIONS, STATE_CODES, LOCATION_OPTIONS, LOCATION_LABELS, location_key, selection_filters
+from locations import REGIONS, STATE_CODES, selection_filters
 from ui import apply_styles, icon, render_sidebar, searchable_selectbox
 
 st.set_page_config(
@@ -111,54 +122,18 @@ def filter_dialog():
             st.rerun()
 
 
-@st.dialog("Search location", on_dismiss=close_dialog)
-def search_dialog():
-    with st.form("location_search", border=False):
-        chosen = searchable_selectbox("City", list(CITIES), index=None, placeholder="Search a city…", help="Type a city name to search, or use Filter to enter coordinates.")
-        if st.form_submit_button("Show on map", type="primary", width="stretch"):
-            if chosen is None:
-                st.error("Select a city to continue.")
-                return
-            country, state, city, lat, lon = CITIES[chosen]
-            st.session_state.filters = {**filters, "country": country, "state": state, "city": city, "latitude": lat, "longitude": lon}
-            close_dialog()
-            st.rerun()
-
-
-def change_toolbar_location():
-    value = st.session_state.toolbar_location
-    if value and value != "current":
-        kind, identifier = value.split(":", 1)
-        selected = selection_filters({"kind": kind, "id": identifier}, st.session_state.filters)
-        if selected is not None:
-            st.session_state.filters = selected
-
-
 render_sidebar("Map")
 with st.container(key="dashboard-grid"):
     map_col, insight_col = st.columns([1, 1], gap="small", vertical_alignment="top")
 with map_col:
     with st.container(key="map-panel"):
         with st.container(key="map-toolbar", horizontal=True, vertical_alignment="center", gap="small"):
-            if st.button("", icon=":material/search:", key="search", help="Search location", width="content"):
-                st.session_state.active_dialog = "search"
             if st.button("Filter", icon=":material/filter_alt:", key="filter", width="content"):
                 st.session_state.active_dialog = "filter"
                 st.session_state.filter_country = filters["country"]
                 states = list(REGIONS[filters["country"]])
                 st.session_state[f"filter_state_{filters['country']}"] = filters["state"] if filters["state"] in states else states[0]
-            current_location = location_key(filters)
-            location_options = LOCATION_OPTIONS if current_location != "current" else ["current", *LOCATION_OPTIONS]
-            filter_signature = tuple(filters.get(key) for key in ("country", "state", "city", "latitude", "longitude"))
-            if "toolbar_location" not in st.session_state or st.session_state.get("toolbar_filter_signature") != filter_signature:
-                st.session_state.toolbar_location = current_location
-                st.session_state.toolbar_filter_signature = filter_signature
-            searchable_selectbox(
-                "Location", location_options, key="toolbar_location", index=None,
-                format_func=lambda value: location if value == "current" else LOCATION_LABELS[value],
-                label_visibility="collapsed", placeholder="Search a country or city…",
-                on_change=change_toolbar_location, help="Type a country or city name to search.",
-            )
+            st.markdown(f'<div class="location-pill" role="status" aria-label="Selected country">{icon("pin")}<span>{escape(filters["country"])}</span></div>', unsafe_allow_html=True)
         map_event = render_globe(filters)
         if isinstance(map_event, dict) and map_event.get("event_id") != st.session_state.get("last_map_event"):
             st.session_state.last_map_event = map_event.get("event_id")
@@ -217,5 +192,3 @@ with insight_col:
 
 if st.session_state.get("active_dialog") == "filter":
     filter_dialog()
-elif st.session_state.get("active_dialog") == "search":
-    search_dialog()

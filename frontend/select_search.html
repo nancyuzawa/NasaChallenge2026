@@ -1,0 +1,35 @@
+<div hidden data-firewatch-select-search></div>
+<style>
+  [data-testid="stElementContainer"]:has([data-firewatch-select-search]) { display: none; }
+</style>
+<script>
+(() => {
+  if (window.firewatchSelectSearch) return;
+  window.firewatchSelectSearch = true;
+  const pending = new WeakSet();
+  const clearSearch = input => {
+    if (!input || input.disabled || input.readOnly || pending.has(input)) return;
+    pending.add(input);
+    queueMicrotask(() => {
+      pending.delete(input);
+      if (!input.isConnected || !input.value) return;
+      // Only edit the search text. Streamlit retains the committed selection
+      // and restores its label on blur if no new option was chosen.
+      const setter = Object.getOwnPropertyDescriptor(HTMLInputElement.prototype, 'value').set;
+      setter.call(input, '');
+      input.dispatchEvent(new Event('input', { bubbles: true }));
+    });
+  };
+  document.addEventListener('focusin', event => {
+    if (event.target.matches('[data-testid="stSelectbox"] input[role="combobox"]') &&
+        event.target.getAttribute('aria-expanded') !== 'true') {
+      clearSearch(event.target);
+    }
+  });
+  document.addEventListener('pointerdown', event => {
+    const group = event.target.closest('[data-testid="stSelectbox"] [role="group"]');
+    const input = group?.querySelector('input[role="combobox"]');
+    if (input && !event.target.closest('[aria-label="Clear value"]')) clearSearch(input);
+  });
+})();
+</script>

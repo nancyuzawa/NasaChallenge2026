@@ -89,3 +89,23 @@ def annual_summary(year, filters=None, sensors=None):
     return {"year": year, "series": values, "total": total,
             "growth": round((total / previous - 1) * 100, 1) if previous else None,
             "peak_period": f"{MONTH_NAMES[start]} to {MONTH_NAMES[start + 2]}" if total else "No activity"}
+
+
+def month_summary(year, month, filters=None, sensors=None):
+    """Detalhes consistentes com as somas do calendário e da análise anual."""
+    if month not in range(1, 13):
+        raise ValueError("Invalid month.")
+    daily = daily_activity(year, filters, sensors)
+    days = [(day, count) for day, count in daily.items() if day.month == month]
+    total = sum(count for _, count in days)
+    annual_total = sum(daily.values())
+    if month > 1:
+        previous = sum(count for day, count in daily.items() if day.month == month - 1)
+    elif year - 1 in AVAILABLE_YEARS:
+        previous = annual_series(year - 1, filters, sensors)[-1]
+    else:
+        previous = None
+    return {"year": year, "month": month, "days": days, "total": total,
+            "annual_share": round(total / annual_total * 100, 1) if annual_total else 0,
+            "growth": round((total / previous - 1) * 100, 1) if previous else None,
+            "confidence": None}
