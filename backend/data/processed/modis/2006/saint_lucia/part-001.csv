@@ -1,0 +1,6 @@
+sensor,satellite,acq_date,acq_time,latitude,longitude,confidence,frp,cell_x,cell_y,source_file
+MODIS,Aqua,2006-04-14,1708,13.872,-60.9074,29,14.4,-5866,1763,modis/2006/2006/modis_2006_Saint_Lucia.csv
+MODIS,Terra,2006-04-17,1437,14.0501,-60.8945,0,5.5,-5865,1785,modis/2006/2006/modis_2006_Saint_Lucia.csv
+MODIS,Aqua,2006-04-19,1727,14.0489,-60.8984,0,28.0,-5865,1785,modis/2006/2006/modis_2006_Saint_Lucia.csv
+MODIS,Terra,2006-05-13,1514,13.7441,-60.959,0,36.3,-5871,1747,modis/2006/2006/modis_2006_Saint_Lucia.csv
+MODIS,Terra,2006-10-26,1437,14.0066,-60.9864,41,6.7,-5873,1780,modis/2006/2006/modis_2006_Saint_Lucia.csv

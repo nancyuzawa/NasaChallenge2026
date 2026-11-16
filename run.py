@@ -17,7 +17,7 @@ ENVIRONMENT = FRONTEND / ".venv"
 PYTHON = ENVIRONMENT / ("Scripts/python.exe" if os.name == "nt" else "bin/python")
 REQUIREMENTS = FRONTEND / "requirements.txt"
 STAMP = ENVIRONMENT / ".requirements.sha256"
-IMPORT_CHECK = "import streamlit; import plotly.graph_objects; import numpy"
+IMPORT_CHECK = "import streamlit; import plotly.graph_objects; import numpy; import pandas"
 
 
 def run(command, **kwargs):
@@ -72,7 +72,7 @@ def main():
     try:
         prepare_environment(force_install=options.install)
         if options.check:
-            print("Streamlit, Plotly, NumPy, and dependencies are ready.", flush=True)
+            print("Streamlit, Plotly, NumPy, pandas, and dependencies are ready.", flush=True)
             return 0
         return subprocess.call(
             [str(PYTHON), "-m", "streamlit", "run", str(FRONTEND / "app.py"), *streamlit_options],

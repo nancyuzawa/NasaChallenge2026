@@ -1,0 +1,2 @@
+sensor,satellite,acq_date,acq_time,latitude,longitude,confidence,frp,cell_x,cell_y,source_file
+MODIS,Aqua,2006-06-24,0625,12.5327,-70.021,61,6.4,-6743,1596,modis/2006/2006/modis_2006_Aruba.csv

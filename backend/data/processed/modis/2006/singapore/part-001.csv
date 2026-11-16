@@ -1,0 +1,2 @@
+sensor,satellite,acq_date,acq_time,latitude,longitude,confidence,frp,cell_x,cell_y,source_file
+MODIS,Terra,2006-07-21,0404,1.3174,103.6621,0,23.2,9982,169,modis/2006/2006/modis_2006_Singapore.csv

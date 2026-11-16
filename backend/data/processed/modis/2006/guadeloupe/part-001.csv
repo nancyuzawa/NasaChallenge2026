@@ -1,0 +1,12 @@
+sensor,satellite,acq_date,acq_time,latitude,longitude,confidence,frp,cell_x,cell_y,source_file
+MODIS,Aqua,2006-02-16,1715,15.9808,-61.2969,60,26.2,-5903,2025,modis/2006/2006/modis_2006_Guadeloupe.csv
+MODIS,Aqua,2006-02-16,1715,15.9811,-61.2903,67,22.7,-5903,2025,modis/2006/2006/modis_2006_Guadeloupe.csv
+MODIS,Aqua,2006-02-27,1657,16.4125,-61.4993,37,16.1,-5923,2078,modis/2006/2006/modis_2006_Guadeloupe.csv
+MODIS,Aqua,2006-02-27,1657,16.4232,-61.4948,40,18.3,-5922,2079,modis/2006/2006/modis_2006_Guadeloupe.csv
+MODIS,Aqua,2006-03-07,1746,16.3952,-61.4291,31,9.4,-5916,2076,modis/2006/2006/modis_2006_Guadeloupe.csv
+MODIS,Terra,2006-03-30,1449,16.2723,-61.6208,0,10.4,-5934,2061,modis/2006/2006/modis_2006_Guadeloupe.csv
+MODIS,Terra,2006-05-28,1430,16.3929,-61.4765,64,12.3,-5921,2076,modis/2006/2006/modis_2006_Guadeloupe.csv
+MODIS,Terra,2006-05-28,1430,16.3945,-61.489,66,19.8,-5922,2076,modis/2006/2006/modis_2006_Guadeloupe.csv
+MODIS,Aqua,2006-05-28,1734,16.3921,-61.4895,85,31.9,-5922,2076,modis/2006/2006/modis_2006_Guadeloupe.csv
+MODIS,Aqua,2006-06-10,1704,16.4103,-61.5027,68,91.7,-5923,2078,modis/2006/2006/modis_2006_Guadeloupe.csv
+MODIS,Aqua,2006-06-10,1704,16.4104,-61.5094,0,117.9,-5924,2078,modis/2006/2006/modis_2006_Guadeloupe.csv

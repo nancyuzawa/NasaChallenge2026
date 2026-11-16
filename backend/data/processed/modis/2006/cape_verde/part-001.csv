@@ -1,0 +1,5 @@
+sensor,satellite,acq_date,acq_time,latitude,longitude,confidence,frp,cell_x,cell_y,source_file
+MODIS,Aqua,2006-07-07,1506,15.1642,-23.6899,80,10.0,-2282,1924,modis/2006/2006/modis_2006_Cape_Verde.csv
+MODIS,Terra,2006-09-10,1245,16.8378,-24.8799,33,27.6,-2396,2130,modis/2006/2006/modis_2006_Cape_Verde.csv
+MODIS,Aqua,2006-10-10,1425,15.12,-23.1834,40,36.4,-2233,1918,modis/2006/2006/modis_2006_Cape_Verde.csv
+MODIS,Terra,2006-10-28,1245,16.9018,-24.9249,0,29.8,-2401,2138,modis/2006/2006/modis_2006_Cape_Verde.csv

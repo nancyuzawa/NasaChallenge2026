@@ -1,0 +1,14 @@
+sensor,satellite,acq_date,acq_time,latitude,longitude,confidence,frp,cell_x,cell_y,source_file
+MODIS,Terra,2006-03-12,1501,13.0969,-59.5085,72,45.7,-5731,1666,modis/2006/2006/modis_2006_Barbados.csv
+MODIS,Terra,2006-03-12,1501,13.1002,-59.5135,71,45.4,-5732,1667,modis/2006/2006/modis_2006_Barbados.csv
+MODIS,Terra,2006-04-24,0229,13.1096,-59.4787,75,12.2,-5728,1668,modis/2006/2006/modis_2006_Barbados.csv
+MODIS,Aqua,2006-04-26,1733,13.1642,-59.5924,74,10.3,-5739,1675,modis/2006/2006/modis_2006_Barbados.csv
+MODIS,Aqua,2006-05-07,1715,13.1779,-59.5632,73,17.5,-5736,1677,modis/2006/2006/modis_2006_Barbados.csv
+MODIS,Aqua,2006-05-14,1721,13.1806,-59.5941,52,10.1,-5739,1677,modis/2006/2006/modis_2006_Barbados.csv
+MODIS,Aqua,2006-05-21,1727,13.1646,-59.4605,67,9.7,-5726,1675,modis/2006/2006/modis_2006_Barbados.csv
+MODIS,Terra,2006-05-23,1413,13.232,-59.5471,14,11.7,-5735,1683,modis/2006/2006/modis_2006_Barbados.csv
+MODIS,Aqua,2006-05-23,1715,13.1621,-59.6014,83,20.0,-5740,1675,modis/2006/2006/modis_2006_Barbados.csv
+MODIS,Aqua,2006-05-23,1715,13.1684,-59.5601,87,31.2,-5736,1675,modis/2006/2006/modis_2006_Barbados.csv
+MODIS,Aqua,2006-05-23,1715,13.17,-59.5499,92,47.2,-5735,1676,modis/2006/2006/modis_2006_Barbados.csv
+MODIS,Aqua,2006-05-24,0529,13.1033,-59.4673,62,9.3,-5727,1667,modis/2006/2006/modis_2006_Barbados.csv
+MODIS,Terra,2006-06-15,1419,13.1133,-59.4539,0,17.2,-5726,1669,modis/2006/2006/modis_2006_Barbados.csv
