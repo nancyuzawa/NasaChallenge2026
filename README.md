@@ -11,3 +11,12 @@ and starts Streamlit with that environment's Python. Use `python run.py --check`
 to verify the environment without opening the application. The interface is in English.
 
 See [frontend/README.md](frontend/README.md) for details.
+
+# Team Members & Contributions
+
+| Member | Role | Contributions |
+|---|---|---|
+| Karen Yuzawa | UI/UX Designer | Wireframes, prototyping and interface design |
+| Kelly Yuzawa | Developer | Frontend implementation and data integration |
+| Nancy Yuzawa | Developer | Backend and data integration |
+
