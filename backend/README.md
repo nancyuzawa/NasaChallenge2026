@@ -10,40 +10,41 @@
 | `data/processed` | Standardized and harmonized data |
 | `data/aggregated` | Consolidated data for analysis |
 
-## Importar dados locais
+## Import local data
 
-Na raiz do projeto:
+From the project root:
 
 ```powershell
-python -m pip install -r backend/requirements.txt
-python backend/scripts/import_firms.py --chunk-size 100000
+python run.py --check
+frontend/.venv/Scripts/python.exe -m pip install -r backend/requirements.txt
+frontend/.venv/Scripts/python.exe backend/scripts/import_firms.py --chunk-size 100000
 python run.py
 ```
 
-Coloque CSV, CSV.GZ ou ZIP nas subpastas `backend/data/raw/modis/` e
-`backend/data/raw/viirs/`, em qualquer organização de anos/países.
-Para começar com dados reais do Brasil de 2020, usando o ambiente já existente:
+Place CSV, CSV.GZ, or ZIP files in `backend/data/raw/modis/` and
+`backend/data/raw/viirs/`, using any year/country directory organization.
+To start with real data for Brazil in 2020, using the prepared environment:
 
 ```powershell
-backend/.venv/Scripts/python.exe backend/scripts/import_firms.py --match '*Brazil*.csv' --start-year 2020 --end-year 2020
+frontend/.venv/Scripts/python.exe backend/scripts/import_firms.py --match '*Brazil*.csv' --start-year 2020 --end-year 2020
 python run.py
 ```
 
-Se a base principal estiver ocupada por outra importação, gere uma base separada:
+If the main database is busy with another import, create a separate database:
 
 ```powershell
-backend/.venv/Scripts/python.exe backend/scripts/import_firms.py --match '*Brazil*.csv' --start-year 2020 --end-year 2020 --output backend/data/processed/brazil-2020
+frontend/.venv/Scripts/python.exe backend/scripts/import_firms.py --match '*Brazil*.csv' --start-year 2020 --end-year 2020 --output backend/data/processed/brazil-2020
 $env:FIREWATCH_DATA = (Resolve-Path 'backend/data/processed/brazil-2020').Path
 python run.py
 ```
 
-Depois, amplie até 2025 com o mesmo diretório de saída:
+To extend the separate database above through 2025, keep the output argument:
 
 ```powershell
-backend/.venv/Scripts/python.exe backend/scripts/import_firms.py --match '*Brazil*.csv' --start-year 2020 --end-year 2025
+frontend/.venv/Scripts/python.exe backend/scripts/import_firms.py --match '*Brazil*.csv' --start-year 2020 --end-year 2025 --output backend/data/processed/brazil-2020
 ```
 
-O processamento percorre os anos em ordem, nos dois sensores. As saídas são:
+Processing visits years in order for both sensors. The outputs are:
 
 ```text
 backend/data/processed/
@@ -55,166 +56,170 @@ backend/data/processed/
   viirs/2020/brazil/part-001.parquet
 ```
 
-Cada país/ano contém partes numeradas a partir de `part-001`, com até 50 mil
-registros por parte. Os CSVs correspondentes são salvos ao lado dos Parquets.
-O país é extraído do nome FIRMS, como `modis_2020_Brazil.csv` ou
-`viirs-jpss1_2020_Argentina.csv`, inclusive nos CSVs dentro de ZIPs.
-Também é reconhecida a pasta de país em `sensor/ano/país/arquivo.csv`.
-Os nomes das pastas ficam em minúsculas, sem acentos, com `_` entre palavras;
-fontes sem país identificável ficam em `unknown`. Não há classificação geográfica
-por coordenadas nesta etapa: use fontes separadas por país.
-Fontes do mesmo sensor/ano/país compartilham a sequência de partes, preservando
-`source_file`. Ao atualizar uma fonte, a partição é reconstruída e partes antigas
-excedentes são removidas. Arquivos temporários são escritos antes da publicação;
-uma interrupção durante a substituição é recuperada na próxima execução.
+Each country/year contains parts numbered from `part-001`, with up to 50,000
+records per part. Matching CSVs are saved alongside the Parquets.
+The country is extracted from the FIRMS name, such as `modis_2020_Brazil.csv`
+or `viirs-jpss1_2020_Argentina.csv`, including CSVs inside ZIP files.
+A country directory in `sensor/year/country/file.csv` is also recognized.
+Directory names are lowercase, without accents, with underscores between words;
+sources without an identifiable country go into `unknown`. This stage does
+not classify countries by coordinates: use sources separated by country.
+Sources for the same sensor/year/country share the part sequence, preserving
+`source_file`. When a source is updated, the partition is rebuilt and excess
+old parts are removed. Temporary files are written before publication;
+an interruption during replacement is recovered on the next run.
 
-Para importar os arquivos locais e gerar a estrutura acima, execute na raiz do projeto:
-
-```powershell
-backend/.venv/Scripts/python.exe backend/scripts/import_firms.py --start-year 2020 --end-year 2025
-```
-
-O script mostra o diretório absoluto de saída e o período antes de começar.
-As pastas são criadas conforme cada fonte/ano termina; pastas sem dados não são
-pré-criadas. O índice `firewatch.sqlite` permanece na raiz de `processed` para os checkpoints da importação.
-
-Para reorganizar uma base já processada sem reler os CSVs brutos:
+To import local files and generate the structure above, run from the project root:
 
 ```powershell
-backend/.venv/Scripts/python.exe backend/scripts/import_firms.py --export-only --start-year 2020 --end-year 2025
+frontend/.venv/Scripts/python.exe backend/scripts/import_firms.py --start-year 2020 --end-year 2025
 ```
 
-`--export-only` consulta apenas registros já presentes no SQLite; ele não importa
-`raw`. Se não houver registros no período solicitado, uma mensagem informa isso.
-Esse modo abre a base somente para leitura, sem mudar o journal ou criar tabelas.
-Se houver bloqueio, o script orienta a aguardar o outro processo e repetir o comando.
+The script displays the absolute output directory and period before starting.
+Directories are created as each source/year finishes; empty directories are not
+created in advance. The `firewatch.sqlite` index stays at the root of `processed`
+for import checkpoints.
 
-Use `--output` para escolher outra base, como `backend/data/processed/brazil-2020`.
-As exportações antigas em `year=2020` são removidas apenas após a publicação das
-partes correspondentes no novo padrão. Os checkpoints antigos também são
-atualizados automaticamente ao repetir a importação normal.
+To reorganize an existing processed database without rereading raw CSVs:
 
-O frontend consulta os Parquets com DuckDB, sem abrir os CSVs brutos.
-O SQLite é usado para staging e checkpoints do importador. Assim que uma
-fonte/ano termina e publica suas partes, seus registros ficam disponíveis: atualize a página e selecione
-um período/região que tenha dados. A importação pode continuar em outro terminal.
-O cache considera caminho, tamanho e mtime de cada parte Parquet publicada.
+```powershell
+frontend/.venv/Scripts/python.exe backend/scripts/import_firms.py --export-only --start-year 2020 --end-year 2025
+```
 
-Se houver interrupção, repita o comando. Fontes/anos já concluídos são ignorados;
-a fonte/ano em andamento retoma do último lote confirmado. O leitor ainda precisa
-percorrer os lotes anteriores do CSV comprimido, mas não os reinsere. Se mudar
-`--chunk-size` durante uma retomada, somente a fonte/ano incompleta reinicia.
-Um arquivo com vários anos é lido para cada ano solicitado. Prefira arquivos anuais
-para reduzir leitura. O ano no caminho/nome é usado como filtro: mantenha-o coerente
-com o conteúdo; arquivos sem ano no caminho são inspecionados para cada ano.
+`--export-only` queries only records already in SQLite; it does not import
+`raw`. A message is displayed if no records exist for the requested period.
+This mode opens the database read-only, without changing the journal or creating
+tables. If it is locked, the script asks you to wait for the other process and retry.
 
-Dados e checkpoints intermediários ficam persistidos no SQLite. Uma fonte/ano alterada
-é preparada em staging; a versão anterior permanece disponível até a troca em
-transação. Se a exportação falhar depois dessa troca, a próxima execução refaz
-somente a publicação pendente. Os arquivos CSV e Parquet são substituídos
-individualmente; o checkpoint de exportação é confirmado após ambos.
-O importador migra o esquema do índice existente sem apagar os dados anteriores.
-Índices antigos sem checkpoints anuais são revalidados na primeira importação.
-A tabela legada `sources` registra a última execução por fonte; os checkpoints e
-relatórios de cada ano ficam em `ingestion_years`. A tabela legada `daily` não é
-atualizada: a interface agrega diretamente as detecções dos Parquets via DuckDB.
+Use `--output` to select another database, such as `backend/data/processed/brazil-2020`.
+Old exports in `year=2020` are removed only after the corresponding parts have
+been published in the new layout. Old checkpoints are also updated automatically
+when the normal import is repeated.
 
-A normalização valida coordenadas, datas e horários UTC. Confiança baixa é preservada.
-Duplicatas na mesma fonte são ignoradas; fontes sobrepostas mantêm a procedência,
-e a interface deduplica por sensor, satélite, data, hora, latitude e longitude.
-Arquivos sem mudança de tamanho/data são considerados iguais; se substituir um
-arquivo mantendo ambos, altere seu mtime para forçar a atualização.
-Fontes removidas de `raw` continuam na base. Para gerar uma base independente,
-use `--output` e configure `FIREWATCH_DATA` no frontend. Não execute dois importadores
-na mesma base ao mesmo tempo.
+The frontend queries Parquets with DuckDB without opening raw CSVs.
+SQLite is used for importer staging and checkpoints. As soon as a source/year
+finishes and publishes its parts, its records become available: refresh the page
+and select a period/region with data. The import can continue in another terminal.
+The cache considers the path, size, and mtime of each published Parquet part.
 
-Este script processa arquivos locais; não baixa dados da NASA. A retomada evita
-reprocessar os anos concluídos, e os arquivos já baixados permanecem em `raw`.
-A obtenção automática via API FIRMS não faz parte desta versão.
+If interrupted, repeat the command. Completed sources/years are skipped;
+the source/year in progress resumes from the last committed batch. The reader
+still has to scan earlier batches in compressed CSVs, but does not insert them again.
+If `--chunk-size` changes during a resume, only the incomplete source/year restarts.
+A file containing multiple years is read once for each requested year. Prefer annual
+files to reduce reading. The year in the path/name is used as a filter: keep it
+consistent with the contents; files without a year in their path are checked for each year.
 
-## Análise com DuckDB e integração com o frontend
+Intermediate data and checkpoints are persisted in SQLite. A changed source/year
+is prepared in staging; its previous version remains available until a transactional
+swap. If export fails after that swap, the next run retries only the pending
+publication. CSV and Parquet files are replaced individually; the export checkpoint
+is committed after both.
+The importer migrates the existing index schema without deleting previous data.
+Old indexes without annual checkpoints are revalidated on the first import.
+The legacy `sources` table records the latest run per source; annual checkpoints
+and reports are stored in `ingestion_years`. The legacy `daily` table is not
+updated: the interface aggregates detections directly from Parquets through DuckDB.
 
-`src/firms_analysis.py` abre os Parquets publicados em
-`processed/{modis,viirs}/AAAA/país/part-NNN.parquet` como uma view DuckDB em memória.
-Nenhum banco DuckDB persistente ou novo processamento de `raw` é necessário.
-Arquivos CSV, temporários e diretórios antigos `year=AAAA` são ignorados.
-A leitura direta usa a API documentada em [DuckDB: Parquet](https://duckdb.org/docs/stable/data/parquet/overview).
+Normalization validates coordinates, dates, and UTC times. Low confidence is preserved.
+Duplicates within a source are ignored; overlapping sources retain their provenance,
+and the interface deduplicates by sensor, satellite, date, time, latitude, and longitude.
+Files with unchanged size and modification time are treated as identical; if you replace
+a file while preserving both, change its mtime to force an update.
+Sources removed from `raw` remain in the database. To generate an independent database,
+use `--output` and configure `FIREWATCH_DATA` in the frontend. Do not run two importers
+against the same database at the same time.
 
-O fluxo de consulta é: Parquets → DuckDB (filtros, deduplicação, agregação diária)
-→ harmonização mensal no backend → DataFrames pequenos para o Streamlit.
-As detecções são deduplicadas entre partes antes de contar células ocupadas.
-Os filtros de país, raio e retângulo são aplicados aos pontos originais;
-o nome da pasta de país não substitui a seleção geográfica.
-O histórico completo da região alimenta a calibração e a linha de base.
-A exportação de detecções seleciona os anos do período e limita a saída a 100 mil linhas.
+This script processes local files; it does not download NASA data. Resuming avoids
+reprocessing completed years, and downloaded files remain in `raw`.
+Automatic retrieval through the FIRMS API is not included in this version.
 
-Na raiz do projeto, para abrir o frontend usando os Parquets já gerados:
+## DuckDB analysis and frontend integration
+
+`src/firms_analysis.py` opens Parquets published in
+`processed/{modis,viirs}/YYYY/country/part-NNN.parquet` as an in-memory DuckDB view.
+No persistent DuckDB database or additional processing of `raw` is required.
+CSV files, temporary files, and old `year=YYYY` directories are ignored.
+Direct reading uses the API documented in [DuckDB: Parquet](https://duckdb.org/docs/stable/data/parquet/overview).
+
+The query flow is: Parquets -> DuckDB (filters, deduplication, daily aggregation)
+-> monthly harmonization in the backend -> small DataFrames for Streamlit.
+Detections are deduplicated across parts before occupied cells are counted.
+Country, radius, and rectangle filters apply to the original points;
+the country directory name does not replace geographic selection.
+The region's full history feeds calibration and the baseline.
+Detection exports select the years in the requested period and limit output to 100,000 rows.
+
+From the project root, to open the frontend using existing Parquets:
 
 ```powershell
 $env:FIREWATCH_DATA = (Resolve-Path 'backend/data/processed').Path
 python run.py
 ```
 
-`python run.py` instala as dependências declaradas, incluindo DuckDB, se necessário.
-Sem configuração, a pasta padrão é `backend/data/processed`.
-`FIREWATCH_DATA` tem prioridade sobre a configuração legada `FIREWATCH_DB`.
-Se apenas `FIREWATCH_DB` estiver definida, a leitura SQLite anterior continua disponível.
-Sem partes Parquet publicadas, a interface informa que usa amostra sintética.
-Se houver partes, mas nenhum dado para a região/período, o resultado é vazio;
-não há substituição desses resultados por amostra sintética.
-Atualize a página após a publicação de novas partes para invalidar o cache.
+`python run.py` installs declared dependencies, including DuckDB, when necessary.
+Without configuration, the default directory is `backend/data/processed`.
+Use `FIREWATCH_DATA` to select the Parquet directory.
+The current adapter ignores `FIREWATCH_DB`; SQLite is used by the importer.
+Without published Parquet parts, the interface identifies its data as synthetic.
+If parts exist but there is no data for the region/period, results remain empty;
+synthetic samples do not replace those results.
+Refresh the page after new parts are published to invalidate the cache.
 
-## Git e publicação sem os arquivos grandes
+## Git and deployment without large files
 
-`data/raw/` e `data/processed/` são ignorados pelo Git.
-A amostra pequena em `data/sample/hotspots.csv` é **sintética** e versionada.
-Para hospedar com dados reais, transfira as pastas Parquet por armazenamento externo
-ou volume persistente, preservando sensor/ano/país, e configure `FIREWATCH_DATA`.
-O servidor de análise precisa dos Parquets; o SQLite de checkpoints e os CSVs
-brutos podem permanecer apenas na máquina de importação.
+Git ignores `backend/data/raw/`, the local SQLite database, and the Dashboard cache.
+Parquets and CSVs in `backend/data/processed/` can be tracked under the current
+configuration; check `git status` before publishing large files.
+The small sample in `data/sample/hotspots.csv` is **synthetic** and versioned.
+To host the application with real data, transfer the Parquet directories through
+external storage or a persistent volume, preserving sensor/year/country, and configure
+`FIREWATCH_DATA`. The analysis server needs the Parquets; the checkpoint SQLite
+database and raw CSVs can remain on the import machine.
 
-## Método e limitações
+## Method and limitations
 
-1. Grade cilíndrica de área equivalente: raio autálico 6371007.181 m,
-   paralelo padrão de 30°, células de 1000 × 1000 m.
-2. Agregação em células ocupadas por dia UTC e sensor: reduz múltiplos pixels
-   e passagens, mas não identifica eventos de incêndio independentes.
-3. Para cada região e mês, MODIS é a referência quando há registros.
-   Na ausência dele, utiliza-se VIIRS vezes a mediana das razões mensais
-   MODIS/VIIRS em pelo menos três meses anteriores ao mês de avaliação.
-   Sem sobreposição suficiente, VIIRS fica provisório e a anomalia não é calculada.
-4. A série exibe **células-dia equivalentes**, mantendo separada a contagem
-   de detecções originais. Não misture as unidades.
-5. A média histórica considera o mesmo mês/dias em anos anteriores, exclui
-   o ano avaliado e utiliza apenas anos com registros comparáveis.
-   Lacunas não são zeros. O pico anual usa apenas o intervalo selecionado.
+1. Cylindrical equal-area grid: authalic radius 6371007.181 m,
+   standard parallel of 30 degrees, cells measuring 1000 x 1000 m.
+2. Aggregation into occupied cells per UTC day and sensor reduces multiple pixels
+   and passes, but does not identify independent fire events.
+3. For each region and month, MODIS is the reference when records exist.
+   Otherwise, VIIRS is multiplied by the median monthly MODIS/VIIRS ratio
+   from at least three months preceding the evaluation month.
+   Without sufficient overlap, VIIRS remains provisional and no anomaly is calculated.
+4. The series displays **equivalent cell-days**, keeping the original detection
+   count separate. Do not mix these units.
+5. The historical mean uses the same month/days in previous years, excludes
+   the evaluated year, and includes only years with comparable records.
+   Gaps are not zeros. The annual peak uses only the selected interval.
 
-Sem metadados de cobertura, um mês com poucos registros pode refletir dados
-incompletos. O ajuste não corrige nuvens, geometria orbital ou sensibilidade;
-não garante continuidade MODIS–VIIRS e exige validação científica antes de uso
-operacional. As razões regionais podem esconder variação sazonal e espacial.
-Não há dados de ocorrências confirmadas ou relatadas por equipes de campo.
+Without coverage metadata, a month with few records may reflect incomplete data.
+The adjustment does not correct for clouds, orbital geometry, or sensitivity;
+it does not guarantee MODIS-VIIRS continuity and requires scientific validation
+before operational use. Regional ratios may hide seasonal and spatial variation.
+No confirmed incidents or reports from field teams are available.
 
-Países usam polígonos simplificados do mapa; cidades e estados usam raio
-configurável em torno do ponto de referência, explicitamente indicado na UI.
-O retângulo manual define limites geográficos independentes do país.
-A seleção espacial é aplicada às coordenadas originais antes de agrupar a grade.
+Countries use simplified map polygons; cities and states use a configurable radius
+around the reference point, explicitly identified in the UI.
+The manual rectangle defines geographic boundaries independently of the country.
+Spatial selection applies to original coordinates before grid aggregation.
 
-A consulta é local, usa DuckDB sobre Parquet e cache invalidado por caminho/mtime/tamanho.
-O histórico da região é agregado uma vez por mudança de região/base; filtros
-temporais operam sobre esse agregado. A primeira consulta de áreas globais
-ainda pode ser custosa. CSV de detecções tem limite explícito de 100 mil linhas
-por download para proteger memória do servidor; o resumo mensal é separado.
-As visualizações podem ser exportadas como HTML autossuficiente ou PNG pelo Plotly.
+Queries run locally using DuckDB over Parquet, with cache invalidation based on
+path/mtime/size. Regional history is aggregated once per region/database change;
+temporal filters operate on that aggregate. The first query of global areas
+can still be expensive. Detection CSVs have an explicit limit of 100,000 rows
+per download to protect server memory; the monthly summary is separate.
+Visualizations can be exported as self-contained HTML or PNG through Plotly.
 
-Referências oficiais:
+Official references:
+
 - https://firms.modaps.eosdis.nasa.gov/
 - https://firms.modaps.eosdis.nasa.gov/map/
 - https://firms.modaps.eosdis.nasa.gov/content/active_fire/
 
-## Verificação
+## Verification
 
 ```powershell
-python -m unittest discover -s backend/tests
+frontend/.venv/Scripts/python.exe -m unittest discover -s backend/tests
 frontend/.venv/Scripts/python.exe -m unittest discover -s frontend/tests
 ```

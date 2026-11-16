@@ -10,7 +10,7 @@ From the project root:
 python run.py
 ```
 
-On Windows, you can also double-click `iniciar.cmd`. The launcher creates
+The launcher creates
 `frontend/.venv` if needed, installs `requirements.txt`, and starts Streamlit
 with that environment's Python. No environment activation or PowerShell
 execution policy changes are needed. Installation uses trusted Windows
@@ -77,7 +77,7 @@ The calendar, legend, annual chart, peak periods, growth, and yearly totals
 all reflect the selected sources. Clearing the selection restores combined
 data without changing location or date controls.
 
-All data is synthetic. The 2023-2025 scenarios derive from 2025 city
+In demo mode (without published Parquets), data is synthetic. The 2023-2025 scenarios derive from 2025 city
 samples. MODIS/VIIRS assignments are simulated, not satellite measurements.
 Source counts add up exactly to each day's combined total; daily counts
 match monthly and yearly sums. Earlier years are not historical
@@ -130,8 +130,9 @@ and `pages/3_Reports.py`, and styling in `reports.css`.
 
 Dashboard samples in `data.py` are synthetic and limited to 2025. Country
 totals aggregate available cities; they are not national estimates.
-Dates outside 2025 and areas without samples show zero. The backend API
-is not connected yet.
+In demo mode, dates outside 2025 and areas without samples show zero.
+With published Parquets, Dashboard, Activity, and Reports use the local Python
+analysis code in `backend/src`; no separate backend API server is required.
 
 See `components/globe/README.md` for map assets, geographic sources, and
 licensing. Shared styles are in `styles.css`. Panels adapt to the window;
@@ -146,62 +147,62 @@ frontend\.venv\Scripts\python.exe -m unittest discover -s frontend/tests -v
 ```
 
 
-## DuckDB no Dashboard e Activity
+## DuckDB in Dashboard and Activity
 
-As páginas `/Dashboard` e `/Activity` consultam os Parquets publicados em
-`backend/data/processed/{modis,viirs}/ano/país/part-NNN.parquet`.
-Os adaptadores `processed_data.py` e `processed_activity.py` usam a camada
-`backend/src/firms_analysis.py`; Reports mantém seu adaptador anterior.
-As consultas não importam nem alteram os arquivos de `raw`.
+The `/Dashboard` and `/Activity` pages query Parquets published in
+`backend/data/processed/{modis,viirs}/year/country/part-NNN.parquet`.
+The `processed_data.py` and `processed_activity.py` adapters use
+`backend/src/firms_analysis.py`. Reports queries Parquets through
+`processed_reports.py` and `dashboard_data.py`. The synthetic data
+descriptions above refer to demo mode.
+Queries neither import nor modify files in `raw`.
 
 ```powershell
 $env:FIREWATCH_DATA = (Resolve-Path 'backend/data/processed').Path
 python run.py
 ```
 
-A variável é opcional para a pasta padrão. O iniciador instala DuckDB e pandas
-conforme `requirements.txt`. Dashboard exibe o total de detecções originais e a
-série de atividade harmonizada em células-dia; Activity usa células-dia no
-calendário, na comparação anual e nos detalhes mensais. Um sensor selecionado
-usa suas próprias células. No calendário e nos detalhes mensais, selecionar ambos
-soma as células-dia dos dois sensores por dia, inclusive nos meses de sobreposição.
-A comparação anual usa MODIS como referência e ajusta VIIRS quando existem três
-meses anteriores de sobreposição. Sem isso, VIIRS é provisório.
-As fontes são deduplicadas antes da agregação. Dias e meses sem observações ficam
-sem valor (cinza no calendário), pois ausência de registros não comprova zero fogo.
-A comparação anual omite percentuais sem cobertura/calibração comparável.
+The variable is optional when using the default directory. The launcher installs
+DuckDB and pandas according to `requirements.txt`. Dashboard displays the total
+original detection count and the harmonized activity series in cell-days; Activity
+uses cell-days in the calendar, annual comparison, and monthly details. A selected
+sensor uses its own cells. In the calendar and monthly details, selecting both
+adds the two sensors' cell-days for each day, including overlapping months.
+The annual comparison uses MODIS as the reference and adjusts VIIRS when three
+previous overlapping months are available. Otherwise, VIIRS remains provisional.
+Sources are deduplicated before aggregation. Days and months without observations
+remain missing (gray in the calendar), because missing records do not prove zero fire.
+The annual comparison omits percentages without comparable coverage/calibration.
 
-A lista de anos da Activity vem das pastas publicadas. O cache é invalidado por
-caminho, tamanho e mtime das partes; atualize a página após novas publicações.
-Sem Parquets publicados, essas duas páginas usam o modo demonstrativo identificado.
-Com Parquets, seleções sem registros permanecem vazias e não usam dados sintéticos.
+Activity's year list comes from the published directories. The cache is invalidated
+by part path, size, and mtime; refresh the page after new publications.
+Without published Parquets, these two pages use the identified demo mode.
+With Parquets, selections without records remain empty and do not use synthetic data.
 
+### Dashboard: summaries and loading
 
-### Dashboard: resumos e carregamento
+Dashboard uses `dashboard_data.py` to select files based on Parquet latitude/longitude
+statistics and skip years after the end of the selection.
+Earlier years remain available for calibration and historical comparison.
+Files without statistics remain in the query, and the exact geographic filter
+still applies to the points. Country directories do not replace that filter.
 
-O Dashboard usa `dashboard_data.py` para selecionar arquivos pelas estatísticas de
-latitude/longitude dos Parquets e ignorar anos posteriores ao fim da seleção.
-Anos anteriores continuam disponíveis para calibração e comparação histórica.
-Arquivos sem estatísticas são mantidos na consulta, e o filtro geográfico exato
-continua aplicado aos pontos. As pastas de país não substituem esse filtro.
+The selection's daily aggregate is reused in memory and saved in
+`processed/.dashboard_cache/`, outside observation partitions. The key includes
+relevant files, size, mtime, filters, and geometry; changes invalidate the summary.
+The first query must generate the summary, and subsequent queries can reuse it,
+including after restarting the application. Read-only storage still allows
+the in-memory cache. Summaries are disposable and do not need to be versioned.
+A spinner with elapsed time is displayed while Dashboard data loads.
+This optimization does not change the Activity or Reports adapter.
 
-O agregado diário da seleção é reutilizado em memória e salvo em
-`processed/.dashboard_cache/`, fora das partições de observações. A chave considera
-os arquivos relevantes, tamanho, mtime, filtros e geometria; mudanças invalidam o
-resumo. A primeira consulta precisa gerar o resumo, e as seguintes podem reutilizá-lo,
-inclusive após reiniciar o aplicativo. Em armazenamento somente leitura, permanece
-o cache em memória. Os resumos são descartáveis; não precisam ser versionados.
-Um spinner com tempo decorrido é exibido enquanto os dados do Dashboard carregam.
-Essa otimização não altera o adaptador de Activity ou Reports.
+### Dashboard indicator units
 
-
-### Unidades dos indicadores do Dashboard
-
-Os cartões da direita e o gráfico mensal do Dashboard usam **hotspots**:
-contagens de detecções deduplicadas, somadas por dia/mês entre sensores.
-O pico mostra o nome do mês e a contagem na mesma unidade. Variações e médias
-históricas usam essas contagens e ficam indisponíveis quando faltam anos com
-os mesmos meses e sensores observados. Essa verificação não comprova cobertura
-completa; os indicadores se baseiam nos registros disponíveis. Hotspots não
-representam incêndios independentes. A comparação anual da Activity mantém a série harmonizada em células-dia;
-o calendário e os detalhes mensais somam as células-dia dos sensores selecionados.
+The cards on the right and Dashboard's monthly chart use **hotspots**:
+deduplicated detection counts, summed across sensors per day/month.
+The peak shows the month name and count in the same unit. Changes and historical
+means use these counts and remain unavailable when there are no years with
+the same observed months and sensors. This check does not prove complete coverage;
+indicators rely on available records. Hotspots do not represent independent fires.
+Activity's annual comparison retains the harmonized cell-day series;
+the calendar and monthly details sum cell-days from the selected sensors.
