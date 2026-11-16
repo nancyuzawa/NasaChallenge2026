@@ -8,6 +8,9 @@ import io
 import json
 import sys
 import unittest
+import os
+import tempfile
+from unittest.mock import patch
 
 from streamlit.testing.v1 import AppTest
 
@@ -78,6 +81,13 @@ class ReportsDataTest(unittest.TestCase):
 
 
 class ReportsNavigationTest(unittest.TestCase):
+    def setUp(self):
+        folder = tempfile.TemporaryDirectory()
+        self.addCleanup(folder.cleanup)
+        env = patch.dict(os.environ, {"FIREWATCH_DATA": folder.name})
+        env.start()
+        self.addCleanup(env.stop)
+
     def test_slides_filters_pagination_and_map_reentry(self):
         app = AppTest.from_file(str(FRONTEND / "app.py"), default_timeout=30).run()
         app.switch_page("pages/3_Reports.py").run()
@@ -103,14 +113,14 @@ class ReportsNavigationTest(unittest.TestCase):
         self.assertEqual(app.session_state.reports_record_page, 0)
         app.button(key="reports-dot-1").click().run()
         self.assertEqual(len(json.loads(app.get("plotly_chart")[0].proto.spec)["data"]), 1)
-        self.assertTrue(any("No earlier demonstration years" in m.value for m in app.markdown))
+        self.assertTrue(any("No comparable earlier years" in m.value for m in app.markdown))
         app.selectbox(key="reports_country").select("Antarctica").run()
         self.assertFalse(app.exception)
         self.assertEqual(app.selectbox(key="reports_state").value, "All regions")
         app.button(key="reports-dot-2").click().run()
         self.assertTrue(app.button(key="records-back").disabled)
         self.assertTrue(app.button(key="records-next").disabled)
-        self.assertTrue(any("No demonstration records" in m.value for m in app.markdown))
+        self.assertTrue(any("No records" in m.value for m in app.markdown))
         app.session_state.filters = {"country": "Brazil", "state": "Amazonas", "city": "Manaus",
                                      "latitude": -3.119, "longitude": -60.0217,
                                      "period": (date(2025, 1, 1), date(2025, 12, 31))}

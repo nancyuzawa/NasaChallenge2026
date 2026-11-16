@@ -163,8 +163,10 @@ A variável é opcional para a pasta padrão. O iniciador instala DuckDB e panda
 conforme `requirements.txt`. Dashboard exibe o total de detecções originais e a
 série de atividade harmonizada em células-dia; Activity usa células-dia no
 calendário, na comparação anual e nos detalhes mensais. Um sensor selecionado
-usa suas próprias células; com ambos, MODIS é referência e VIIRS é ajustado
-quando existem três meses anteriores de sobreposição. Sem isso, VIIRS é provisório.
+usa suas próprias células. No calendário e nos detalhes mensais, selecionar ambos
+soma as células-dia dos dois sensores por dia, inclusive nos meses de sobreposição.
+A comparação anual usa MODIS como referência e ajusta VIIRS quando existem três
+meses anteriores de sobreposição. Sem isso, VIIRS é provisório.
 As fontes são deduplicadas antes da agregação. Dias e meses sem observações ficam
 sem valor (cinza no calendário), pois ausência de registros não comprova zero fogo.
 A comparação anual omite percentuais sem cobertura/calibração comparável.
@@ -201,4 +203,5 @@ O pico mostra o nome do mês e a contagem na mesma unidade. Variações e média
 históricas usam essas contagens e ficam indisponíveis quando faltam anos com
 os mesmos meses e sensores observados. Essa verificação não comprova cobertura
 completa; os indicadores se baseiam nos registros disponíveis. Hotspots não
-representam incêndios independentes. Activity mantém a série harmonizada em células-dia.
+representam incêndios independentes. A comparação anual da Activity mantém a série harmonizada em células-dia;
+o calendário e os detalhes mensais somam as células-dia dos sensores selecionados.

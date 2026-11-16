@@ -25,6 +25,7 @@ def back_to_calendar():
 def render_month_details(filters, provider=None):
     available = provider.years() if provider else AVAILABLE_YEARS
     get_summary = provider.month_summary if provider else month_summary
+    get_daily = provider.daily_activity if provider else daily_activity
     st.html(Path(__file__).with_name("month_details.css"))
     with st.container(key="month-page"):
         st.button("Back", icon=":material/chevron_left:", key="month-back", on_click=back_to_calendar)
@@ -50,13 +51,13 @@ def render_month_details(filters, provider=None):
                     for sensor in SENSORS:
                         if sensor not in sensors:
                             continue
-                        counts = daily_activity(year, filters, [sensor])
+                        counts = get_daily(year, filters, [sensor])
                         figure.add_trace(go.Bar(
                             name=sensor,
                             x=[day.day for day, _ in summary["days"]],
-                            y=[counts[day] for day, _ in summary["days"]],
+                            y=[counts.get(day) for day, _ in summary["days"]],
                             marker={"color": SENSOR_COLORS[sensor], "line": {"width": 0}},
-                            hovertemplate=f"{sensor} · {MONTH_NAMES[month - 1]} %{{x}}, {year}: %{{y:,}} hotspots<extra></extra>",
+                            hovertemplate=f"{sensor} · {MONTH_NAMES[month - 1]} %{{x}}, {year}: %{{y:,}} {summary.get('unit', 'hotspots')}<extra></extra>",
                         ))
                     last_day = len(summary["days"])
                     figure.update_layout(
