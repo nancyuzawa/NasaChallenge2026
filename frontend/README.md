@@ -144,3 +144,61 @@ Run tests from the project root:
 ```powershell
 frontend\.venv\Scripts\python.exe -m unittest discover -s frontend/tests -v
 ```
+
+
+## DuckDB no Dashboard e Activity
+
+As páginas `/Dashboard` e `/Activity` consultam os Parquets publicados em
+`backend/data/processed/{modis,viirs}/ano/país/part-NNN.parquet`.
+Os adaptadores `processed_data.py` e `processed_activity.py` usam a camada
+`backend/src/firms_analysis.py`; Reports mantém seu adaptador anterior.
+As consultas não importam nem alteram os arquivos de `raw`.
+
+```powershell
+$env:FIREWATCH_DATA = (Resolve-Path 'backend/data/processed').Path
+python run.py
+```
+
+A variável é opcional para a pasta padrão. O iniciador instala DuckDB e pandas
+conforme `requirements.txt`. Dashboard exibe o total de detecções originais e a
+série de atividade harmonizada em células-dia; Activity usa células-dia no
+calendário, na comparação anual e nos detalhes mensais. Um sensor selecionado
+usa suas próprias células; com ambos, MODIS é referência e VIIRS é ajustado
+quando existem três meses anteriores de sobreposição. Sem isso, VIIRS é provisório.
+As fontes são deduplicadas antes da agregação. Dias e meses sem observações ficam
+sem valor (cinza no calendário), pois ausência de registros não comprova zero fogo.
+A comparação anual omite percentuais sem cobertura/calibração comparável.
+
+A lista de anos da Activity vem das pastas publicadas. O cache é invalidado por
+caminho, tamanho e mtime das partes; atualize a página após novas publicações.
+Sem Parquets publicados, essas duas páginas usam o modo demonstrativo identificado.
+Com Parquets, seleções sem registros permanecem vazias e não usam dados sintéticos.
+
+
+### Dashboard: resumos e carregamento
+
+O Dashboard usa `dashboard_data.py` para selecionar arquivos pelas estatísticas de
+latitude/longitude dos Parquets e ignorar anos posteriores ao fim da seleção.
+Anos anteriores continuam disponíveis para calibração e comparação histórica.
+Arquivos sem estatísticas são mantidos na consulta, e o filtro geográfico exato
+continua aplicado aos pontos. As pastas de país não substituem esse filtro.
+
+O agregado diário da seleção é reutilizado em memória e salvo em
+`processed/.dashboard_cache/`, fora das partições de observações. A chave considera
+os arquivos relevantes, tamanho, mtime, filtros e geometria; mudanças invalidam o
+resumo. A primeira consulta precisa gerar o resumo, e as seguintes podem reutilizá-lo,
+inclusive após reiniciar o aplicativo. Em armazenamento somente leitura, permanece
+o cache em memória. Os resumos são descartáveis; não precisam ser versionados.
+Um spinner com tempo decorrido é exibido enquanto os dados do Dashboard carregam.
+Essa otimização não altera o adaptador de Activity ou Reports.
+
+
+### Unidades dos indicadores do Dashboard
+
+Os cartões da direita e o gráfico mensal do Dashboard usam **hotspots**:
+contagens de detecções deduplicadas, somadas por dia/mês entre sensores.
+O pico mostra o nome do mês e a contagem na mesma unidade. Variações e médias
+históricas usam essas contagens e ficam indisponíveis quando faltam anos com
+os mesmos meses e sensores observados. Essa verificação não comprova cobertura
+completa; os indicadores se baseiam nos registros disponíveis. Hotspots não
+representam incêndios independentes. Activity mantém a série harmonizada em células-dia.

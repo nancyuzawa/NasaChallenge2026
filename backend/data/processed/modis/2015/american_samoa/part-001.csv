@@ -1,0 +1,2 @@
+sensor,satellite,acq_date,acq_time,latitude,longitude,confidence,frp,cell_x,cell_y,source_file
+MODIS,Terra,2015-04-13,2152,-14.3244,-170.7153,0,7.1,-16440,-1821,modis/2015/modis_2015_American_Samoa.csv

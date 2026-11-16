@@ -1,0 +1,6 @@
+sensor,satellite,acq_date,acq_time,latitude,longitude,confidence,frp,cell_x,cell_y,source_file
+VIIRS,N20,2020-02-07,0244,6.88383,158.30005,n,2.38,15243,881,viirs/2020/viirs-jpss1_2020_Federated_States_of_Micronesia.csv
+VIIRS,N20,2020-02-08,0408,9.54693,138.158,n,5.72,13304,1220,viirs/2020/viirs-jpss1_2020_Federated_States_of_Micronesia.csv
+VIIRS,N20,2020-04-08,0343,9.76312,140.51668,l,12.23,13531,1247,viirs/2020/viirs-jpss1_2020_Federated_States_of_Micronesia.csv
+VIIRS,N20,2020-04-18,0213,6.88327,158.2968,n,3.24,15243,881,viirs/2020/viirs-jpss1_2020_Federated_States_of_Micronesia.csv
+VIIRS,N20,2020-05-14,0408,9.55392,138.14137,n,2.6,13302,1221,viirs/2020/viirs-jpss1_2020_Federated_States_of_Micronesia.csv

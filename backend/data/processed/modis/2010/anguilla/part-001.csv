@@ -1,0 +1,2 @@
+sensor,satellite,acq_date,acq_time,latitude,longitude,confidence,frp,cell_x,cell_y,source_file
+MODIS,Terra,2010-10-19,1448,18.2493,-63.0315,48,5.4,-6070,2303,modis/2010/modis_2010_Anguilla.csv

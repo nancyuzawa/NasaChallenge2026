@@ -1,0 +1,12 @@
+sensor,satellite,acq_date,acq_time,latitude,longitude,confidence,frp,cell_x,cell_y,source_file
+MODIS,Terra,2015-03-11,0211,13.1085,-59.629,100,28.5,-5743,1668,modis/2015/modis_2015_Barbados.csv
+MODIS,Terra,2015-03-11,1426,13.2384,-59.5755,54,7.7,-5737,1684,modis/2015/modis_2015_Barbados.csv
+MODIS,Aqua,2015-05-05,1736,13.1103,-59.4672,76,16.1,-5727,1668,modis/2015/modis_2015_Barbados.csv
+MODIS,Aqua,2015-05-09,1712,13.0999,-59.4995,86,33.6,-5730,1667,modis/2015/modis_2015_Barbados.csv
+MODIS,Aqua,2015-05-09,1712,13.2494,-59.5872,39,10.1,-5739,1686,modis/2015/modis_2015_Barbados.csv
+MODIS,Aqua,2015-05-14,1730,13.1657,-59.5975,74,12.4,-5740,1675,modis/2015/modis_2015_Barbados.csv
+MODIS,Aqua,2015-05-14,1730,13.2403,-59.5854,69,10.1,-5738,1684,modis/2015/modis_2015_Barbados.csv
+MODIS,Terra,2015-05-21,1432,13.0974,-59.5526,64,5.0,-5735,1667,modis/2015/modis_2015_Barbados.csv
+MODIS,Aqua,2015-06-10,1712,13.0884,-59.5369,45,13.3,-5734,1665,modis/2015/modis_2015_Barbados.csv
+MODIS,Aqua,2015-10-21,1729,13.1218,-59.5116,39,5.9,-5731,1670,modis/2015/modis_2015_Barbados.csv
+MODIS,Aqua,2015-10-21,1729,13.1231,-59.5022,60,9.8,-5730,1670,modis/2015/modis_2015_Barbados.csv

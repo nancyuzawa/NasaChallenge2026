@@ -1,0 +1,2 @@
+sensor,satellite,acq_date,acq_time,latitude,longitude,confidence,frp,cell_x,cell_y,source_file
+MODIS,Terra,2020-06-25,0319,12.1479,-68.9604,14,13.7,-6641,1548,modis/2020/modis_2020_Curacao.csv

@@ -1,0 +1,2 @@
+sensor,satellite,acq_date,acq_time,latitude,longitude,confidence,frp,cell_x,cell_y,source_file
+MODIS,Terra,2020-09-23,1120,-7.9006,-14.3801,20,8.8,-1385,-1012,modis/2020/modis_2020_Saint_Helena.csv

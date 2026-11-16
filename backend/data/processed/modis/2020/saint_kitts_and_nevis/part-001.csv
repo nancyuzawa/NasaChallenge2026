@@ -1,0 +1,10 @@
+sensor,satellite,acq_date,acq_time,latitude,longitude,confidence,frp,cell_x,cell_y,source_file
+MODIS,Aqua,2020-03-08,1731,17.379,-62.8535,54,11.8,-6053,2197,modis/2020/modis_2020_Saint_Kitts_and_Nevis.csv
+MODIS,Aqua,2020-05-07,1755,17.3976,-62.8463,0,15.0,-6052,2199,modis/2020/modis_2020_Saint_Kitts_and_Nevis.csv
+MODIS,Terra,2020-05-26,1520,17.3979,-62.8059,18,24.9,-6049,2199,modis/2020/modis_2020_Saint_Kitts_and_Nevis.csv
+MODIS,Terra,2020-05-28,1507,17.3403,-62.8164,0,19.4,-6050,2192,modis/2020/modis_2020_Saint_Kitts_and_Nevis.csv
+MODIS,Terra,2020-06-08,1449,17.2943,-62.7275,69,9.8,-6041,2186,modis/2020/modis_2020_Saint_Kitts_and_Nevis.csv
+MODIS,Terra,2020-06-13,1507,17.3071,-62.713,0,15.8,-6040,2188,modis/2020/modis_2020_Saint_Kitts_and_Nevis.csv
+MODIS,Terra,2020-06-17,1443,17.2925,-62.7344,59,10.1,-6042,2186,modis/2020/modis_2020_Saint_Kitts_and_Nevis.csv
+MODIS,Aqua,2020-06-17,1749,17.3158,-62.7084,0,20.2,-6039,2189,modis/2020/modis_2020_Saint_Kitts_and_Nevis.csv
+MODIS,Terra,2020-09-08,1513,17.311,-62.7161,0,14.3,-6040,2189,modis/2020/modis_2020_Saint_Kitts_and_Nevis.csv

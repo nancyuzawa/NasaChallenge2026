@@ -1,0 +1,5 @@
+sensor,satellite,acq_date,acq_time,latitude,longitude,confidence,frp,cell_x,cell_y,source_file
+MODIS,Terra,2020-04-12,1455,18.3345,-64.9587,57,9.7,-6256,2314,modis/2020/modis_2020_United_States_Virgin_Islands.csv
+MODIS,Terra,2020-04-12,1455,18.3359,-64.9685,60,9.8,-6257,2314,modis/2020/modis_2020_United_States_Virgin_Islands.csv
+MODIS,Aqua,2020-06-08,1755,17.7526,-64.5752,43,8.9,-6219,2243,modis/2020/modis_2020_United_States_Virgin_Islands.csv
+MODIS,Terra,2020-06-20,1513,17.7325,-64.6565,26,11.6,-6227,2240,modis/2020/modis_2020_United_States_Virgin_Islands.csv

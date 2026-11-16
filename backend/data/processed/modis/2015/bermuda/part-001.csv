@@ -1,0 +1,2 @@
+sensor,satellite,acq_date,acq_time,latitude,longitude,confidence,frp,cell_x,cell_y,source_file
+MODIS,Terra,2015-08-03,1505,32.3629,-64.6713,54,7.3,-6228,3937,modis/2015/modis_2015_Bermuda.csv

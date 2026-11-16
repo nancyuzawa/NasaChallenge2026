@@ -1,0 +1,5 @@
+sensor,satellite,acq_date,acq_time,latitude,longitude,confidence,frp,cell_x,cell_y,source_file
+MODIS,Terra,2020-03-18,1502,16.7591,-62.1594,0,13.5,-5986,2121,modis/2020/modis_2020_Montserrat.csv
+MODIS,Aqua,2020-05-13,1718,16.7444,-62.1567,0,16.1,-5986,2119,modis/2020/modis_2020_Montserrat.csv
+MODIS,Terra,2020-05-28,1507,16.7469,-62.159,0,15.4,-5986,2119,modis/2020/modis_2020_Montserrat.csv
+MODIS,Terra,2020-06-03,1431,16.7407,-62.1574,0,10.7,-5986,2119,modis/2020/modis_2020_Montserrat.csv

@@ -554,3 +554,56 @@ h1, h2, h3 { font-family: Barlow, Arial, sans-serif; }
 }
 
 
+
+
+/* Dark date picker with readable labels and native selection highlights. */
+[data-testid="stDateInputCalendar"],
+[data-testid="stDateInputHeaderPickerPopover"],
+[data-testid="stDateInputQuickSelectPopover"] {
+  color-scheme: dark;
+  background: #303646 !important;
+}
+
+
+[data-testid="stDateInputCalendar"],
+[data-testid="stDateInputCalendar"] *,
+[data-testid="stDateInputHeaderPickerPopover"],
+[data-testid="stDateInputHeaderPickerPopover"] *,
+[data-testid="stDateInputQuickSelectPopover"],
+[data-testid="stDateInputQuickSelectPopover"] * {
+  color: #f1f5f9 !important;
+  -webkit-text-fill-color: currentColor !important;
+}
+
+[data-testid="stDateInputCalendar"] [role="columnheader"] {
+  color: #cbd5e1 !important;
+  font-weight: 600;
+}
+
+[data-testid="stDateInputCalendar"] [data-outside-month],
+[data-testid="stDateInputCalendar"] [data-outside-month] *,
+[data-testid="stDateInputCalendar"] [data-disabled],
+[data-testid="stDateInputCalendar"] [data-disabled] *,
+[data-testid="stDateInputCalendar"] [aria-disabled="true"] {
+  color: #a5b1c5 !important;
+  opacity: 1 !important;
+}
+
+[data-testid="stDateInputCalendar"] [data-selected],
+[data-testid="stDateInputCalendar"] [data-selected] * {
+  color: #fff !important;
+  font-weight: 600;
+}
+
+[data-testid="stDateInputCalendar"] button[slot="previous"],
+[data-testid="stDateInputCalendar"] button[slot="next"] {
+  background: #424d63 !important;
+  color: #fff !important;
+}
+
+[data-testid="stDateInputCalendar"] [data-focus-visible],
+[data-testid="stDateInputCalendar"] button:focus-visible,
+[data-testid="stDateInputHeaderPickerPopover"] [data-focus-visible] {
+  outline: 2px solid #93c5fd !important;
+  outline-offset: 2px;
+}

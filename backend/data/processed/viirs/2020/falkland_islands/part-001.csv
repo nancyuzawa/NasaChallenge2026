@@ -1,0 +1,12 @@
+sensor,satellite,acq_date,acq_time,latitude,longitude,confidence,frp,cell_x,cell_y,source_file
+VIIRS,N20,2020-02-07,1741,-51.83132,-58.44899,n,5.7,-5629,-5784,viirs/2020/viirs-jpss1_2020_Falkland_Islands.csv
+VIIRS,N20,2020-09-14,1856,-51.51503,-60.28326,n,8.84,-5806,-5759,viirs/2020/viirs-jpss1_2020_Falkland_Islands.csv
+VIIRS,N20,2020-09-25,1709,-51.88228,-59.35505,n,5.7,-5716,-5788,viirs/2020/viirs-jpss1_2020_Falkland_Islands.csv
+VIIRS,N20,2020-09-25,1709,-51.88212,-59.34972,n,2.75,-5716,-5788,viirs/2020/viirs-jpss1_2020_Falkland_Islands.csv
+VIIRS,N20,2020-09-25,1849,-51.86897,-59.37149,n,6.09,-5718,-5787,viirs/2020/viirs-jpss1_2020_Falkland_Islands.csv
+VIIRS,N20,2020-10-15,1734,-51.62543,-58.77044,n,6.97,-5660,-5768,viirs/2020/viirs-jpss1_2020_Falkland_Islands.csv
+VIIRS,N20,2020-11-01,1715,-51.67048,-57.90236,n,1.91,-5576,-5771,viirs/2020/viirs-jpss1_2020_Falkland_Islands.csv
+VIIRS,N20,2020-11-29,0438,-51.71016,-59.90999,n,9.46,-5770,-5775,viirs/2020/viirs-jpss1_2020_Falkland_Islands.csv
+VIIRS,N20,2020-11-29,0438,-51.70927,-59.9155,n,2.19,-5770,-5775,viirs/2020/viirs-jpss1_2020_Falkland_Islands.csv
+VIIRS,N20,2020-11-29,0438,-51.70687,-59.90862,n,9.46,-5770,-5774,viirs/2020/viirs-jpss1_2020_Falkland_Islands.csv
+VIIRS,N20,2020-11-29,0438,-51.70599,-59.91415,n,2.19,-5770,-5774,viirs/2020/viirs-jpss1_2020_Falkland_Islands.csv

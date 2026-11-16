@@ -1,0 +1,2 @@
+sensor,satellite,acq_date,acq_time,latitude,longitude,confidence,frp,cell_x,cell_y,source_file
+MODIS,Terra,2020-10-24,0721,-17.061,42.7353,32,7.2,4115,-2159,modis/2020/modis_2020_French_Southern_and_Antarctic_Lands.csv

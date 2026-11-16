@@ -16,7 +16,8 @@ from pathlib import Path
 import plotly.graph_objects as go
 import streamlit as st
 
-from activity_data import AVAILABLE_YEARS, MONTH_NAMES, MONTH_LABELS, SERIES_COLORS, SENSORS, annual_summary, calendar_cells, heat_legend
+from processed_activity import years, MONTH_NAMES, MONTH_LABELS, SERIES_COLORS, SENSORS, annual_summary, calendar_cells, heat_legend
+from processed_data import dataset_status
 from activity_ui import calendar_html, chart_heading, key_periods_html, legend_html, summary_html
 from month_details import open_month, render_month_details
 from ui import apply_styles, render_sidebar, searchable_selectbox
@@ -27,6 +28,14 @@ apply_styles()
 st.markdown(f"<style>{(Path(__file__).resolve().parents[1] / 'activity.css').read_text(encoding='utf-8')}</style>", unsafe_allow_html=True)
 render_sidebar("Activity")
 filters = st.session_state.get("filters")
+with st.spinner("Loading activity data…", show_time=True):
+    AVAILABLE_YEARS = years()
+    status = dataset_status()
+real = not status["demo"]
+st.caption(status["label"] + (" · Cell-days; gray cells indicate missing observations. VIIRS is provisional without three earlier overlap months." if real else " · Demonstration data"))
+for key in ("calendar_year", "comparison_year", "detail_year"):
+    if key in st.session_state and st.session_state[key] not in AVAILABLE_YEARS:
+        st.session_state[key] = AVAILABLE_YEARS[0]
 if filters:
     state, country, city = filters.get("state"), filters["country"], filters.get("city")
     area = [city] if city else []
@@ -43,7 +52,7 @@ def render_location():
 
 
 if st.session_state.get("activity_view") == "month":
-    render_month_details(filters)
+    render_month_details(filters, provider=__import__("processed_activity"))
     render_location()
     st.stop()
 
@@ -63,9 +72,10 @@ with st.container(key="activity-page"):
                         with st.container(key="calendar-period-controls", horizontal=True, gap="small", width="content"):
                             month = searchable_selectbox("Month", list(range(13)), format_func=lambda value: "All months" if value == 0 else MONTH_NAMES[value - 1],
                                                          key="calendar_month", label_visibility="collapsed", persist_state="session", icon=None) or 0
-                            calendar_year = searchable_selectbox("Calendar year", AVAILABLE_YEARS, key="calendar_year", label_visibility="collapsed", persist_state="session", icon=None) or 2025
-                    cells = calendar_cells(calendar_year, month, filters, sensors)
-                    legend = heat_legend(cell["count"] for cell in cells)
+                            calendar_year = searchable_selectbox("Calendar year", AVAILABLE_YEARS, key="calendar_year", label_visibility="collapsed", persist_state="session", icon=None) or AVAILABLE_YEARS[0]
+                    with st.spinner("Loading activity calendar…", show_time=True):
+                        cells = calendar_cells(calendar_year, month, filters, sensors)
+                        legend = heat_legend(cell["count"] for cell in cells)
                     with st.container(key="calendar-body"):
                         st.markdown(calendar_html(cells, legend), unsafe_allow_html=True)
                     if month:
@@ -73,20 +83,23 @@ with st.container(key="activity-page"):
                             st.button("See more details", icon=":material/arrow_forward:", key="see-month-details",
                                       on_click=open_month, args=(month, calendar_year))
             with legend_column:
-                st.markdown(legend_html(legend), unsafe_allow_html=True)
+                st.markdown(legend_html(legend, "cell-days" if real else "hotspots"), unsafe_allow_html=True)
 
     st.markdown('''<header class="activity-section-heading"><h2>Annual analysis</h2>
 <p>Compare the burning activity across the years.</p></header>''', unsafe_allow_html=True)
 
     with st.container(key="activity-annual"):
         with st.container(key="annual-controls", horizontal=True, gap="small"):
-            end_year = searchable_selectbox("Comparison year", AVAILABLE_YEARS, key="comparison_year", label_visibility="collapsed", persist_state="session", icon=None) or 2025
+            end_year = searchable_selectbox("Comparison year", AVAILABLE_YEARS, key="comparison_year", label_visibility="collapsed", persist_state="session", icon=None) or AVAILABLE_YEARS[0]
             available = [year for year in AVAILABLE_YEARS if year <= end_year]
+            if st.session_state.get("comparison_range", 1) > len(available):
+                st.session_state.comparison_range = len(available)
             span = searchable_selectbox("Comparison range", list(range(len(available), 0, -1)),
                                         format_func=lambda value: "Last year" if value == 1 else f"Last {value} years",
                                         key="comparison_range", label_visibility="collapsed", persist_state="session", icon=None) or len(available)
-        summaries = [annual_summary(year, filters, sensors) for year in available[:span]]
-        colors = SERIES_COLORS[:len(summaries)]
+        with st.spinner("Preparing annual comparison…", show_time=True):
+            summaries = [annual_summary(year, filters, sensors) for year in available[:span]]
+        colors = [SERIES_COLORS[i % len(SERIES_COLORS)] for i in range(len(summaries))]
         with st.container(key="annual-comparison"):
             chart, periods = st.columns([4, 1.2], gap="medium")
             with chart:
@@ -97,14 +110,14 @@ with st.container(key="activity-page"):
                         figure.add_trace(go.Scatter(
                             x=MONTH_LABELS, y=summary["series"], name=str(summary["year"]), mode="lines+markers",
                             line={"color": color, "width": 2}, marker={"size": 6, "color": "#303646", "line": {"color": color, "width": 2}},
-                            hovertemplate=f"{summary['year']} · %{{x}}: %{{y:,}} hotspots<extra></extra>",
+                            hovertemplate=f"{summary['year']} · %{{x}}: %{{y:,}} {'cell-days' if real else 'hotspots'}<extra></extra>",
                         ))
                     figure.update_layout(
                         autosize=True, paper_bgcolor="#303646", plot_bgcolor="#303646", showlegend=False,
                         font={"family": "Barlow, Arial", "size": 11, "color": "#d5d8e2"},
                         margin={"l": 33, "r": 10, "t": 14, "b": 26},
                         xaxis={"showgrid": True, "gridcolor": "#424a5a", "fixedrange": True},
-                        yaxis={"range": [0, max(10, max(max(summary["series"]) for summary in summaries) * 1.15)], "gridcolor": "#495162", "zerolinecolor": "#495162", "nticks": 5, "fixedrange": True},
+                        yaxis={"range": [0, max(10, max((n for summary in summaries for n in summary["series"] if n is not None), default=0) * 1.15)], "gridcolor": "#495162", "zerolinecolor": "#495162", "nticks": 5, "fixedrange": True},
                         hovermode="x unified", hoverlabel={"bgcolor": "#09163b"},
                     )
                     st.plotly_chart(figure, key="annual-comparison-chart", width="stretch", height="stretch", theme=None, config={"displayModeBar": False})
