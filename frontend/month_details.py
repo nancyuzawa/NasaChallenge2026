@@ -46,11 +46,18 @@ def render_month_details(filters, provider=None):
                 chart, metrics = st.columns([1.1, 1], gap="medium", vertical_alignment="center")
                 with chart:
                     st.markdown('<h2 class="month-chart-title">Evolution of Outbreaks During the Month</h2>', unsafe_allow_html=True)
-                    figure = go.Figure(go.Bar(
-                        x=[day.day for day, _ in summary["days"]], y=[count for _, count in summary["days"]],
-                        marker={"color": "#ffb648", "line": {"width": 0}},
-                        hovertemplate=f"{MONTH_NAMES[month - 1]} %{{x}}, {year}: %{{y:,}} {summary.get('unit', 'hotspots')}<extra></extra>",
-                    ))
+                    figure = go.Figure()
+                    for sensor in SENSORS:
+                        if sensor not in sensors:
+                            continue
+                        counts = daily_activity(year, filters, [sensor])
+                        figure.add_trace(go.Bar(
+                            name=sensor,
+                            x=[day.day for day, _ in summary["days"]],
+                            y=[counts[day] for day, _ in summary["days"]],
+                            marker={"color": SENSOR_COLORS[sensor], "line": {"width": 0}},
+                            hovertemplate=f"{sensor} · {MONTH_NAMES[month - 1]} %{{x}}, {year}: %{{y:,}} hotspots<extra></extra>",
+                        ))
                     last_day = len(summary["days"])
                     figure.update_layout(
                         paper_bgcolor="#303646", plot_bgcolor="#303646", barmode="stack", showlegend=True,

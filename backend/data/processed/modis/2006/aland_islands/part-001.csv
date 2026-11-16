@@ -1,0 +1,2 @@
+sensor,satellite,acq_date,acq_time,latitude,longitude,confidence,frp,cell_x,cell_y,source_file
+MODIS,Terra,2006-05-05,1053,60.3032,19.9914,27,7.0,1925,6390,modis/2006/2006/modis_2006_Aland_Islands.csv

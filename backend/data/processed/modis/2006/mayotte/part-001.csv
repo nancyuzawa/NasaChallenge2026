@@ -1,0 +1,2 @@
+sensor,satellite,acq_date,acq_time,latitude,longitude,confidence,frp,cell_x,cell_y,source_file
+MODIS,Aqua,2006-09-26,1046,-12.9583,45.1242,48,4.6,4345,-1650,modis/2006/2006/modis_2006_Mayotte.csv

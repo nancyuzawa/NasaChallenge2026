@@ -1,0 +1,5 @@
+sensor,satellite,acq_date,acq_time,latitude,longitude,confidence,frp,cell_x,cell_y,source_file
+MODIS,Terra,2006-05-09,0327,19.3272,-81.1766,38,9.0,-7818,2434,modis/2006/2006/modis_2006_Cayman_Islands.csv
+MODIS,Aqua,2006-06-01,1849,19.3327,-81.1477,59,11.5,-7815,2435,modis/2006/2006/modis_2006_Cayman_Islands.csv
+MODIS,Aqua,2006-06-01,1849,19.334,-81.1381,55,11.2,-7814,2435,modis/2006/2006/modis_2006_Cayman_Islands.csv
+MODIS,Aqua,2006-10-18,1833,19.2822,-81.2714,36,7.6,-7827,2429,modis/2006/2006/modis_2006_Cayman_Islands.csv

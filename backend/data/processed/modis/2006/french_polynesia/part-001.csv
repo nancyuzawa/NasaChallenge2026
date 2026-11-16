@@ -1,0 +1,11 @@
+sensor,satellite,acq_date,acq_time,latitude,longitude,confidence,frp,cell_x,cell_y,source_file
+MODIS,Terra,2006-11-22,1922,-10.545,-138.658,10,9.3,-13353,-1347,modis/2006/2006/modis_2006_French_Polynesia.csv
+MODIS,Aqua,2006-12-05,2321,-10.5439,-138.6573,52,27.2,-13353,-1347,modis/2006/2006/modis_2006_French_Polynesia.csv
+MODIS,Aqua,2006-12-10,2339,-9.7459,-139.0755,29,59.8,-13393,-1246,modis/2006/2006/modis_2006_French_Polynesia.csv
+MODIS,Terra,2006-12-15,1928,-10.5446,-138.6575,28,9.2,-13353,-1347,modis/2006/2006/modis_2006_French_Polynesia.csv
+MODIS,Terra,2006-12-23,0751,-9.7272,-138.9995,100,21.9,-13386,-1243,modis/2006/2006/modis_2006_French_Polynesia.csv
+MODIS,Terra,2006-12-23,0751,-9.7183,-139.0009,100,17.5,-13386,-1242,modis/2006/2006/modis_2006_French_Polynesia.csv
+MODIS,Aqua,2006-12-23,1052,-9.7318,-138.9969,56,11.0,-13386,-1244,modis/2006/2006/modis_2006_French_Polynesia.csv
+MODIS,Aqua,2006-12-23,1052,-9.7225,-138.9956,95,16.9,-13385,-1243,modis/2006/2006/modis_2006_French_Polynesia.csv
+MODIS,Aqua,2006-12-23,1052,-9.7211,-139.0051,28,8.4,-13386,-1243,modis/2006/2006/modis_2006_French_Polynesia.csv
+MODIS,Aqua,2006-12-30,2314,-10.5446,-138.6501,42,16.8,-13352,-1347,modis/2006/2006/modis_2006_French_Polynesia.csv
