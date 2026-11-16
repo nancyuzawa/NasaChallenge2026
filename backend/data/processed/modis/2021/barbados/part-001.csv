@@ -1,0 +1,6 @@
+sensor,satellite,acq_date,acq_time,latitude,longitude,confidence,frp,cell_x,cell_y,source_file
+MODIS,Aqua,2021-03-20,1723,13.276,-59.6333,63,29.6,-5743,1689,modis/2021/modis_2021_Barbados.csv
+MODIS,Aqua,2021-03-20,1723,13.2774,-59.624,72,10.7,-5742,1689,modis/2021/modis_2021_Barbados.csv
+MODIS,Aqua,2021-03-23,1754,13.1412,-59.46,40,22.8,-5726,1672,modis/2021/modis_2021_Barbados.csv
+MODIS,Aqua,2021-04-07,1711,13.2333,-59.6281,61,25.7,-5743,1684,modis/2021/modis_2021_Barbados.csv
+MODIS,Aqua,2021-11-08,1717,13.2878,-59.6341,52,12.3,-5743,1690,modis/2021/modis_2021_Barbados.csv

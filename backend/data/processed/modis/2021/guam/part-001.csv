@@ -1,0 +1,6 @@
+sensor,satellite,acq_date,acq_time,latitude,longitude,confidence,frp,cell_x,cell_y,source_file
+MODIS,Aqua,2021-02-11,0353,13.2717,144.7328,0,5.5,13937,1688,modis/2021/modis_2021_Guam.csv
+MODIS,Aqua,2021-02-27,0353,13.3074,144.7417,76,23.1,13938,1693,modis/2021/modis_2021_Guam.csv
+MODIS,Aqua,2021-02-27,0353,13.3155,144.7446,45,7.9,13938,1694,modis/2021/modis_2021_Guam.csv
+MODIS,Aqua,2021-04-25,0347,13.3937,144.7386,30,6.0,13938,1704,modis/2021/modis_2021_Guam.csv
+MODIS,Aqua,2021-10-20,0335,13.4824,144.856,53,19.1,13949,1715,modis/2021/modis_2021_Guam.csv

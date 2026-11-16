@@ -16,9 +16,12 @@ import re
 
 import streamlit as st
 
-from activity_data import AVAILABLE_YEARS
+from functools import partial
+
+from processed_data import dataset_status
+from processed_reports import years, regions
 from locations import REGIONS
-from reports_data import ANOMALY_THRESHOLD, detection_records, historical_summary, record_page, records_csv
+from processed_reports import ANOMALY_THRESHOLD, historical_summary, record_page, records_csv
 from reports_ui import anomalies_html, comparison_figure, indicators_html, records_html
 from ui import apply_styles, render_sidebar, searchable_selectbox
 
@@ -39,11 +42,16 @@ def change_page(offset):
 
 # Inherit the map's administrative area, retaining report selections on reruns.
 shared = st.session_state.get("filters", {})
+status = dataset_status()
+AVAILABLE_YEARS = years()
+if st.session_state.get("reports_year") not in AVAILABLE_YEARS:
+    st.session_state.reports_year = AVAILABLE_YEARS[0]
+
 origin = (shared.get("country", "Brazil"), shared.get("state", "São Paulo"))
 if st.session_state.get("reports_location_origin") != origin:
     country = origin[0] if origin[0] in REGIONS else "Brazil"
     st.session_state.reports_country = country
-    st.session_state.reports_state = origin[1] if origin[1] in REGIONS[country] else "All regions"
+    st.session_state.reports_state = origin[1] if origin[1] in regions(country) else "All regions"
     st.session_state.reports_location_origin = origin
 st.session_state.setdefault("reports_slide", 0)
 st.session_state.setdefault("reports_record_page", 0)
@@ -60,14 +68,14 @@ with st.container(key="reports-page"):
         with country_col:
             country = searchable_selectbox("Country", list(REGIONS), key="reports_country", persist_state="session", icon=None)
         country = country or st.session_state.get("reports_valid_country", origin[0])
-        states = list(REGIONS[country])
+        states = regions(country)
         if st.session_state.get("reports_state") not in states:
             st.session_state.reports_state = "All regions"
         with state_col:
             state = searchable_selectbox("State/Province", states, key="reports_state", persist_state="session", icon=None)
         state = state or "All regions"
         with year_col:
-            year = searchable_selectbox("Period analyzed", AVAILABLE_YEARS, key="reports_year", persist_state="session", icon=None) or 2025
+            year = searchable_selectbox("Period analyzed", AVAILABLE_YEARS, key="reports_year", persist_state="session", icon=None) or AVAILABLE_YEARS[0]
         st.session_state.reports_valid_country = country
 
     selection = (year, country, state)
@@ -76,8 +84,8 @@ with st.container(key="reports-page"):
         st.session_state.reports_record_selection = selection
     summary = historical_summary(*selection)
     with export:
-        filename = re.sub(r"[^\w-]+", "_", f"firewatch_{country}_{state}_{year}_demo")
-        st.download_button("Export all data", data=records_csv(*selection),
+        filename = re.sub(r"[^\w-]+", "_", f"firewatch_{country}_{state}_{year}")
+        st.download_button("Export all data", data=partial(records_csv, *selection),
                            file_name=f"{filename}.csv", mime="text/csv", icon=":material/download:",
                            key="reports-export", disabled=summary["total"] == 0, on_click="ignore")
 
@@ -100,12 +108,12 @@ with st.container(key="reports-page"):
                     with chart:
                         st.markdown('<h2 class="historical-section-title">Current activity vs. historical average</h2>', unsafe_allow_html=True)
                         with st.container(key="reports-chart"):
-                            st.caption("Illustrative figures for detected hotspots per month.")
+                            st.caption("Detected hotspots per month; gaps indicate missing observations.")
                             st.plotly_chart(comparison_figure(summary), key="reports-comparison", width="stretch",
                                             height=400, theme=None, config={"displayModeBar": False})
                 else:
                     st.markdown('<h2 class="historical-section-title">Detection record</h2>', unsafe_allow_html=True)
-                    page = record_page(detection_records(*selection), st.session_state.reports_record_page)
+                    page = record_page(*selection, st.session_state.reports_record_page)
                     st.session_state.reports_record_page = page["page"]
                     st.markdown(records_html(page), unsafe_allow_html=True)
                     with st.container(key="reports-pagination", horizontal=True, horizontal_alignment="center"):
@@ -124,7 +132,12 @@ with st.container(key="reports-page"):
                           help=label, on_click=change_slide, args=(index,))
 
     baseline = ", ".join(str(y) for y in sorted(summary["previous_years"])) or "unavailable"
-    st.caption(f"Synthetic demonstration data · Historical baseline: {baseline}. "
-               f"Anomalies: monthly deviation ≥ {ANOMALY_THRESHOLD:g}% in either direction, or activity with a zero baseline. "
-               "Area totals include catalog cities only. Record times and sensor assignments are simulated; coordinates are city centers. "
-               "N/A: satellite, confidence, radiative power and day/night are unavailable.")
+    if status["demo"]:
+        st.caption(f"Synthetic demonstration data | Historical baseline: {baseline}. "
+                   "Record times and sensor assignments are simulated; coordinates are city centers.")
+    else:
+        st.caption(f"NASA FIRMS | Historical baseline: {baseline}. "
+                   f"Anomalies: monthly deviation >= {ANOMALY_THRESHOLD:g}% in either direction. "
+                   "Comparisons require matching observed months and sensors. "
+                   "N/A: unavailable data. Confidence: MODIS 0-100; VIIRS l/n/h (low/nominal/high). "
+                   "Times are UTC; day/night is unavailable when absent from the source.")

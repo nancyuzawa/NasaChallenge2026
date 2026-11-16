@@ -40,7 +40,7 @@ def anomalies_html(summary):
              f'<span class="incident-count">{len(incidents)} incidents</span></div>',
              '<div class="anomaly-list" tabindex="0" aria-label="Monthly anomalies">']
     if not incidents:
-        message = ("No earlier demonstration years are available for comparison." if summary["average"] is None
+        message = ("No comparable earlier years are available." if summary["average"] is None
                    else "No anomalies found for this selection.")
         parts.append(f'<div class="historical-empty">{message}</div>')
     for row in incidents:
@@ -88,9 +88,9 @@ def records_html(page):
         values = [record[0], f"{record[1]:.4f}", f"{record[2]:.4f}", *record[3:]]
         rows.append('<tr>' + ''.join(f'<td>{escape(str(value)) if value is not None else "N/A"}</td>' for value in values) + '</tr>')
     if not rows:
-        rows.append('<tr><td colspan="8" class="historical-empty">No demonstration records for this selection.</td></tr>')
+        rows.append('<tr><td colspan="8" class="historical-empty">No records for this selection.</td></tr>')
     return f'''<div class="record-meta"><span>{page['total']:,} records found</span><span>Page {page['page'] + 1} of {page['pages']}</span></div>
 <div class="detection-table-scroll" tabindex="0" aria-label="Detection record table"><table class="detection-table">
-<caption class="sr-only">Synthetic detection records, newest first. All timestamps are UTC.</caption>
+<caption class="sr-only">Detection records, newest first. All timestamps are UTC.</caption>
 <thead><tr>{headers}</tr></thead><tbody>{''.join(rows)}</tbody></table></div>
 <div class="record-meta">Showing {page['start']:,}–{page['end']:,} of {page['total']:,}</div>'''

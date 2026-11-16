@@ -1,0 +1,16 @@
+sensor,satellite,acq_date,acq_time,latitude,longitude,confidence,frp,cell_x,cell_y,source_file
+MODIS,Terra,2021-05-09,1529,66.9963,-50.4317,0,7.5,-4857,6771,modis/2021/modis_2021_Greenland.csv
+MODIS,Terra,2021-06-10,1528,67.1497,-51.1731,0,5.0,-4928,6779,modis/2021/modis_2021_Greenland.csv
+MODIS,Terra,2021-06-21,1510,67.1525,-51.1842,0,3.0,-4929,6779,modis/2021/modis_2021_Greenland.csv
+MODIS,Terra,2021-06-28,1335,73.6472,-26.6054,27,7.9,-2563,7059,modis/2021/modis_2021_Greenland.csv
+MODIS,Terra,2021-07-02,1447,80.5702,-18.2733,0,6.8,-1760,7257,modis/2021/modis_2021_Greenland.csv
+MODIS,Aqua,2021-07-08,1611,67.3635,-51.4857,41,6.3,-4958,6789,modis/2021/modis_2021_Greenland.csv
+MODIS,Terra,2021-07-18,1448,73.6971,-27.1334,26,5.9,-2613,7060,modis/2021/modis_2021_Greenland.csv
+MODIS,Terra,2021-07-21,1521,66.2266,-49.9055,34,5.3,-4806,6732,modis/2021/modis_2021_Greenland.csv
+MODIS,Terra,2021-07-28,1523,80.3043,-19.3645,12,7.0,-1865,7251,modis/2021/modis_2021_Greenland.csv
+MODIS,Terra,2021-07-30,1515,66.2278,-49.9066,34,6.4,-4806,6732,modis/2021/modis_2021_Greenland.csv
+MODIS,Terra,2021-08-03,1625,73.7035,-27.1439,23,15.6,-2614,7061,modis/2021/modis_2021_Greenland.csv
+MODIS,Terra,2021-08-08,1328,73.6491,-26.5932,19,8.7,-2561,7059,modis/2021/modis_2021_Greenland.csv
+MODIS,Terra,2021-08-20,1533,66.2274,-49.9109,41,6.6,-4807,6732,modis/2021/modis_2021_Greenland.csv
+MODIS,Terra,2021-08-22,1521,66.2283,-49.9126,34,6.3,-4807,6732,modis/2021/modis_2021_Greenland.csv
+MODIS,Terra,2021-08-22,1522,63.5753,-50.2852,19,10.5,-4843,6587,modis/2021/modis_2021_Greenland.csv

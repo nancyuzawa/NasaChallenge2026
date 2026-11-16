@@ -1,0 +1,2 @@
+sensor,satellite,acq_date,acq_time,latitude,longitude,confidence,frp,cell_x,cell_y,source_file
+MODIS,Terra,2021-06-03,1218,16.8504,-24.9883,76,6.8,-2407,2132,modis/2021/modis_2021_Cape_Verde.csv

@@ -3,7 +3,7 @@ from calendar import monthrange
 from datetime import date, timedelta
 import activity_data as demo
 from activity_data import MONTH_NAMES, MONTH_LABELS, SERIES_COLORS, SENSORS, HEAT_COLORS
-from processed_data import dataset_status, available_years, daily_data, monthly_analysis, harmonize_monthly
+from processed_data import dataset_status, available_years, daily_data, monthly_analysis
 
 
 def years():
@@ -11,7 +11,7 @@ def years():
 
 
 def _sensors(sensors):
-    selected = list(sensors or SENSORS)
+    selected = list(SENSORS if sensors is None else sensors)
     if not set(selected).issubset(SENSORS):
         raise ValueError("Unknown sensor.")
     return selected
@@ -21,22 +21,18 @@ def daily_activity(year, filters=None, sensors=None):
     if dataset_status()["demo"]:
         return demo.daily_activity(year, filters, sensors)
     daily = daily_data(filters, _sensors(sensors))
-    monthly, _ = harmonize_monthly(daily, (date(year,1,1), date(year,12,31)))
-    result = {}
-    factor = monthly.attrs.get("calibration_factor") or 1.0
-    for row in monthly.itertuples():
-        sensor = "MODIS" if row.method == "MODIS reference" else "VIIRS"
-        selected = daily[(daily.sensor == sensor) & daily.acq_date.str.startswith(row.month)]
-        scale = factor if row.method == "VIIRS calibrated" else 1.0
-        result.update({date.fromisoformat(day.acq_date): float(day.cells)*scale for day in selected.itertuples()})
-    return result
+    # Keep each selected sensor's occupied cells, including overlapping months.
+    daily = daily[daily.acq_date.str.startswith(f"{year:04d}-")]
+    return {date.fromisoformat(day): float(cells)
+            for day, cells in daily.groupby("acq_date").cells.sum().items()}
 
 
 def annual_series(year, filters=None, sensors=None):
     if dataset_status()["demo"]:
         return demo.annual_series(year, filters, sensors)
-    daily = daily_activity(year, filters, sensors)
-    return [sum(n for day,n in daily.items() if day.month==m) if any(day.month==m for day in daily) else None for m in range(1,13)]
+    monthly, _ = monthly_analysis((date(year, 1, 1), date(year, 12, 31)), filters, _sensors(sensors))
+    values = {int(row.month[5:]): float(row.activity) for row in monthly.itertuples()}
+    return [values.get(month) for month in range(1, 13)]
 
 
 def calendar_cells(year, month=0, filters=None, sensors=None):
