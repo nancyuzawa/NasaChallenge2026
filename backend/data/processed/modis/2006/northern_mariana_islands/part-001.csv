@@ -1,0 +1,4 @@
+sensor,satellite,acq_date,acq_time,latitude,longitude,confidence,frp,cell_x,cell_y,source_file
+MODIS,Terra,2006-04-06,1236,16.348,145.6958,60,8.3,14030,2070,modis/2006/2006/modis_2006_Northern_Mariana_Islands.csv
+MODIS,Terra,2006-05-24,1236,16.3504,145.6926,66,7.5,14029,2070,modis/2006/2006/modis_2006_Northern_Mariana_Islands.csv
+MODIS,Aqua,2006-05-25,1605,16.352,145.6992,71,9.2,14030,2071,modis/2006/2006/modis_2006_Northern_Mariana_Islands.csv

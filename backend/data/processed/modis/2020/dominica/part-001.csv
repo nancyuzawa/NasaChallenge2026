@@ -1,0 +1,8 @@
+sensor,satellite,acq_date,acq_time,latitude,longitude,confidence,frp,cell_x,cell_y,source_file
+MODIS,Aqua,2020-04-09,1730,15.3952,-61.4033,47,5.9,-5913,1952,modis/2020/modis_2020_Dominica.csv
+MODIS,Terra,2020-05-05,1502,15.3959,-61.4053,19,8.1,-5914,1953,modis/2020/modis_2020_Dominica.csv
+MODIS,Terra,2020-05-18,1431,15.593,-61.3498,0,7.6,-5908,1977,modis/2020/modis_2020_Dominica.csv
+MODIS,Aqua,2020-05-18,1736,15.5998,-61.4509,64,13.1,-5918,1978,modis/2020/modis_2020_Dominica.csv
+MODIS,Aqua,2020-05-25,1742,15.4645,-61.4394,43,14.0,-5917,1961,modis/2020/modis_2020_Dominica.csv
+MODIS,Aqua,2020-05-27,1730,15.3895,-61.3973,50,8.1,-5913,1952,modis/2020/modis_2020_Dominica.csv
+MODIS,Terra,2020-09-05,1443,15.3027,-61.3829,0,7.6,-5912,1941,modis/2020/modis_2020_Dominica.csv

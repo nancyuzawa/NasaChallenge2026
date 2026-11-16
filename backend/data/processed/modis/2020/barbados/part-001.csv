@@ -1,0 +1,14 @@
+sensor,satellite,acq_date,acq_time,latitude,longitude,confidence,frp,cell_x,cell_y,source_file
+MODIS,Terra,2020-02-03,1438,13.1761,-59.6018,86,31.3,-5740,1676,modis/2020/modis_2020_Barbados.csv
+MODIS,Terra,2020-02-03,1438,13.1775,-59.611,96,62.8,-5741,1677,modis/2020/modis_2020_Barbados.csv
+MODIS,Aqua,2020-02-03,1741,13.1739,-59.6093,84,39.9,-5741,1676,modis/2020/modis_2020_Barbados.csv
+MODIS,Aqua,2020-02-07,1717,13.1726,-59.5291,54,9.8,-5733,1676,modis/2020/modis_2020_Barbados.csv
+MODIS,Aqua,2020-03-08,1729,13.2377,-59.582,57,7.1,-5738,1684,modis/2020/modis_2020_Barbados.csv
+MODIS,Terra,2020-03-20,1451,13.1558,-59.4937,63,18.3,-5730,1674,modis/2020/modis_2020_Barbados.csv
+MODIS,Terra,2020-03-20,1451,13.1579,-59.5064,63,13.1,-5731,1674,modis/2020/modis_2020_Barbados.csv
+MODIS,Aqua,2020-04-02,1723,13.1141,-59.5966,82,15.2,-5740,1669,modis/2020/modis_2020_Barbados.csv
+MODIS,Terra,2020-04-18,1420,13.1634,-59.4663,69,21.1,-5727,1675,modis/2020/modis_2020_Barbados.csv
+MODIS,Aqua,2020-04-30,1748,13.3042,-59.6402,0,39.9,-5744,1692,modis/2020/modis_2020_Barbados.csv
+MODIS,Terra,2020-05-16,0230,13.1341,-59.4848,54,7.6,-5729,1671,modis/2020/modis_2020_Barbados.csv
+MODIS,Terra,2020-05-18,0217,13.1177,-59.6117,57,6.6,-5741,1669,modis/2020/modis_2020_Barbados.csv
+MODIS,Terra,2020-05-18,0217,13.1217,-59.5838,88,12.5,-5738,1670,modis/2020/modis_2020_Barbados.csv

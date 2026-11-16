@@ -1,0 +1,10 @@
+sensor,satellite,acq_date,acq_time,latitude,longitude,confidence,frp,cell_x,cell_y,source_file
+MODIS,Terra,2006-05-23,1536,66.8238,-49.9503,19,4.5,-4811,6762,modis/2006/2006/modis_2006_Greenland.csv
+MODIS,Terra,2006-06-25,1441,66.996,-50.4291,0,7.1,-4857,6771,modis/2006/2006/modis_2006_Greenland.csv
+MODIS,Terra,2006-06-25,1441,67.1537,-51.1748,0,2.6,-4929,6779,modis/2006/2006/modis_2006_Greenland.csv
+MODIS,Terra,2006-07-08,1548,66.9953,-50.4281,42,8.2,-4857,6771,modis/2006/2006/modis_2006_Greenland.csv
+MODIS,Aqua,2006-07-20,1451,67.3652,-51.4713,26,7.6,-4957,6789,modis/2006/2006/modis_2006_Greenland.csv
+MODIS,Terra,2006-07-22,1421,72.9727,-27.9555,22,7.3,-2693,7034,modis/2006/2006/modis_2006_Greenland.csv
+MODIS,Terra,2006-07-23,1326,71.185,-28.1104,14,9.6,-2707,6963,modis/2006/2006/modis_2006_Greenland.csv
+MODIS,Terra,2006-07-23,1326,72.1665,-26.6355,16,10.9,-2565,7003,modis/2006/2006/modis_2006_Greenland.csv
+MODIS,Terra,2006-07-23,1326,72.17,-26.6683,29,11.1,-2569,7003,modis/2006/2006/modis_2006_Greenland.csv

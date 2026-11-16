@@ -1,0 +1,4 @@
+sensor,satellite,acq_date,acq_time,latitude,longitude,confidence,frp,cell_x,cell_y,source_file
+MODIS,Terra,2020-07-27,1157,77.7229,18.2792,0,6.6,1760,7188,modis/2020/modis_2020_Svalbard_and_Jan_Mayen.csv
+MODIS,Terra,2020-08-01,1216,77.3023,16.7181,31,8.2,1609,7176,modis/2020/modis_2020_Svalbard_and_Jan_Mayen.csv
+MODIS,Terra,2020-08-04,1246,78.6035,13.0449,0,7.6,1256,7211,modis/2020/modis_2020_Svalbard_and_Jan_Mayen.csv

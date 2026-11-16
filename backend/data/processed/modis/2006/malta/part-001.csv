@@ -1,0 +1,2 @@
+sensor,satellite,acq_date,acq_time,latitude,longitude,confidence,frp,cell_x,cell_y,source_file
+MODIS,Aqua,2006-06-21,1154,36.0489,14.2398,74,16.1,1371,4329,modis/2006/2006/modis_2006_Malta.csv

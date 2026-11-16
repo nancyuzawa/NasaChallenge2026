@@ -1,0 +1,2 @@
+sensor,satellite,acq_date,acq_time,latitude,longitude,confidence,frp,cell_x,cell_y,source_file
+MODIS,Terra,2007-02-16,2204,-14.3348,-170.7299,0,15.3,-16441,-1822,modis/2007/modis_2007_American_Samoa.csv

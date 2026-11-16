@@ -1,0 +1,3 @@
+sensor,satellite,acq_date,acq_time,latitude,longitude,confidence,frp,cell_x,cell_y,source_file
+MODIS,Terra,2010-04-20,1209,16.807,-25.051,57,11.9,-2413,2127,modis/2010/modis_2010_Cape_Verde.csv
+MODIS,Terra,2010-05-05,1303,17.0153,-25.119,0,36.3,-2419,2152,modis/2010/modis_2010_Cape_Verde.csv

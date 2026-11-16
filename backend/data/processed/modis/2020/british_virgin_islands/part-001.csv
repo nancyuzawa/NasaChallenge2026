@@ -1,0 +1,2 @@
+sensor,satellite,acq_date,acq_time,latitude,longitude,confidence,frp,cell_x,cell_y,source_file
+MODIS,Terra,2020-05-23,1449,18.7046,-64.2867,63,12.9,-6191,2359,modis/2020/modis_2020_British_Virgin_Islands.csv

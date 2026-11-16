@@ -1,0 +1,2 @@
+sensor,satellite,acq_date,acq_time,latitude,longitude,confidence,frp,cell_x,cell_y,source_file
+MODIS,Terra,2015-04-03,1609,19.3219,-81.1271,46,13.2,-7813,2434,modis/2015/modis_2015_Cayman_Islands.csv

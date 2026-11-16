@@ -1,0 +1,9 @@
+sensor,satellite,acq_date,acq_time,latitude,longitude,confidence,frp,cell_x,cell_y,source_file
+VIIRS,N20,2020-02-16,1054,-9.77889,-139.00876,n,0.93,-13387,-1250,viirs/2020/viirs-jpss1_2020_French_Polynesia.csv
+VIIRS,N20,2020-03-10,2258,-9.79013,-138.93065,n,11.61,-13379,-1251,viirs/2020/viirs-jpss1_2020_French_Polynesia.csv
+VIIRS,N20,2020-08-31,2333,-16.59415,-151.46658,n,2.05,-14586,-2101,viirs/2020/viirs-jpss1_2020_French_Polynesia.csv
+VIIRS,N20,2020-09-03,1146,-17.72741,-149.33685,n,1.8,-14381,-2241,viirs/2020/viirs-jpss1_2020_French_Polynesia.csv
+VIIRS,N20,2020-09-04,1127,-17.73058,-149.33627,n,2.76,-14381,-2241,viirs/2020/viirs-jpss1_2020_French_Polynesia.csv
+VIIRS,N20,2020-09-04,1127,-17.72673,-149.33611,n,2.76,-14381,-2240,viirs/2020/viirs-jpss1_2020_French_Polynesia.csv
+VIIRS,N20,2020-09-08,2243,-16.04821,-145.63901,n,4.61,-14025,-2034,viirs/2020/viirs-jpss1_2020_French_Polynesia.csv
+VIIRS,N20,2020-09-26,2344,-23.35975,-149.48793,n,1.87,-14396,-2917,viirs/2020/viirs-jpss1_2020_French_Polynesia.csv

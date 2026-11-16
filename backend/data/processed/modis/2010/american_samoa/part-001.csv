@@ -1,0 +1,2 @@
+sensor,satellite,acq_date,acq_time,latitude,longitude,confidence,frp,cell_x,cell_y,source_file
+MODIS,Aqua,2010-02-27,0043,-14.3359,-170.7314,0,23.9,-16442,-1822,modis/2010/modis_2010_American_Samoa.csv

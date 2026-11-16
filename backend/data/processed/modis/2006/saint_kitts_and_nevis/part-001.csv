@@ -1,0 +1,3 @@
+sensor,satellite,acq_date,acq_time,latitude,longitude,confidence,frp,cell_x,cell_y,source_file
+MODIS,Terra,2006-04-27,1513,17.309,-62.7212,0,23.8,-6040,2188,modis/2006/2006/modis_2006_Saint_Kitts_and_Nevis.csv
+MODIS,Terra,2006-05-01,1448,17.292,-62.7364,68,9.6,-6042,2186,modis/2006/2006/modis_2006_Saint_Kitts_and_Nevis.csv
