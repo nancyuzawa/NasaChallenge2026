@@ -1,0 +1,5 @@
+sensor,satellite,acq_date,acq_time,latitude,longitude,confidence,frp,cell_x,cell_y,source_file
+MODIS,Terra,2021-05-26,0945,36.0188,14.2705,45,11.9,1374,4326,modis/2021/modis_2021_Malta.csv
+MODIS,Terra,2021-05-26,0945,36.0219,14.2465,46,11.4,1371,4326,modis/2021/modis_2021_Malta.csv
+MODIS,Aqua,2021-06-29,1251,36.053,14.272,0,17.3,1374,4329,modis/2021/modis_2021_Malta.csv
+MODIS,Terra,2021-08-05,0950,36.0248,14.2299,71,11.7,1370,4326,modis/2021/modis_2021_Malta.csv

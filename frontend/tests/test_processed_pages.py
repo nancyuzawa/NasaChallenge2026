@@ -64,12 +64,66 @@ class ProcessedPagesTest(unittest.TestCase):
         self.assertIsNone(values[1])
         self.assertEqual(activity.annual_series(2025,self.filters),values)
         cells=activity.calendar_cells(2025,1,self.filters)
-        self.assertEqual(sum(c['count'] or 0 for c in cells),2.)
+        self.assertEqual(sum(c['count'] or 0 for c in cells),4.)
         self.assertIsNone(cells[0]['count'])
         self.assertIn('No observations',calendar_html(cells,activity.heat_legend(c['count'] for c in cells)))
-        self.assertEqual(activity.month_summary(2025,1,self.filters)['total'],2.)
+        self.assertEqual(activity.month_summary(2025,1,self.filters)['total'],4.)
         self.assertEqual(activity.annual_series(2025,self.filters,['VIIRS'])[0],4.)
         self.assertIsNone(activity.annual_series(2025,self.filters,['MODIS'])[0])
+
+    def test_calendar_combines_both_sensors_using_daily_cell_counts(self):
+        # Duplicate observations still count once within each sensor's cell/day.
+        extra = self.frame[(self.frame.sensor == 'VIIRS') & (self.frame.acq_date == '2024-03-10')].copy()
+        extra['acq_date'] = '2024-03-20'
+        self.frame = pd.concat([self.frame, self.frame, extra], ignore_index=True)
+        self.write()
+        modis = activity.daily_activity(2024, self.filters, ['MODIS'])
+        viirs = activity.daily_activity(2024, self.filters, ['VIIRS'])
+        combined = activity.daily_activity(2024, self.filters, ['MODIS', 'VIIRS'])
+        self.assertEqual(combined, {day: modis.get(day, 0) + viirs.get(day, 0) for day in modis.keys() | viirs.keys()})
+        self.assertEqual(combined[date(2024, 3, 10)], 3.)
+        self.assertEqual(combined[date(2024, 3, 20)], 2.)
+        self.assertNotIn(date(2024, 3, 1), combined)
+        self.assertEqual(activity.month_summary(2024, 3, self.filters)['total'], 5.)
+        app = AppTest.from_file(str(FRONTEND/'app.py'), default_timeout=30).run()
+        app.session_state.filters = self.filters
+        app.switch_page('pages/2_Activity.py').run()
+        app.selectbox(key='calendar_year').select(2024).run()
+        app.selectbox(key='calendar_month').select(3).run()
+        for sensors, count in ((['MODIS'], 1.), (['VIIRS'], 2.), (['MODIS', 'VIIRS'], 3.)):
+            app.get('button_group')[0].set_value(sensors).run()
+            self.assertFalse(app.exception)
+            calendar = next(m.value for m in app.markdown if 'class="activity-heatmap"' in m.value)
+            self.assertIn(f'10/03/2024: {count:,} cell-days', calendar)
+            if 'VIIRS' in sensors:
+                self.assertIn('20/03/2024: 2.0 cell-days', calendar)
+        app.button(key='see-month-details').click().run()
+        self.assertFalse(app.exception)
+        chart = json.loads(app.get('plotly_chart')[0].proto.spec)
+        self.assertEqual(sum(value or 0 for trace in chart['data'] for value in trace['y']), 5.)
+
+    def test_no_sensors_clears_real_activity(self):
+        self.assertFalse(store.daily_data(self.filters).empty)
+        self.assertTrue(store.daily_data(self.filters, []).empty)
+        self.assertEqual(activity.daily_activity(2024, self.filters, []), {})
+        self.assertTrue(all(cell['count'] is None for cell in activity.calendar_cells(2024, filters=self.filters, sensors=[])))
+        self.assertEqual(activity.annual_series(2024, self.filters, []), [None] * 12)
+        self.assertEqual(activity.annual_summary(2024, self.filters, [])['total'], 0)
+        self.assertEqual(activity.month_summary(2024, 3, self.filters, [])['total'], 0)
+        app = AppTest.from_file(str(FRONTEND/'app.py'), default_timeout=30).run()
+        app.session_state.filters = self.filters
+        app.switch_page('pages/2_Activity.py').run()
+        app.selectbox(key='calendar_year').select(2024).run()
+        app.get('button_group')[0].set_value([]).run()
+        self.assertFalse(app.exception)
+        calendar = next(m.value for m in app.markdown if 'class="activity-heatmap"' in m.value)
+        self.assertEqual(calendar.count('--day-color:#687080'), 366)
+        chart = json.loads(app.get('plotly_chart')[0].proto.spec)
+        self.assertTrue(all(all(value is None for value in trace['y']) for trace in chart['data']))
+        app.get('button_group')[0].set_value(['MODIS']).run()
+        self.assertFalse(app.exception)
+        calendar = next(m.value for m in app.markdown if 'class="activity-heatmap"' in m.value)
+        self.assertLess(calendar.count('--day-color:#687080'), 366)
 
     def test_cache_invalidates_without_changing_reports_adapter(self):
         expected=reports_series(self.filters['period'],self.filters)
@@ -94,6 +148,34 @@ class ProcessedPagesTest(unittest.TestCase):
         self.assertFalse(app.exception)
         app.get('button_group')[0].set_value(['MODIS']).run()
         self.assertFalse(app.exception)
+
+
+    def test_month_chart_uses_real_data_outside_demo_years(self):
+        self.frame['acq_date'] = self.frame.acq_date.str.replace('2024-', '2021-', regex=False)
+        self.write()
+        app = AppTest.from_file(str(FRONTEND/'app.py'), default_timeout=30).run()
+        app.session_state.filters = self.filters
+        app.session_state.activity_view = 'month'
+        app.session_state.detail_year = 2021
+        app.session_state.detail_month = 3
+        app.switch_page('pages/2_Activity.py').run()
+        self.assertFalse(app.exception)
+        chart = json.loads(app.get('plotly_chart')[0].proto.spec)
+        self.assertEqual(chart['layout']['barmode'], 'stack')
+        self.assertEqual([trace['name'] for trace in chart['data']], ['MODIS', 'VIIRS'])
+        for trace, observed in zip(chart['data'], (1., 2.)):
+            self.assertEqual(trace['x'], list(range(1, 32)))
+            self.assertEqual(trace['y'], [observed if day == 10 else None for day in range(1, 32)])
+            self.assertIn('Cell-days', trace['hovertemplate'])
+        app.get('button_group')[0].set_value(['VIIRS']).run()
+        self.assertFalse(app.exception)
+        chart = json.loads(app.get('plotly_chart')[0].proto.spec)
+        self.assertEqual([trace['name'] for trace in chart['data']], ['VIIRS'])
+        self.assertEqual(chart['data'][0]['y'][9], 2.)
+        app.get('button_group')[0].set_value([]).run()
+        self.assertFalse(app.exception)
+        chart = json.loads(app.get('plotly_chart')[0].proto.spec)
+        self.assertEqual(chart['data'], [])
 
 
 class SpatialBatchTest(unittest.TestCase):

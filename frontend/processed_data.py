@@ -123,7 +123,7 @@ def daily_data(filters=None, sensors=None):
         # Coordinates inherited from an earlier city do not affect a country query.
         filters = {"country": filters.get("country", "Brazil"), "state": "All regions"}
     result = _daily(str(dataset_path()), parquet_signature(dataset_path()), json.dumps(filters, sort_keys=True)).copy()
-    if sensors:
+    if sensors is not None:
         result = result[result.sensor.isin(sensors)].copy()
     return result
 

@@ -1,0 +1,12 @@
+sensor,satellite,acq_date,acq_time,latitude,longitude,confidence,frp,cell_x,cell_y,source_file
+MODIS,Terra,2021-09-02,1356,-51.9971,-59.519,66,20.9,-5732,-5797,modis/2021/modis_2021_Falkland_Islands.csv
+MODIS,Terra,2021-09-02,1356,-51.852,-59.1876,84,32.7,-5700,-5786,modis/2021/modis_2021_Falkland_Islands.csv
+MODIS,Aqua,2021-09-02,1807,-52.0078,-59.5188,63,10.1,-5732,-5798,modis/2021/modis_2021_Falkland_Islands.csv
+MODIS,Aqua,2021-09-02,1807,-51.9593,-59.4766,81,31.9,-5728,-5794,modis/2021/modis_2021_Falkland_Islands.csv
+MODIS,Aqua,2021-09-02,1807,-51.9534,-59.4306,86,33.3,-5724,-5794,modis/2021/modis_2021_Falkland_Islands.csv
+MODIS,Aqua,2021-09-02,1807,-51.95,-59.4797,55,17.1,-5728,-5794,modis/2021/modis_2021_Falkland_Islands.csv
+MODIS,Aqua,2021-09-02,1807,-51.8972,-59.2911,65,15.3,-5710,-5789,modis/2021/modis_2021_Falkland_Islands.csv
+MODIS,Aqua,2021-09-02,1807,-51.8953,-59.276,69,13.8,-5709,-5789,modis/2021/modis_2021_Falkland_Islands.csv
+MODIS,Aqua,2021-09-02,1807,-51.8943,-59.4188,33,9.0,-5722,-5789,modis/2021/modis_2021_Falkland_Islands.csv
+MODIS,Aqua,2021-09-02,1807,-51.8931,-59.4579,41,8.3,-5726,-5789,modis/2021/modis_2021_Falkland_Islands.csv
+MODIS,Aqua,2021-09-02,1807,-51.8873,-59.4122,39,6.7,-5722,-5789,modis/2021/modis_2021_Falkland_Islands.csv

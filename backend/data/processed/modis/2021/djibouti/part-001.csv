@@ -1,0 +1,17 @@
+sensor,satellite,acq_date,acq_time,latitude,longitude,confidence,frp,cell_x,cell_y,source_file
+MODIS,Aqua,2021-04-27,1010,11.4612,41.9928,65,52.6,4043,1461,modis/2021/modis_2021_Djibouti.csv
+MODIS,Aqua,2021-04-27,1010,11.592,42.4249,43,31.7,4085,1478,modis/2021/modis_2021_Djibouti.csv
+MODIS,Aqua,2021-04-27,1010,12.1218,42.4581,77,52.5,4088,1544,modis/2021/modis_2021_Djibouti.csv
+MODIS,Terra,2021-05-05,0755,11.9382,42.321,84,20.1,4075,1521,modis/2021/modis_2021_Djibouti.csv
+MODIS,Terra,2021-05-14,0748,11.5563,43.1101,38,8.1,4151,1473,modis/2021/modis_2021_Djibouti.csv
+MODIS,Aqua,2021-06-03,1028,11.5086,43.0975,72,10.7,4150,1467,modis/2021/modis_2021_Djibouti.csv
+MODIS,Terra,2021-06-08,0742,11.5124,43.0963,84,24.6,4150,1468,modis/2021/modis_2021_Djibouti.csv
+MODIS,Aqua,2021-06-08,1047,11.5122,43.0981,68,11.1,4150,1468,modis/2021/modis_2021_Djibouti.csv
+MODIS,Terra,2021-08-02,0747,11.5577,43.0857,69,8.5,4149,1473,modis/2021/modis_2021_Djibouti.csv
+MODIS,Aqua,2021-09-04,0958,11.5829,41.9833,41,94.0,4042,1477,modis/2021/modis_2021_Djibouti.csv
+MODIS,Aqua,2021-09-25,1016,11.4552,42.3203,48,41.5,4075,1461,modis/2021/modis_2021_Djibouti.csv
+MODIS,Terra,2021-10-05,0746,11.4468,42.278,41,11.7,4071,1459,modis/2021/modis_2021_Djibouti.csv
+MODIS,Terra,2021-10-10,0804,11.422,42.3331,68,31.3,4076,1456,modis/2021/modis_2021_Djibouti.csv
+MODIS,Terra,2021-10-10,0804,11.4365,42.3187,66,35.7,4075,1458,modis/2021/modis_2021_Djibouti.csv
+MODIS,Terra,2021-10-10,0804,11.4689,42.3137,69,38.6,4074,1462,modis/2021/modis_2021_Djibouti.csv
+MODIS,Terra,2021-12-01,0739,11.4693,43.2286,68,13.4,4162,1462,modis/2021/modis_2021_Djibouti.csv

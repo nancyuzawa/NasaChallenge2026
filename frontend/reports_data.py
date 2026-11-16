@@ -13,7 +13,7 @@ ANOMALY_THRESHOLD = 20.0
 PAGE_SIZE = 10
 RECORD_COLUMNS = (
     "Date and Time (UTC)", "Latitude", "Longitude", "Satellite", "Sensor",
-    "Confidence (%)", "Radiative Power (MW)", "Daytime/Nighttime",
+    "Confidence", "Radiative Power (MW)", "Daytime/Nighttime",
 )
 
 
@@ -38,8 +38,8 @@ def monthly_comparison(current, historical, threshold=ANOMALY_THRESHOLD):
     rows = []
     for month, value in enumerate(current, 1):
         average = historical[month - 1] if historical is not None else None
-        deviation = (value / average - 1) * 100 if average else None
-        new_activity = average == 0 and value > 0
+        deviation = (value / average - 1) * 100 if average and value is not None else None
+        new_activity = average == 0 and value is not None and value > 0
         incident = new_activity or (deviation is not None and abs(deviation) >= threshold)
         rows.append({"month": month, "name": MONTH_NAMES[month - 1], "current": value,
                      "average": average, "deviation": deviation, "incident": incident,

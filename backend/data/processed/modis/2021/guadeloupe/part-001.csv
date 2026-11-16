@@ -1,0 +1,6 @@
+sensor,satellite,acq_date,acq_time,latitude,longitude,confidence,frp,cell_x,cell_y,source_file
+MODIS,Terra,2021-02-26,1454,16.3686,-61.4652,65,10.8,-5919,2073,modis/2021/modis_2021_Guadeloupe.csv
+MODIS,Aqua,2021-03-04,1724,16.4164,-61.4174,74,16.2,-5915,2079,modis/2021/modis_2021_Guadeloupe.csv
+MODIS,Aqua,2021-03-04,1724,16.4179,-61.4074,60,20.2,-5914,2079,modis/2021/modis_2021_Guadeloupe.csv
+MODIS,Aqua,2021-03-04,1724,16.4257,-61.4189,79,18.3,-5915,2080,modis/2021/modis_2021_Guadeloupe.csv
+MODIS,Aqua,2021-03-04,1724,16.4272,-61.4089,48,14.0,-5914,2080,modis/2021/modis_2021_Guadeloupe.csv
